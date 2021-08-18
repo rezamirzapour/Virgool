@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useRouter } from 'next/router';
@@ -13,17 +14,18 @@ export default function useAuth() {
         return Boolean(accessToken);
     }
 
-    const getLoginedUser = () => {
-        if (!user && isAuthenticated())
-            dispatch({ type: "AFTER_LOGIN_SAGA", enqueueSnackbar })
-        return user;
-    }
+    const getLoginedUser = () => user
 
     const logout = () => {
         localStorage.removeItem("access_token")
         dispatch({ type: "auth/logout" })
         router.push("/login")
     }
+
+    useEffect(() => {
+        if (!user && isAuthenticated())
+            dispatch({ type: "FETCH_PROFILE_SAGA", payload: { enqueueSnackbar } })
+    }, [user])
 
     return { isAuthenticated, getLoginedUser, logout } as const
 }
