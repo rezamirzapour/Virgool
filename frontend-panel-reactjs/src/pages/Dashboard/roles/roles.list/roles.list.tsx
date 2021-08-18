@@ -12,7 +12,7 @@ import { Button } from 'components/material';
 export default function RolesList() {
     const [isOpenDialog, setIsOpenDialog] = useState(false)
     const { fetchData, loading, pagination, response, setPage, setSize } = useAwesomeTable<RolesResponse>();
-    const { getValues, onFilterChange, filterOptions } = useAwesomeFilter(initialFilterOptions);
+    const { getValues, register } = useAwesomeFilter(initialFilterOptions());
     const { navigate } = useRouter();
     const { mutate, isSubmitting } = useMutate()
     const theme = useTheme()
@@ -46,9 +46,8 @@ export default function RolesList() {
         <Grid spacing={3} container alignItems="center">
             <Grid lg={6} item>
                 <AwesomeFilter
-                    filterOptions={filterOptions}
-                    onFilterChange={onFilterChange}
                     onApplyFilter={onApplyFiler}
+                    register={register}
                 />
             </Grid>
         </Grid>

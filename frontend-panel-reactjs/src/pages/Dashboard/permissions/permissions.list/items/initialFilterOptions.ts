@@ -1,7 +1,7 @@
 import { FilterOptions } from 'components/AwesomeFilter'
 import { GetPermissionsParams } from 'services'
 
-const initialFilterOptions: FilterOptions<GetPermissionsParams> = {
+const initialFilterOptions = (): FilterOptions<GetPermissionsParams> => ({
     defaultFilter: 'عنوان',
     filters: [
         {
@@ -24,6 +24,6 @@ const initialFilterOptions: FilterOptions<GetPermissionsParams> = {
 
         }
     ]
-}
+})
 
 export default initialFilterOptions;

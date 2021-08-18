@@ -1,5 +1,5 @@
 
-interface IndexedSignuate {
+export interface IndexedSignuate {
     [key: string]: any;
 }
 

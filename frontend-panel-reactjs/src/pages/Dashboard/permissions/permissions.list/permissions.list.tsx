@@ -11,7 +11,7 @@ import { initialFilterOptions, columns } from './items'
 
 export default function PermissionsList() {
     const { fetchData, loading, pagination, response, setPage, setSize } = useAwesomeTable<PermissionsResponse>();
-    const { getValues, onFilterChange, filterOptions } = useAwesomeFilter(initialFilterOptions);
+    const { getValues, register } = useAwesomeFilter(initialFilterOptions());
     const { navigate } = useRouter();
     const { mutate, isSubmitting } = useMutate()
 
@@ -41,9 +41,8 @@ export default function PermissionsList() {
         <Grid spacing={3} container alignItems="center">
             <Grid lg={6} item>
                 <AwesomeFilter
-                    filterOptions={filterOptions}
-                    onFilterChange={onFilterChange}
                     onApplyFilter={onApplyFiler}
+                    register={register}
                 />
             </Grid>
         </Grid>

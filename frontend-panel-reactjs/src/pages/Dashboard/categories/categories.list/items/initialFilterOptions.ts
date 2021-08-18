@@ -1,7 +1,7 @@
 import { FilterOptions } from 'components/AwesomeFilter'
 import { GetCategoriesParms } from 'services/categories'
 
-const initialFilterOptions: FilterOptions<GetCategoriesParms> = {
+const initialFilterOptions = (): FilterOptions<GetCategoriesParms> => ({
     defaultFilter: 'عنوان',
     filters: [
         {
@@ -24,6 +24,6 @@ const initialFilterOptions: FilterOptions<GetCategoriesParms> = {
 
         }
     ]
-}
+})
 
 export default initialFilterOptions;

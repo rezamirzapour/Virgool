@@ -2,7 +2,7 @@ import { FilterOptions } from 'components/AwesomeFilter';
 import { GetUsersParms } from 'services/users';
 import { IS_EMAIL_VERIFIED_OPTIONS, IS_PHONE_NUMBER_VERIFIED_OPTIONS } from './options';
 
-const initialFilterOptions: FilterOptions<GetUsersParms> = {
+const initialFilterOptions = (): FilterOptions<GetUsersParms> => ({
     defaultFilter: 'نام',
     filters: [
         {
@@ -45,6 +45,6 @@ const initialFilterOptions: FilterOptions<GetUsersParms> = {
 
         },
     ]
-}
+})
 
 export default initialFilterOptions;

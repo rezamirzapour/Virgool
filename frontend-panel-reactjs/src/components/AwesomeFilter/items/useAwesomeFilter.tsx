@@ -1,20 +1,51 @@
 import { useState } from 'react';
 import { Filters, FilterOptions } from './interface';
+import { parseDate } from 'utils'
 
-export default function useAwesomeFilter(FilterOptions: FilterOptions) {
-    const [state, setState] = useState<FilterOptions>(FilterOptions)
+type Key = 'field' | 'label'
 
-    const getValues = () => {
-        const params: any = {}
+export default function useAwesomeFilter(filterOptions: FilterOptions) {
+    const [state, setState] = useState<FilterOptions>(filterOptions)
+
+    const getValues = (key: Key = 'field') => {
+        const params: Record<string, any> = {}
         state.filters.forEach((filter) => {
-            if (typeof filter.field === "string")
-                if (filter.value)
-                    params[filter.field] = filter.value
-            // if (["DATE_TIME_RANGE", "NUMBER_RANGE"].includes(filter.type)) {
-            if (filter.type === "DATE_TIME_RANGE" || filter.type === "NUMBER_RANGE") {
-                if (filter.value.start !== null && filter.value.end !== null) {
-                    params[filter.field.start] = filter.value.start
-                    params[filter.field.end] = filter.value.end
+            switch (filter.type) {
+                case 'DATE_TIME_RANGE': {
+                    if (filter.value.start !== null && filter.value.end !== null) {
+                        if (key === "label")
+                            params[filter[key]] = `از ${parseDate(filter.value.start)} تا ${parseDate(filter.value.end)}`;
+                        else {
+                            params[filter.field.start as string] = filter.value.start
+                            params[filter.field.end as string] = filter.value.end
+                        }
+                    }
+                    break;
+                }
+                case 'NUMBER_RANGE': {
+                    if (filter.value.start !== null && filter.value.end !== null) {
+                        if (key === "label")
+                            params[filter[key]] = `از ${filter.value.start} تا ${filter.value.end}`;
+                        else {
+                            params[filter.field.start as string] = filter.value.start
+                            params[filter.field.end as string] = filter.value.end
+                        }
+                    }
+                    break;
+                }
+                case 'SELECT': {
+                    if (key === 'label') {
+                        params[filter[key]] = filter.options.find(f => f.value === filter.value)?.label ?? ""
+                    } else {
+                        params[filter[key] as string] = filter.value
+                    }
+                    break;
+                }
+                default: {
+                    if (typeof filter.field === "string") {
+                        if (filter.value)
+                            params[filter[key] as string] = filter.value
+                    }
                 }
             }
         });
@@ -22,28 +53,15 @@ export default function useAwesomeFilter(FilterOptions: FilterOptions) {
     }
 
     const onFilterChange = (filters: Filters) => setState(pre => ({ ...pre, filters }))
-
-    const getValuesAsQueryString = () => {
-        let query = "?"
-        state.filters.forEach(filter => {
-            switch (filter.type) {
-                case 'STRING':
-                case 'SELECT': {
-                    if (filter.value)
-                        query += `${filter.field.toString()}=${filter.value}&`
-                    break;
+    const onDeleteFilter = (label: string) => {
+        setState(pre => ({
+            ...pre, filters: pre.filters.map(f => {
+                if (f.label === label) {
+                    f.value = filterOptions.filters.find(f => f.label === label)?.value
                 }
-                case 'NUMBER_RANGE':
-                case 'DATE_TIME_RANGE': {
-                    if (filter.value.start && filter.value.end)
-                        query += `${filter.field.start.toString()}=${filter.value.start}&${filter.field.end.toString()}=${filter.value.end}`
-                    break;
-                }
-            }
-        })
-        return query;
+                return f
+            })
+        }))
     }
-
-
-    return { onFilterChange, getValues, getValuesAsQueryString, filterOptions: state };
+    return { getValues, register: { onFilterChange, getValues, filterOptions: state, onDeleteFilter } } as const;
 }
