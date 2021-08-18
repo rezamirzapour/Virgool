@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "Yekan";
+  src: url("./Yekan.eot"); /*اکسپلورر ۹ به بعد*/
+  src: local("Yekan"), /*بررسی نصب بودن فونت در سیستم کاربر*/ local("b Yekan"),
+    /*برای برخی از مرورگرها مانند سافاری*/ url("Yekan.eot?#iefix")
+      format("embedded-opentype"),
+    /*هک برای اکسپلورر ۸ و ماقبل*/ url("Yekan.woff") format("woff"),
+    /*مرورگر های جدید*/ url("Yekan.ttf") format("truetype"),
+    /*تمام مرورگرها به جزء اکسپلورر*/ url("Yekan.svg#Yekan") format("svg"); /*نسخه های قدیمی سیستم عامل iOS*/
+  font-style: normal;
+  font-weight: normal;
+}

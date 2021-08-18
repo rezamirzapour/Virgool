@@ -1,0 +1,38 @@
+# compiled output
+/backend-nestjs/dist
+/backend-nestjs/node_modules
+/frontend-panel-reactjs/node_modules
+/frontend-site-nextjs/node_modules
+
+# Logs
+*.log
+/backend-nestjs/logs
+/backend-nestjs/npm-debug.log*
+/backend-nestjs/yarn-debug.log*
+/backend-nestjs/yarn-error.log*
+/backend-nestjs/lerna-debug.log*
+
+# OS
+backend-nestjs/.DS_Store
+
+# Tests
+/backend-nestjs/coverage
+/backend-nestjs/.nyc_output
+
+# IDEs and editors
+/backend-nestjs/.idea
+/backend-nestjs/.project
+/backend-nestjs/classpath
+/backend-nestjs/.c9/
+/backend-nestjs/*.launch
+/backend-nestjs/.settings/
+/backend-nestjs/*.sublime-workspace
+
+# IDE - VSCode
+/backend-nestjs/.vscode/*
+!/backend-nestjs/.vscode/settings.json
+!/backend-nestjs/.vscode/tasks.json
+!/backend-nestjs/.vscode/launch.json
+!/backend-nestjs/.vscode/extensions.json
+
+/frontend-site-nextjs/.next

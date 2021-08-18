@@ -1,0 +1,126 @@
+@import "./font-face.scss";
+
+body {
+    font-family: YekanBakh !important;
+}
+#__next {
+    min-height: 100vh;
+}
+.global__rtl {
+    direction: rtl;
+}
+
+.global__ltr {
+    direction: ltr;
+}
+
+.global__main-color {
+    color: #3b3e44;
+}
+
+.global__unset-max-width {
+    max-width: unset !important;
+}
+
+.global__container {
+    max-width: 1366px;
+    padding-right: 32px;
+    padding-left: 32px;
+    margin: auto;
+}
+
+#header {
+    #top-search {
+        button {
+            height: 42px;
+            margin-right: 1px;
+        }
+
+        input {
+            height: 44px;
+
+            &:focus-visible {
+                outline: none;
+                border-color: #f9bb3d !important;
+            }
+        }
+    }
+
+    #auth-button {
+        min-width: 135px;
+        height: 44px;
+    }
+}
+
+#top-navigation {
+    height: 34px;
+}
+
+#contact-us-section {
+    input {
+        height: 44px;
+    }
+
+    .contact-us-section__wrapper {
+        width: 360px;
+    }
+}
+
+.product-card:hover {
+    h6 {
+        color: #a56219;
+    }
+
+    .seller-name {
+        color: #3b3e44;
+    }
+}
+
+#home-page {
+    #main-slider-wrapper {
+        width: calc(75% - 12px);
+
+        @media (max-width: 1024px) {
+            width: 100%;
+        }
+
+        #main-slider-nav-next-button,
+        #main-slider-nav-prev-button {
+            img {
+                transition: all 0.3s;
+            }
+        }
+
+        #main-slider-nav-next-button {
+            &:hover {
+                img {
+                    transform: translateX(3px);
+                }
+            }
+        }
+
+        #main-slider-nav-prev-button {
+            &:hover {
+                img {
+                    transform: translateX(-3px);
+                }
+            }
+        }
+    }
+
+    #main-slider-wrapper-sibling {
+        width: calc(25% - 12px);
+    }
+}
+
+#auth-page {
+    #register-and-login-wrapper {
+        max-width: 360px;
+        height: 575px;
+    }
+
+    #register-code-wrapper {
+        max-width: 360px;
+        height: 441px;
+    }
+}
