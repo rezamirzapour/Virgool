@@ -1,11 +1,11 @@
 import { http } from 'utils';
-import { CreatePermissionDto, GetAllPermissionsParams, GetOnePermisionParams, UpdatePermissionDto } from './types';
+import { CreatePermissionDto, GetPermissionsParams, GetPermissionParams, UpdatePermissionDto } from './types';
 import { CrudServices } from '../common';
 
 export const PermissionsServices = new class implements CrudServices {
     uri = "permissions";
 
-    async findAll(params?: GetAllPermissionsParams) {
+    async findAll(params?: GetPermissionsParams) {
         return http.get(this.uri, { params })
     }
 

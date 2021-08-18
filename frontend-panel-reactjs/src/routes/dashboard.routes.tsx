@@ -11,6 +11,9 @@ import {
   RolesEdit,
   RolesCreate,
   RolesList,
+  PermissionsCreate,
+  PermissionsEdit,
+  PermissionsList
 } from "pages/Dashboard";
 
 import {
@@ -107,6 +110,31 @@ const dashboardRoutes: Route[] = [
     icon: <PersonPinIcon color="primary" />,
     show: true,
     name: 'roles.list',
+    auth: true,
+    exact: true,
+  },
+  {
+    path: "/dashboard/permissoins/create",
+    component: PermissionsCreate,
+    name: 'permissions.create',
+    auth: true,
+    exact: true,
+  },
+  {
+    path: "/dashboard/permissoins/:id/edit",
+    component: PermissionsEdit,
+    show: false,
+    name: 'permissions.edit',
+    auth: true,
+    exact: true,
+  },
+  {
+    title: "دسترسی ها",
+    path: "/dashboard/permissions",
+    component: PermissionsList,
+    icon: <LockOpenIcon color="primary" />,
+    show: true,
+    name: 'permissions.list',
     auth: true,
     exact: true,
   },
