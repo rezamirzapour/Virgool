@@ -97,6 +97,7 @@ export function AwesomeTable({
                         )}
                     </Table>
             }
+
             <Pagination
                 totalCount={query.totalCount}
                 page={page}
@@ -104,6 +105,7 @@ export function AwesomeTable({
                 setSize={setSize}
                 size={size}
             />
+
         </TableContainer>
     );
 }

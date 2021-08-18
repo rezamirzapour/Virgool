@@ -28,7 +28,7 @@ const paginationReducer = (state: IPagination = initialPagination, action: IActi
     switch (action.type) {
         case 'RESET': return { ...state, offset: 0, page: 1 };
         case 'SET_PAGE': {
-            const offset = state.size * action.payload
+            const offset = state.size * (action.payload - 1)
             return { ...state, offset, page: action.payload }
         }
         case 'SET_SIZE': {
