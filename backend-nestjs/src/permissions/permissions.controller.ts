@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Body, Query } from '@nestjs/common';
+import { Body, Param, Query } from '@nestjs/common';
 import { PermissionsService } from './permissions.service';
-import { CreatePermissionDto, UpdatePermissionDto, GetAllPermissionDto } from './dto';
+import { CreatePermissionDto, UpdatePermissionDto, GetAllPermissionDto, GetOnePermissionParams } from './dto';
 import { ApiController, GetAllMethod, GetOneMethod, PostMethod, PutMethod, DeleteMethod, ID } from 'common/decorator';
 
 @ApiController('permissions')
@@ -19,12 +19,12 @@ export class PermissionsController {
   }
 
   @GetOneMethod(':id')
-  findOne(@ID() id: number) {
+  findOne(@Param() params: GetOnePermissionParams, @ID() id: number) {
     return this.permissionsService.findOne(id);
   }
 
   @PutMethod(':id')
-  update(@ID() id: number, @Body() updatePermissionDto: UpdatePermissionDto) {
+  update(@Param() params: GetOnePermissionParams, id: number, @Body() updatePermissionDto: UpdatePermissionDto) {
     return this.permissionsService.update(id, updatePermissionDto);
   }
 

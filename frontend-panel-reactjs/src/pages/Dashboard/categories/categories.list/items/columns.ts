@@ -1,6 +1,6 @@
 import { IColumn } from 'components/AwesomeTable/items/interface';
 import { CategoriesPayloadResponse } from 'services/categories';
-import jMomemnt from 'moment-jalaali';
+import { parseDate } from 'utils';
 
 const columns: IColumn<CategoriesPayloadResponse>[] = [
     {
@@ -13,11 +13,11 @@ const columns: IColumn<CategoriesPayloadResponse>[] = [
     },
     {
         title: 'تاریخ ایجاد',
-        render: (rd) => jMomemnt(rd.createdAt).format("jYYYY/jMM/jDD")
+        render: (rd) => parseDate(rd.createdAt)
     },
     {
         title: 'آخرین ویرایش',
-        render: (rd) => jMomemnt(rd.updatedAt).format("jYYYY/jMM/jDD")
+        render: (rd) => parseDate(rd.updatedAt)
     },
 ]
 

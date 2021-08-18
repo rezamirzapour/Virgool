@@ -1,6 +1,6 @@
 import { IColumn } from 'components/AwesomeTable/items/interface';
 import { RolesPayloadResponse } from 'services/roles';
-import jMomemnt from 'moment-jalaali';
+import { parseDate } from 'utils';
 
 const columns: IColumn<RolesPayloadResponse>[] = [
     {
@@ -13,11 +13,11 @@ const columns: IColumn<RolesPayloadResponse>[] = [
     },
     {
         title: 'تاریخ ایجاد',
-        render: (rd) => jMomemnt(rd.createdAt).format("jYYYY/jMM/jDD")
+        render: (rd) => parseDate(rd.createdAt)
     },
     {
         title: 'آخرین ویرایش',
-        render: (rd) => jMomemnt(rd.updatedAt).format("jYYYY/jMM/jDD")
+        render: (rd) => parseDate(rd.updatedAt)
     },
 ]
 

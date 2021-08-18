@@ -5,18 +5,16 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-d
 import { RTLProvider } from "providers";
 import { SnackbarProvider } from 'notistack';
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
 import JalaliUtils from "@date-io/jalaali";
-import jMoment from "moment-jalaali";
-
 import store from './store'
 
 import "./App.css";
 import "./assets/fonts/IRANSans/css/fontiran.css";
 import "./assets/css/styles.css";
 
-jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
+
 function App() {
   return (
     <div className="App">

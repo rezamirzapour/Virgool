@@ -2,7 +2,7 @@ import { IColumn } from 'components/AwesomeTable/items/interface';
 import { UsersPayloadResponse } from 'services/users';
 import { colors, Avatar, Box } from '@material-ui/core';
 import { Check as CheckIcon, Close as CloseIcon } from '@material-ui/icons'
-import jMomemnt from 'moment-jalaali';
+import { parseDate } from 'utils';
 
 const columns: IColumn<UsersPayloadResponse>[] = [
     {
@@ -41,11 +41,11 @@ const columns: IColumn<UsersPayloadResponse>[] = [
     },
     {
         title: 'تاریخ ایجاد',
-        render: (rd) => jMomemnt(rd.createdAt).format("jYYYY/jMM/jDD")
+        render: (rd) => parseDate(rd.createdAt)
     },
     {
         title: 'آخرین ویرایش',
-        render: (rd) => jMomemnt(rd.updatedAt).format("jYYYY/jMM/jDD")
+        render: (rd) => parseDate(rd.updatedAt)
     },
 ]
 

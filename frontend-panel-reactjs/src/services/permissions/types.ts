@@ -15,8 +15,6 @@ export interface UpdatePermissionDto extends CreatePermissionDto { }
 export interface PermissionsPayload {
     id: number;
     title: string;
-    createdAt: Date;
-    updatedAt: Date;
 }
 
 export interface PermissionPayload {

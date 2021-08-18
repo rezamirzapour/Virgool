@@ -1,7 +1,7 @@
 import { IColumn } from 'components/AwesomeTable/items/interface';
 import { ArticlesPayloadResponse } from 'services/articles';
 import { colors, Avatar, Box } from '@material-ui/core';
-import jMomemnt from 'moment-jalaali';
+import { parseDate } from 'utils'
 import { STAUS_OPTIONS } from './options';
 
 const columns: IColumn<ArticlesPayloadResponse>[] = [
@@ -37,11 +37,11 @@ const columns: IColumn<ArticlesPayloadResponse>[] = [
     },
     {
         title: 'تاریخ ایجاد',
-        render: (rd) => jMomemnt(rd.createdAt).format("jYYYY/jMM/jDD")
+        render: (rd) => parseDate(rd.createdAt)
     },
     {
         title: 'آخرین ویرایش',
-        render: (rd) => jMomemnt(rd.updatedAt).format("jYYYY/jMM/jDD")
+        render: (rd) => parseDate(rd.updatedAt)
     },
 ]
 
