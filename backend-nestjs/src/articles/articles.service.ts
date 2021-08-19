@@ -32,7 +32,6 @@ export class ArticlesService {
         if (otherOptions.startLikeCount && otherOptions.endLikeCount)
             options.where = { ...options.where, likeCount: { [Op.gte]: +otherOptions.startLikeCount, [Op.lte]: +otherOptions.endLikeCount } }
 
-
         if (paginate) {
             const result = await this.articleModel.findAndCountAll({
                 ...paginateOptions, ...options, attributes: { exclude: ['authorId', 'thumbnailId'] },
@@ -40,7 +39,8 @@ export class ArticlesService {
                     {
                         model: Category,
                         attributes: ["id", 'title'],
-                        through: { attributes: [] }
+                        through: { attributes: [] },
+                        ...(otherOptions.categories && { id: { [Op.in]: otherOptions.categories?.map?.(c => +c) ?? [] } })
                     }, {
                         model: User,
                         attributes: ['id', 'email', 'firstName', 'lastName'],

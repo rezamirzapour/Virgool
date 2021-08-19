@@ -33,7 +33,9 @@ export class GetAllArticlesDto {
     @ApiProperty({ required: false, type: 'integer' })
     startLikeCount?: number;
 
-
     @ApiProperty({ required: false, type: 'integer' })
     endLikeCount?: number;
+
+    @ApiProperty({ required: false })
+    categories?: number[];
 }

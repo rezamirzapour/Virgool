@@ -3,8 +3,9 @@ import { GetAllParams, GetOneParams } from '../common/common.services.interface'
 export interface GetArticlesParms extends GetAllParams {
     title?: string;
     status?: "published" | 'unpublished'
-    startLikeCount: number;
-    endLikeCount: number;
+    startLikeCount?: number;
+    endLikeCount?: number;
+    categories?: number[]
 }
 export interface GetArticleParms extends GetOneParams { }
 
