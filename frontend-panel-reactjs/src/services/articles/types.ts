@@ -57,6 +57,10 @@ export interface ArticlePayloadResponse {
     status: string | null;
     authorId: number | null;
     thumbnailId: number | null;
+    categories: {
+        id: number;
+        title: string;
+    }[];
     createdAt: Date;
     updatedAt: Date;
 }

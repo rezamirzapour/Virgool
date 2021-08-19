@@ -14,10 +14,6 @@ const columns: IColumn<ArticlesPayloadResponse>[] = [
         field: 'title',
     },
     {
-        title: 'محتوا',
-        render: (rd) => <div dangerouslySetInnerHTML={{ __html: rd.content.replace(/(<? *script)/gi, 'illegalscript') }} />
-    },
-    {
         title: 'تعداد لایک',
         render: (rd) => <p style={{ color: rd.likeCount > 10 ? colors.green['400'] : colors.red['400'] }}>{rd.likeCount}</p>
     },

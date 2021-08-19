@@ -1,8 +1,9 @@
-import { TextField, Select } from 'components/material';
+import { TextField, Select, Button } from 'components/material';
+import { TextEditor, useTextEditor } from 'components/TextEditor';
 import { Page } from 'components';
 import { Grid } from '@material-ui/core';
-import { CreateArticleDto } from 'services/articles';
-import { useEntity } from 'hooks';
+import { CreateArticleDto, ArticleServices } from 'services';
+import { useEntity, useMutate, useRouter } from 'hooks';
 import { useForm } from 'react-hook-form';
 
 const defaultValues: CreateArticleDto = {
@@ -15,12 +16,25 @@ const defaultValues: CreateArticleDto = {
 export default function ArticlesCreate() {
     const methods = useForm({ defaultValues });
     const categories = useEntity("categories")
+    const { mutate, isSubmitting } = useMutate()
+    const { editorState, getHtmlContent, setEditorState } = useTextEditor()
+    const { navigate } = useRouter()
+    const onSubmit = (data: CreateArticleDto) => {
+        const requestBody: CreateArticleDto = {
+            ...data,
+            content: getHtmlContent()
+        }
+        return mutate(() => ArticleServices.create(requestBody))
+    }
     return <Page title="ایجاد مقاله" >
-        <form>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
             <Grid container>
                 <Grid lg={6} spacing={3} item container>
                     <Grid item lg={12}>
                         <TextField name="title" label="عنوان" methods={methods} />
+                    </Grid>
+                    <Grid item lg={12}>
+                        <TextEditor label="محتوا" editorState={editorState} setEditorState={setEditorState} />
                     </Grid>
                     <Grid item lg={12}>
                         <Select
@@ -31,10 +45,27 @@ export default function ArticlesCreate() {
                             placeholder="دسته بندی"
                             name="categories"
                             label="دسته بندی"
+                            methods={methods}
+
                         />
                     </Grid>
-
                     <Grid item lg={12}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            loading={isSubmitting}
+                            type="submit"
+                        >
+                            ثبت
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={() => navigate('articles.list')}
+                            style={{ marginRight: '.25em' }}
+                        >
+                            انصراف
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>

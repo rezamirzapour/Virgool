@@ -1,5 +1,5 @@
 import { http } from 'utils';
-import { GetArticlesParms, ArticlesResponse, CreateArticleDto, ArticleResponse } from './types';
+import { GetArticlesParms, ArticlesResponse, CreateArticleDto, ArticleResponse, UpdateArticleDto } from './types';
 import { CrudServices } from '../common';
 
 export const ArticleServices = new class implements CrudServices {
@@ -17,7 +17,7 @@ export const ArticleServices = new class implements CrudServices {
         return http.post(this.uri, data);
     }
 
-    async update(id: number, data: Partial<CreateArticleDto>) {
+    async update(id: number, data: UpdateArticleDto) {
         return http.put(`${this.uri}/${id}`, data);
     }
 
