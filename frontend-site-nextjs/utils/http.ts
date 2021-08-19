@@ -5,7 +5,9 @@ const axios = Axios.create({
 })
 
 axios.interceptors.request.use((config: AxiosRequestConfig) => {
-    const accessToken = localStorage.getItem("access_token")
+    let accessToken
+    if (process.browser)
+        accessToken = localStorage.getItem("access_token")
     if (accessToken) {
         config.headers['Authorization'] = `Bearer ${accessToken}`
     }

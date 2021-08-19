@@ -73,7 +73,7 @@ export function* loginSaga(action: ILoginSagaAction) {
         yield action.payload.enqueueSnackbar("با موفقیت وارد شدید", { variant: 'success' })
         yield put(setToken(accessToken))
         yield put({ type: 'AFTER_LOGIN_SAGA', payload: { enqueueSnackbar: action.payload.enqueueSnackbar } })
-        action.payload.router.push("/home")
+        action.payload.router.push("/")
     } catch (error) {
         action.payload.enqueueSnackbar(error?.response?.message ?? "خطایی وجود دارد", { variant: 'error' })
     } finally {

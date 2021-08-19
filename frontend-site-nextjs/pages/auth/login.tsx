@@ -1,5 +1,5 @@
 import AuthLayout from 'layouts/auth';
-import { ShouldNotAuthWrapper, Input, Button } from 'components';
+import { AuthWrapper, Input, Button } from 'components';
 import { useForm } from 'react-hook-form';
 import { LoginDto } from 'services';
 import { useSnackbar } from 'notistack';
@@ -23,7 +23,7 @@ export default function Login() {
     }
 
     return (
-        <ShouldNotAuthWrapper>
+        <AuthWrapper auth="false">
             <AuthLayout title="ورود">
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     <div id="register-and-login-wrapper" className="p-8 border border-gray-40 rounded-md">
@@ -52,6 +52,6 @@ export default function Login() {
                     </div>
                 </form>
             </AuthLayout>
-        </ShouldNotAuthWrapper>
+        </AuthWrapper>
     )
 }
