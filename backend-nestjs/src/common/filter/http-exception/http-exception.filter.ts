@@ -1,14 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
-
-const MESSAGES = {
-    [HttpStatus.NOT_FOUND]: "موردی یافت نشد",
-    [HttpStatus.FORBIDDEN]: "اجازه دسترسی ندارید",
-    [HttpStatus.INTERNAL_SERVER_ERROR]: "خطای داخلی سیستم",
-    [HttpStatus.UNAUTHORIZED]: "عدم احراز هویت",
-    [HttpStatus.BAD_REQUEST]: "محتوای نادرست",
-}
+import { ExceptionDescription, ExceptionDescription_FA } from './exception-description'
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -22,7 +15,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
             .status(status)
             .json({
                 status,
-                message: MESSAGES?.[status] ?? 'خطایی وجود دارد',
+                message: ExceptionDescription[HttpStatus[status]] === exception.message
+                    ? ExceptionDescription_FA[HttpStatus[status]] ?? 'خطایی وجود دارد'
+                    : exception.message,
                 timestamp: new Date().toISOString(),
                 path: request.url,
             });

@@ -22,7 +22,7 @@ export class AuthService {
     async login({ email, password }: LoginDto) {
         const user = await this.validateUser(email, password)
         if (!user)
-            throw new UnauthorizedException()
+            throw new UnauthorizedException("ایمیل با رمزعبور مطابقت ندارد")
 
         const payload = { email: user.email };
         return {

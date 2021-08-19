@@ -1,1 +1,2 @@
-export * from './http-exception.filter'
+/* eslint-disable prettier/prettier */
+export * from './http-exception'
