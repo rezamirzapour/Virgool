@@ -1,12 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { Get, Post, Body, Patch, Param, Delete, Put, UseGuards, Req } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Get, Post, Body, Patch, Param, Delete, Put, UseGuards, Req, Query } from '@nestjs/common';
 import { MeService } from './me.service';
-import { CreateMeDto } from './dto/create-me.dto';
-import { UpdateMeDto } from './dto/update-me.dto';
+import { FollowUserParams, GetFollowingsQuery } from './dto';
 import { ApiController, User } from 'common/decorator';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+
 import { UpdateUserDto } from 'users/dto';
 @ApiBearerAuth()
 @UseGuards(AuthGuard("jwt"))
@@ -26,24 +25,32 @@ export class MeController {
   }
 
   @Get('users/followers')
-  async getFollowers() {
-
+  async getFollowers(@User() user, @Query() query: GetFollowingsQuery) {
+    return this.meService.getMyFollowers(user, query)
   }
 
   @Get("users/followings")
-  async getFollowings() {
-
+  async getFollowings(@User() user, @Query() query: GetFollowingsQuery) {
+    return this.meService.getMyFollowings(user, query)
   }
 
   @Post("users/:userId/follow")
-  async follow() {
-
+  async follow(@User() user, @Param() params: FollowUserParams) {
+    await this.meService.follow(user, +params.userId)
+    return {
+      message: "یا موفقیت فالو شد"
+    }
   }
 
   @Post("users/:userId/unfollow")
-  async unfollow() {
-
+  async unfollow(@User() user, @Param() params: FollowUserParams) {
+    await this.meService.unfollow(user, +params.userId)
+    return {
+      message: "یا موفقیت آنفالو شد"
+    }
   }
+
+
   @Post("articles/:articleId/like")
   async likeArticle() {
 
