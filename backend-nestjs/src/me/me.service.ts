@@ -1,20 +1,24 @@
 /* eslint-disable prettier/prettier */
 import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { UsersService } from 'users/users.service';
 import { UpdateUserDto } from 'users/dto';
 import { PaginateResponse, UpdateResponse } from 'common/httpResponse';
-import { User, Following } from 'database/database.entities'
+import { User, Following, Notification } from 'database/database.entities'
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { FindAllResponse } from 'common/httpResponse';
 import { GetFollowingsQuery } from './dto';
+import { UserFollowedEvent } from './events';
 
 @Injectable()
 export class MeService {
   constructor(
     private usersService: UsersService,
     @InjectModel(User) private userRepository: typeof User,
-    @InjectModel(Following) private followingRepository: typeof Following
+    @InjectModel(Notification) private notificationRepository: typeof Notification,
+    @InjectModel(Following) private followingRepository: typeof Following,
+    private eventEmitter: EventEmitter2
   ) { }
   async updateProfile(user: User, updateUserDto: UpdateUserDto) {
     try {
@@ -53,14 +57,26 @@ export class MeService {
   async follow(currentUser: User, userId: number) {
     if (currentUser.id === userId)
       throw new BadRequestException()
-    const user = await this.userRepository.findOne({ where: { id: currentUser.id } })
-    user.$add('followings', userId)
+    const following = await this.userRepository.findByPk(currentUser.id)
+    await following.$add('followings', userId)
+    const follower = await this.userRepository.findByPk(userId)
+    this.eventEmitter.emit(
+      'user.followed',
+      new UserFollowedEvent(following, follower),
+    );
     return true;
   }
 
   async unfollow(currentUser: User, userId: number) {
-    const user = await this.userRepository.findOne({ where: { id: currentUser.id } })
+    if (currentUser.id === userId)
+      throw new BadRequestException()
+    const user = await this.userRepository.findByPk(currentUser.id)
     user.$remove('followings', userId)
+    return true;
+  }
+
+  async createNotification(userId: number, message: string) {
+    await this.notificationRepository.create({ userId, message })
     return true;
   }
 }
