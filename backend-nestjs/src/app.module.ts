@@ -13,10 +13,12 @@ import { CommentsModule } from './comments/comments.module';
 import { RolesModule } from './roles/roles.module';
 import { PermissionsModule } from './permissions/permissions.module';
 import { MeModule } from './me/me.module';
-import { Article, User, Photo, ArticleCategory, Category, Comment, Bookmark, Favorite, Following, Permission, PermissionRole, Role, RoleUser } from 'database/database.entities'
+import { Article, User, Photo, ArticleCategory, Category, Comment, Bookmark, Favorite, Following, Permission, PermissionRole, Role, RoleUser, Notification } from 'database/database.entities'
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+
 @Module({
   imports: [SequelizeModule.forRoot({
     dialect: 'mariadb',
@@ -25,7 +27,7 @@ import { JwtModule } from '@nestjs/jwt';
     username: 'root',
     password: '',
     database: 'virgool-nestjs',
-    models: [Article, User, Photo, ArticleCategory, Category, Comment, Bookmark, Favorite, Following, Permission, PermissionRole, Role, RoleUser],
+    models: [Article, User, Photo, ArticleCategory, Category, Comment, Bookmark, Favorite, Following, Permission, PermissionRole, Role, RoleUser, Notification],
     synchronize: true,
     sync: {
       force: true
@@ -33,10 +35,13 @@ import { JwtModule } from '@nestjs/jwt';
   }), JwtModule.register({
     secret: 'secret',
     signOptions: { expiresIn: '60s' },
-  }), PassportModule, AuthModule, ArticlesModule, UsersModule, PhotosModule, DatabaseModule, CategoriesModule, CommentsModule, RolesModule, PermissionsModule, MeModule],
+  }),
+  EventEmitterModule.forRoot(),
+    PassportModule, AuthModule, ArticlesModule, UsersModule, PhotosModule, DatabaseModule, CategoriesModule, CommentsModule, RolesModule, PermissionsModule, MeModule],
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
