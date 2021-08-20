@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Table, Model, PrimaryKey, Column, AllowNull, AutoIncrement, Unique, HasMany, ForeignKey, BelongsTo, Length, BelongsToMany, Default, BeforeCreate } from 'sequelize-typescript'
-import { Article, Photo, Following, RoleUser, Role } from 'database/database.entities'
+import { Article, Photo, Following, RoleUser, Role, Notification } from 'database/database.entities'
 import { hash } from 'bcrypt';
 
 @Table({ tableName: 'users' })
@@ -63,6 +63,9 @@ export class User extends Model {
 
     @BelongsToMany(() => Role, () => RoleUser)
     roles: Role[]
+
+    @HasMany(() => Notification)
+    notifications: Notification[]
 
     @BeforeCreate
     public static async hashPassword(user: User) {
