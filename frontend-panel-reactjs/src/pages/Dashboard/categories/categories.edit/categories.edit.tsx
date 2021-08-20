@@ -6,9 +6,17 @@ import { Grid } from '@material-ui/core';
 import { TextField, Button } from 'components/material';
 import { useForm } from 'react-hook-form';
 import { UpdateCategoryDto, CategoriesServices, CategoryResponse } from 'services/categories'
+import { ValidationRule } from 'types';
 
 const defaultValues: UpdateCategoryDto = {
     title: "",
+}
+
+const RULES: ValidationRule<UpdateCategoryDto> = {
+    title: {
+        required: 'عنوان اجباری می‌باشد',
+        maxLength: 128
+    },
 }
 
 export default function CategoriesEdit() {
@@ -39,6 +47,7 @@ export default function CategoriesEdit() {
                         name="title"
                         label="عنوان"
                         methods={methods}
+                        rules={RULES.title}
                     />
                 </Grid>
                 <Grid item>

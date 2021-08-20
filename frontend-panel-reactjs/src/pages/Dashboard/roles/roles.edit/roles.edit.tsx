@@ -6,11 +6,23 @@ import { Grid } from '@material-ui/core';
 import { TextField, Button, CheckBoxGroup } from 'components/material';
 import { useForm } from 'react-hook-form';
 import { UpdateRoleDto, RolesServices, RoleResponse } from 'services/roles'
+import { ValidationRule } from 'types';
 
 const defaultValues: UpdateRoleDto = {
     title: "",
     label: "",
     permissions: []
+}
+
+const RULES: ValidationRule<UpdateRoleDto> = {
+    title: {
+        required: 'عنوان اجباری می‌باشد',
+        maxLength: 128
+    },
+    label: {
+        required: 'برچسب اجباری می‌باشد',
+        maxLength: 128
+    },
 }
 
 export default function RolesEdit() {
@@ -58,6 +70,7 @@ export default function RolesEdit() {
                         name="title"
                         label="عنوان"
                         methods={methods}
+                        rules={RULES.title}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -65,6 +78,7 @@ export default function RolesEdit() {
                         name="label"
                         label="برچسب"
                         methods={methods}
+                        rules={RULES.label}
                     />
                 </Grid>
                 <Grid item xs={12}>

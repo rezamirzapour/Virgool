@@ -5,12 +5,20 @@ import { Grid } from '@material-ui/core';
 import { CreateArticleDto, ArticleServices } from 'services';
 import { useEntity, useMutate, useRouter } from 'hooks';
 import { useForm } from 'react-hook-form';
+import { ValidationRule } from 'types';
 
 const defaultValues: CreateArticleDto = {
     content: '',
     title: '',
     categories: [],
     thumbnailId: null
+}
+
+const RULES: ValidationRule<CreateArticleDto> = {
+    title: {
+        required: 'عنوان اجباری می‌باشد',
+        maxLength: 128
+    },
 }
 
 export default function ArticlesCreate() {
@@ -31,7 +39,12 @@ export default function ArticlesCreate() {
             <Grid container>
                 <Grid lg={6} spacing={3} item container>
                     <Grid item lg={12}>
-                        <TextField name="title" label="عنوان" methods={methods} />
+                        <TextField
+                            name="title"
+                            label="عنوان"
+                            methods={methods}
+                            rules={RULES.title}
+                        />
                     </Grid>
                     <Grid item lg={12}>
                         <TextEditor label="محتوا" editorState={editorState} setEditorState={setEditorState} />
@@ -46,7 +59,6 @@ export default function ArticlesCreate() {
                             name="categories"
                             label="دسته بندی"
                             methods={methods}
-
                         />
                     </Grid>
                     <Grid item lg={12}>

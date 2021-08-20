@@ -1,14 +1,15 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { TextField as MaterialTextField, StandardTextFieldProps } from '@material-ui/core';
-import { Controller, UseFormMethods, } from 'react-hook-form'
+import { Controller, UseFormMethods, ControllerProps } from 'react-hook-form'
 
 interface ITextFieldProps extends StandardTextFieldProps {
     methods: Pick<UseFormMethods, 'control' | 'errors'>,
-    rules?: Record<string, any>
+    rules?: ControllerProps<'input'>['rules']
 }
 
 export function TextField({ methods, rules, ...rest }: ITextFieldProps) {
     const getError = useCallback(() => methods.errors[rest.name as string]?.message ?? "", [methods.errors])
+
     return <Controller
         name={rest.name as string}
         control={methods.control}

@@ -7,6 +7,14 @@ import { ArticleServices, ArticleResponse, UpdateArticleDto } from 'services';
 import { useEntity, useFetchDetails, useMutate, useRouter } from 'hooks';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
+import { ValidationRule } from 'types';
+
+const RULES: ValidationRule<UpdateArticleDto> = {
+    title: {
+        required: 'عنوان اجباری می‌باشد',
+        maxLength: 128
+    },
+}
 
 export default function ArticlesEdit() {
     const { id } = useParams<{ id: string | undefined }>()
@@ -43,7 +51,9 @@ export default function ArticlesEdit() {
                             name="title"
                             label="عنوان"
                             defaultValue={articleResponse?.result?.title}
-                            methods={methods} />
+                            methods={methods}
+                            rules={RULES.title}
+                        />
                     </Grid>
                     <Grid item lg={12}>
                         <TextEditor label="محتوا" editorState={editorState} setEditorState={setEditorState} />

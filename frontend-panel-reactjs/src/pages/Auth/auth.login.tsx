@@ -7,10 +7,21 @@ import { useSnackbar } from 'notistack';
 import { useRouter } from 'hooks';
 import { LoginDto } from "services";
 import { TextField, Button } from "components/material";
+import { ValidationRule } from 'types';
 
 const defaultValues: LoginDto = {
   email: "",
   password: ""
+}
+
+const RULES: ValidationRule<LoginDto> = {
+  email: {
+    required: "ایمیل اجباری می‌باشد"
+  },
+  password: {
+    required: "رمز عبور اجباری می‌باشد",
+    minLength: { value: 8, message: 'طول رمز عبور حداقل ۸ باید باشد' }
+  }
 }
 
 export default function Login() {
@@ -42,7 +53,7 @@ export default function Login() {
           label="ایمیل"
           name="email"
           methods={methods}
-          rules={{ required: "ایمیل اجباری می‌باشد" }}
+          rules={RULES.email}
         />
         <TextField
           margin="normal"
@@ -50,7 +61,7 @@ export default function Login() {
           label="رمز عبور"
           type="password"
           methods={methods}
-          rules={{ required: "رمز عبور اجباری می‌باشد" }}
+          rules={RULES.password}
         />
         <Button
           fullWidth

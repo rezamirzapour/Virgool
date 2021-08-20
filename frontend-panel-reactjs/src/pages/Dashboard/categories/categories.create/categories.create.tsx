@@ -4,9 +4,17 @@ import { Grid } from '@material-ui/core';
 import { TextField, Button } from 'components/material';
 import { useForm } from 'react-hook-form';
 import { CreateCategoryDto, CategoriesServices } from 'services/categories'
+import { ValidationRule } from 'types';
 
 const defaultValues: CreateCategoryDto = {
     title: "",
+}
+
+const RULES: ValidationRule<CreateCategoryDto> = {
+    title: {
+        required: 'عنوان اجباری می‌باشد',
+        maxLength: 128
+    },
 }
 
 export default function CategoriesCreate() {
@@ -21,7 +29,12 @@ export default function CategoriesCreate() {
         <form onSubmit={methods.handleSubmit(onSubmit)}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <TextField name="title" label="عنوان" methods={methods} />
+                    <TextField
+                        name="title"
+                        label="عنوان"
+                        methods={methods}
+                        rules={RULES.title}
+                    />
                 </Grid>
                 <Grid item>
                     <Button

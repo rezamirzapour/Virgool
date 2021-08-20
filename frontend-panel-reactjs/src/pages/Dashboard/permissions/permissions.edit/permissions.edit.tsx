@@ -6,9 +6,17 @@ import { Grid } from '@material-ui/core';
 import { TextField, Button } from 'components/material';
 import { useForm } from 'react-hook-form';
 import { UpdatePermissionDto, PermissionsServices, PermissionResponse } from 'services'
+import { ValidationRule } from 'types';
 
 const defaultValues: UpdatePermissionDto = {
     title: "",
+}
+
+const RULES: ValidationRule<UpdatePermissionDto> = {
+    title: {
+        required: 'عنوان اجباری می‌باشد',
+        maxLength: 128
+    },
 }
 
 export default function PermissionsEdit() {
@@ -39,6 +47,7 @@ export default function PermissionsEdit() {
                         name="title"
                         label="عنوان"
                         methods={methods}
+                        rules={RULES.title}
                     />
                 </Grid>
                 <Grid item>
