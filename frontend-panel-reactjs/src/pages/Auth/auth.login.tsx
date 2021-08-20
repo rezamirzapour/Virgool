@@ -39,18 +39,18 @@ export default function Login() {
       <form className={classes.form} onSubmit={methods.handleSubmit(onSubmit)}>
         <TextField
           margin="normal"
-          required
           label="ایمیل"
           name="email"
           methods={methods}
+          rules={{ required: "ایمیل اجباری می‌باشد" }}
         />
         <TextField
           margin="normal"
-          required
           name="password"
           label="رمز عبور"
           type="password"
           methods={methods}
+          rules={{ required: "رمز عبور اجباری می‌باشد" }}
         />
         <Button
           fullWidth
