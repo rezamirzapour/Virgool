@@ -2,7 +2,7 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize'
 import { CreateResponse, DestroyResponse, FindAllResponse, FindOneResponse, PaginateResponse, UpdateResponse } from 'common/httpResponse';
-import { CreatePermissionDto, UpdatePermissionDto, GetAllPermissionDto } from './dto';
+import { CreatePermissionDto, UpdatePermissionDto, ListPermissoinsParams } from './dto';
 import { Permission } from './entities';
 
 @Injectable()
@@ -17,9 +17,9 @@ export class PermissionsService {
     }
   }
 
-  async findAll(getAllPermissionDto: GetAllPermissionDto) {
+  async findAll(listPermissoinsParams: ListPermissoinsParams) {
     try {
-      const { paginate, offset, size, ...otherOptions } = getAllPermissionDto
+      const { paginate, offset, size, ...otherOptions } = listPermissoinsParams
       const paginateOptions = { offset, limit: size };
       const options = { where: {} }
       for (const key in otherOptions)

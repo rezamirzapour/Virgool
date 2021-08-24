@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
-import { CreateRoleDto, UpdateRoleDto, GetAllRolesDto, AddUsersDto } from './dto';
+import { CreateRoleDto, UpdateRoleDto, ListRolesParams, AddUsersDto } from './dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Role, Permission } from 'database/database.entities';
 import { CreateResponse, DestroyResponse, FindAllResponse, FindOneResponse, PaginateResponse, UpdateResponse } from 'common/httpResponse';
@@ -23,8 +23,8 @@ export class RolesService {
 
   }
 
-  async findAll(getAllRolesDto: GetAllRolesDto) {
-    const { offset, size, paginate, ...otherOptions } = getAllRolesDto;
+  async findAll(listRolesParams: ListRolesParams) {
+    const { offset, size, paginate, ...otherOptions } = listRolesParams;
     const paginateOptions = { offset, limit: size };
     const options = { where: {} }
     for (const key in otherOptions)

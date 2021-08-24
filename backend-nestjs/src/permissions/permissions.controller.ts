@@ -1,21 +1,22 @@
 /* eslint-disable prettier/prettier */
-import { Body, Param, Query } from '@nestjs/common';
+import { Body, Param, Query, HttpCode, ValidationPipe } from '@nestjs/common';
 import { PermissionsService } from './permissions.service';
-import { CreatePermissionDto, UpdatePermissionDto, GetAllPermissionDto, GetOnePermissionParams } from './dto';
+import { CreatePermissionDto, UpdatePermissionDto, ListPermissoinsParams, GetOnePermissionParams } from './dto';
 import { ApiController, GetAllMethod, GetOneMethod, PostMethod, PutMethod, DeleteMethod, ID } from 'common/decorator';
 
 @ApiController('permissions')
 export class PermissionsController {
   constructor(private readonly permissionsService: PermissionsService) { }
 
+  @HttpCode(201)
   @PostMethod()
   create(@Body() createPermissionDto: CreatePermissionDto) {
     return this.permissionsService.create(createPermissionDto);
   }
 
   @GetAllMethod()
-  findAll(@Query() getAllPermissionDto: GetAllPermissionDto) {
-    return this.permissionsService.findAll(getAllPermissionDto);
+  findAll(@Query(new ValidationPipe({ transform: true })) listPermissoinsParams: ListPermissoinsParams) {
+    return this.permissionsService.findAll(listPermissoinsParams);
   }
 
   @GetOneMethod(':id')

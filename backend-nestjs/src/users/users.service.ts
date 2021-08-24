@@ -4,7 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
-import { GetAllUsersDto, UpdateUserDto } from './dto'
+import { ListUsersParams, UpdateUserDto } from './dto'
 import { Op } from 'sequelize';
 import { PaginateResponse, FindAllResponse, FindOneResponse } from 'common/httpResponse';
 import { Role } from 'roles/entities';
@@ -15,8 +15,8 @@ const saltOrRounds = 10;
 export class UsersService {
     constructor(@InjectModel(User) private userRepository: typeof User) { }
 
-    async findAll(getAllUsersDto: GetAllUsersDto) {
-        const { offset, size, paginate, ...whereOptions } = getAllUsersDto;
+    async findAll(listUsersParams: ListUsersParams) {
+        const { offset, size, paginate, ...whereOptions } = listUsersParams;
         const paginationOptions = { offset, limit: size }
         const options = { where: {} }
 

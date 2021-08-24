@@ -1,3 +1,3 @@
-export { CreateCommentDto } from './create-comment.dto';
-export { UpdateCommentDto } from './update-comment.dto';
-export { GetAllCommentsDto } from './get-all-comments.dto';
+export * from './create-comment.dto';
+export * from './update-comment.dto';
+export * from './list-comments-params';

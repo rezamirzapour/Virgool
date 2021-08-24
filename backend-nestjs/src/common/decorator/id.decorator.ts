@@ -1,9 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import { createParamDecorator, ExecutionContext, NotAcceptableException } from '@nestjs/common';
 
 export const ID = createParamDecorator(
     (data: unknown, ctx: ExecutionContext): number => {
         const request = ctx.switchToHttp().getRequest();
-        return Number(request.params.id);
+        const val = parseInt(request.params.id)
+        if (Number.isNaN(val))
+            throw new NotAcceptableException()
+        return val;
     },
 )

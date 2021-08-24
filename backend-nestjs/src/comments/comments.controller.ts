@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Body, Query } from '@nestjs/common';
+import { Body, Query, ValidationPipe } from '@nestjs/common';
 import { CommentsService } from './comments.service';
-import { CreateCommentDto, UpdateCommentDto, GetAllCommentsDto } from './dto';
+import { CreateCommentDto, UpdateCommentDto, ListCommentsParams } from './dto';
 import { ApiController, GetAllMethod, GetOneMethod, PostMethod, PutMethod, DeleteMethod, ID, User } from 'common/decorator';
 
 @ApiController('comments')
@@ -14,8 +14,8 @@ export class CommentsController {
   }
 
   @GetAllMethod()
-  findAll(@Query() getAllCommentsDto: GetAllCommentsDto) {
-    return this.commentsService.findAll(getAllCommentsDto);
+  findAll(@Query(new ValidationPipe({ transform: true })) listCommentsParams: ListCommentsParams) {
+    return this.commentsService.findAll(listCommentsParams);
   }
 
   @GetOneMethod(':id')

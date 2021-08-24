@@ -1,3 +1,3 @@
-export { CreateCategoryDto } from './create-category.dto';
-export { UpdateCategoryDto } from './update-category.dto';
-export { GetAllCategoriesDto } from './get-all-categories-dto';
+export * from './create-category.dto';
+export * from './update-category.dto';
+export * from './list-categories-params';

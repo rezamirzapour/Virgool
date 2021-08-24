@@ -1,13 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { Body, Param, Query, ValidationPipe, UsePipes } from '@nestjs/common';
+import { Body, Param, Query, HttpCode, ValidationPipe, UsePipes } from '@nestjs/common';
 import { RolesService } from './roles.service';
-import { CreateRoleDto, GetAllRolesDto, UpdateRoleDto, GetOneRoleDto, AddUsersDto } from './dto';
+import { CreateRoleDto, ListRolesParams, UpdateRoleDto, GetOneRoleDto, AddUsersDto } from './dto';
 import { ApiController, GetAllMethod, GetOneMethod, PostMethod, PutMethod, DeleteMethod, ID } from 'common/decorator';
 
 @ApiController('roles')
 export class RolesController {
   constructor(private readonly rolesService: RolesService) { }
 
+  @HttpCode(201)
   @PostMethod()
   create(@Body() createRoleDto: CreateRoleDto) {
     return this.rolesService.create(createRoleDto);
@@ -19,8 +20,8 @@ export class RolesController {
   }
 
   @GetAllMethod()
-  findAll(@Query() getAllRolesDto: GetAllRolesDto) {
-    return this.rolesService.findAll(getAllRolesDto);
+  findAll(@Query(new ValidationPipe({ transform: true })) listRolesParams: ListRolesParams) {
+    return this.rolesService.findAll(listRolesParams);
   }
 
   @PutMethod(':id')

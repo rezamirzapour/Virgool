@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
-import { CreateCommentDto, UpdateCommentDto, GetAllCommentsDto } from './dto';
+import { CreateCommentDto, UpdateCommentDto, ListCommentsParams } from './dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Comment } from './entities'
 import { User } from 'users/entities';
@@ -18,8 +18,8 @@ export class CommentsService {
     }
   }
 
-  async findAll(getAllCommentsDto: GetAllCommentsDto) {
-    const { paginate, size, offset, ...otherOptions } = getAllCommentsDto
+  async findAll(listCommentsParams: ListCommentsParams) {
+    const { paginate, size, offset, ...otherOptions } = listCommentsParams
     const paginateOptions = { size, limit: offset }
     const options = { where: {} }
     for (const key in otherOptions)

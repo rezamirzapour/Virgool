@@ -3,18 +3,19 @@ import { Injectable, InternalServerErrorException, NotFoundException } from '@ne
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize'
 import { Article, Category, User } from 'database/database.entities';
-import { GetAllArticlesDto, CreateArticleDto, UpdateArticleDto } from './dto';
-import { PaginateResponse, FindAllResponse, FindOneResponse, DestroyResponse, CreateResponse, UpdateResponse } from 'common/httpResponse';
+import { ListAllArticlesParams, CreateArticleDto, UpdateArticleDto } from './dto';
+import { PaginateResponse, FindAllResponse } from 'common/httpResponse';
 
 @Injectable()
 export class ArticlesService {
     constructor(
-        @InjectModel(Article) private articleModel: typeof Article,
-        @InjectModel(Category) private readonly categoryModel: typeof Category
+        @InjectModel(Article) private readonly articleModel: typeof Article,
     ) { }
 
-    async findAll(getAllArticlesDto: GetAllArticlesDto) {
-        const { size, offset, paginate, ...otherOptions } = getAllArticlesDto;
+    async findAll(listAllArticlesParams: ListAllArticlesParams) {
+        console.log("I AM")
+        console.log(listAllArticlesParams)
+        const { size, offset, paginate, ...otherOptions } = listAllArticlesParams;
         const paginateOptions = { offset, limit: size }
         const options = { where: {} };
         if (otherOptions.title)
@@ -91,7 +92,7 @@ export class ArticlesService {
             const article = await this.articleModel.create(createArticleDto);
             article.$set("author", author)
             if (createArticleDto.categories) {
-                article.$set("categories", createArticleDto.categories.map(c => +c))
+                article.$set("categories", createArticleDto.categories)
             }
             return article;
         } catch (error) {

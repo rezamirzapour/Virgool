@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateCategoryDto, UpdateCategoryDto, GetAllCategoriesDto } from './dto';
+import { CreateCategoryDto, UpdateCategoryDto, ListCategoriesParams } from './dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize'
 import { Category } from 'database/database.entities';
@@ -15,8 +15,8 @@ export class CategoriesService {
     return category;
   }
 
-  async findAll(getAllCategoriesDto: GetAllCategoriesDto) {
-    const { size, offset, paginate, ...otherOptions } = getAllCategoriesDto;
+  async findAll(listCategoriesParams: ListCategoriesParams) {
+    const { size, offset, paginate, ...otherOptions } = listCategoriesParams;
     const paginatoinOptions = { offset, limit: size };
     const options = { where: {} }
 
