@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
-import { LoggerMiddleware, NormalizerMilddleware, ParseIntIdMiddleware } from './common/middleware';
+import { LoggerMiddleware, ParseIntIdMiddleware } from './common/middleware';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticlesModule } from './articles/articles.module';
@@ -45,7 +45,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(NormalizerMilddleware, LoggerMiddleware).forRoutes("api/*")
+      .apply(LoggerMiddleware).forRoutes("api/*")
       .apply(ParseIntIdMiddleware).forRoutes(
         'api/articles/:id',
         'api/categories/:id',
