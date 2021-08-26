@@ -3,7 +3,6 @@ import {
     LoginDto,
     RegisterDto,
     LoginResponsePayload,
-    GetProfileResponse,
     RegisterResponsePayload
 } from './types';
 
@@ -16,10 +15,6 @@ export class AuthServices {
 
     static async register(data: RegisterDto) {
         return http.post<RegisterResponsePayload>(`${this.url}/register`, data)
-    }
-
-    static async getProfile() {
-        return http.get<GetProfileResponse>(`${this.url}/profile`)
     }
 
 }
