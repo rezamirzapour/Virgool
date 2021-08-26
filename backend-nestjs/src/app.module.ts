@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { LoggerMiddleware, ParseIntIdMiddleware } from './common/middleware';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticlesModule } from './articles/articles.module';
@@ -13,31 +14,34 @@ import { CommentsModule } from './comments/comments.module';
 import { RolesModule } from './roles/roles.module';
 import { PermissionsModule } from './permissions/permissions.module';
 import { MeModule } from './me/me.module';
-import { Article, User, Photo, ArticleCategory, Category, Comment, Bookmark, Favorite, Following, Permission, PermissionRole, Role, RoleUser, Notification } from 'database/database.entities'
+import { Article, User, Photo, ArticleCategory, Category, Comment, Bookmark, Favorite, Following, Permission, PermissionRole, Role, Notification } from 'database/database.entities'
 import { AuthModule } from './auth/auth.module';
+import { GuardsModule } from './gurad/guards.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
-  imports: [SequelizeModule.forRoot({
-    dialect: 'mariadb',
-    host: '127.0.0.1',
-    port: 3306,
-    username: 'root',
-    password: '',
-    database: 'virgool-nestjs',
-    models: [Article, User, Photo, ArticleCategory, Category, Comment, Bookmark, Favorite, Following, Permission, PermissionRole, Role, RoleUser, Notification],
-    synchronize: true,
-    sync: {
-      force: true
-    }
-  }), JwtModule.register({
-    secret: 'secret',
-    signOptions: { expiresIn: '60s' },
-  }),
-  EventEmitterModule.forRoot(),
-    PassportModule, AuthModule, ArticlesModule, UsersModule, PhotosModule, DatabaseModule, CategoriesModule, CommentsModule, RolesModule, PermissionsModule, MeModule],
+  imports: [
+    ConfigModule.forRoot(),
+    SequelizeModule.forRoot({
+      dialect: 'mariadb',
+      host: '127.0.0.1',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'virgool-nestjs',
+      models: [Article, User, Photo, ArticleCategory, Category, Comment, Bookmark, Favorite, Following, Permission, PermissionRole, Role, Notification],
+      synchronize: true,
+      sync: {
+        force: true
+      }
+    }), JwtModule.register({
+      secret: 'secret',
+      signOptions: { expiresIn: '60s' },
+    }),
+    EventEmitterModule.forRoot(),
+    PassportModule, GuardsModule, AuthModule, ArticlesModule, UsersModule, PhotosModule, DatabaseModule, CategoriesModule, CommentsModule, RolesModule, PermissionsModule, MeModule],
   controllers: [AppController],
   providers: [AppService],
 })
