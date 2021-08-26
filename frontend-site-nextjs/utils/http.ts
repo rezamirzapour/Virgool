@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import Axios, { AxiosRequestConfig } from 'axios';
 
 const axios = Axios.create({
@@ -5,12 +6,13 @@ const axios = Axios.create({
 })
 
 axios.interceptors.request.use((config: AxiosRequestConfig) => {
+    config.withCredentials = true
     let accessToken
-    if (process.browser)
-        accessToken = localStorage.getItem("access_token")
-    if (accessToken) {
+    accessToken = process.browser
+        ? localStorage.getItem("access_token")
+        : Cookies.get('access_token')
+    if (accessToken)
         config.headers['Authorization'] = `Bearer ${accessToken}`
-    }
     return config;
 })
 
