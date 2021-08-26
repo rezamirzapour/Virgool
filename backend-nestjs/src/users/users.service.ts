@@ -58,17 +58,17 @@ export class UsersService {
 
     async findOne(id: number) {
         const result = await this.userRepository.findByPk(id, {
-            attributes: { exclude: ['avatarId', 'password'] },
+            attributes: { exclude: ['avatarId', 'password', 'roleId'] },
             include: [{
                 model: Role,
-                attributes: ["id", 'title', 'label'],
-                through: { attributes: [] }
+                attributes: ["id", 'title', 'label', 'allowAny'],
+                include: ['permissions']
             }, 'avatar'
             ]
         })
         if (!result)
             throw new NotFoundException()
-        return new FindOneResponse(result)
+        return result
     }
 
     async update(user: User, updateUserDto: UpdateUserDto) {

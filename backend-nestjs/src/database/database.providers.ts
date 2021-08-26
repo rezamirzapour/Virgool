@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Sequelize } from 'sequelize-typescript';
-import { Article, User, Following, Bookmark, Photo, Category, ArticleCategory, Comment, Favorite, Role, Permission, PermissionRole, RoleUser, Notification } from './database.entities'
+import { Article, User, Following, Bookmark, Photo, Category, ArticleCategory, Comment, Favorite, Role, Permission, PermissionRole, Notification } from './database.entities'
 
 export const databaseProviders = [
     {
@@ -14,7 +14,7 @@ export const databaseProviders = [
                 password: '',
                 database: 'virgool-nestjs',
             });
-            sequelize.addModels([Article, User, Following, Bookmark, Favorite, Photo, Category, Comment, ArticleCategory, Role, Permission, PermissionRole, RoleUser, Notification]);
+            sequelize.addModels([Article, User, Following, Bookmark, Favorite, Photo, Category, Comment, ArticleCategory, Role, Permission, PermissionRole, Notification]);
             await sequelize.sync();
             return sequelize;
         },

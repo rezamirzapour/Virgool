@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Table, Model, PrimaryKey, Column, AllowNull, AutoIncrement, Unique, HasMany, ForeignKey, BelongsTo, Length, BelongsToMany, Default, BeforeCreate } from 'sequelize-typescript'
-import { Article, Photo, Following, RoleUser, Role, Notification } from 'database/database.entities'
+import { Article, Photo, Following, Role, Notification } from 'database/database.entities'
 import { hash } from 'bcrypt';
 
 @Table({ tableName: 'users' })
@@ -61,8 +61,11 @@ export class User extends Model {
     @BelongsToMany(() => User, () => Following, 'followingId')
     followers: User[]
 
-    @BelongsToMany(() => Role, () => RoleUser)
-    roles: Role[]
+    @ForeignKey(() => Role)
+    roleId: number;
+
+    @BelongsTo(() => Role)
+    role: Role
 
     @HasMany(() => Notification)
     notifications: Notification[]

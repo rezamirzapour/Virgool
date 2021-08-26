@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
 import { Length, IsOptional } from 'class-validator'
 export class CreateRoleDto {
     @ApiProperty()
@@ -9,6 +9,10 @@ export class CreateRoleDto {
     @ApiProperty()
     @Length(1, 128)
     label: string;
+
+    @ApiPropertyOptional({ type: 'boolean', default: false })
+    @IsOptional()
+    allowAny = false;
 
     @ApiProperty()
     @IsOptional()

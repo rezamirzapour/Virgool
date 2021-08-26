@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { PermissionRole, RoleUser, User } from 'database/database.entities';
+import { PermissionRole, User } from 'database/database.entities';
 import { Permission } from 'permissions/entities';
-import { Table, Model, PrimaryKey, Column, AutoIncrement, Length, BelongsToMany } from 'sequelize-typescript'
+import { Table, Model, PrimaryKey, Column, AutoIncrement, Length, BelongsToMany, HasMany, Default } from 'sequelize-typescript'
 
 @Table({ tableName: 'roles' })
 export class Role extends Model {
@@ -18,10 +18,13 @@ export class Role extends Model {
     @Column
     label: string;
 
+    @Default(false)
+    @Column
+    allowAny: boolean;
+
     @BelongsToMany(() => Permission, () => PermissionRole)
     permissions: Permission[]
 
-
-    @BelongsToMany(() => User, () => RoleUser)
+    @HasMany(() => User)
     users: User[]
 }
