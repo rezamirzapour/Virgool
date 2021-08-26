@@ -10,7 +10,7 @@ export interface GetUsersParms extends GetAllParams {
 
 export interface GetUserParms extends GetOneParams { }
 
-export interface UsersPayloadResponse {
+export interface UsersResult {
     id: number,
     email: string,
     firstName: string,
@@ -25,7 +25,7 @@ export interface UsersPayloadResponse {
 }
 
 export interface UsersResponse {
-    result: UsersPayloadResponse[];
+    result: UsersResult[];
     count: number;
     message: string;
 }

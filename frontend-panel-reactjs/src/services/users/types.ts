@@ -1,4 +1,4 @@
-import { GetAllParams, GetOneParams } from '../common/common.services.interface';
+import { GetAllParams, GetOneParams, FindAllResponse, FindOneResponse } from '../common/common.services.interface';
 
 export interface GetUsersParms extends GetAllParams {
     firstName?: string;
@@ -10,7 +10,7 @@ export interface GetUsersParms extends GetAllParams {
 
 export interface GetUserParms extends GetOneParams { }
 
-export interface UsersPayloadResponse {
+export interface UsersResult {
     id: number,
     email: string,
     firstName: string,
@@ -24,14 +24,10 @@ export interface UsersPayloadResponse {
     avatar: string | null
 }
 
-export interface UsersResponse {
-    result: UsersPayloadResponse[];
-    count: number;
-    message: string;
-}
+export interface UsersResponse extends FindAllResponse<UsersResult> { }
 
 
-export interface UserPayloadResponse {
+export interface UserResult {
     id: number,
     email: string,
     firstName: string,
@@ -45,7 +41,4 @@ export interface UserPayloadResponse {
     avatar: string | null
 }
 
-export interface UserResponse {
-    result: UserPayloadResponse;
-    message: string;
-}
+export interface UserResponse extends FindOneResponse<UserResult> { }

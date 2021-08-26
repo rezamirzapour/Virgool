@@ -1,4 +1,4 @@
-import { GetAllParams, GetOneParams } from '../common/common.services.interface';
+import { GetAllParams, GetOneParams, FindAllResponse, FindOneResponse } from '../common/common.services.interface';
 
 export interface GetPermissionsParams extends GetAllParams {
     title?: string;
@@ -12,26 +12,18 @@ export interface CreatePermissionDto {
 
 export interface UpdatePermissionDto extends CreatePermissionDto { }
 
-export interface PermissionsPayload {
+export interface PermissionsResult {
     id: number;
     title: string;
 }
 
-export interface PermissionPayload {
+export interface PermissionResult {
     id: number;
     title: string;
     createdAt: Date;
     updatedAt: Date;
 }
 
-export interface PermissionsResponse {
-    result: PermissionsPayload[];
-    count: number;
-    message: string;
-}
+export interface PermissionsResponse extends FindAllResponse<PermissionsResult> { }
 
-export interface PermissionResponse {
-    result: PermissionPayload;
-    count: number;
-    message: string;
-}
+export interface PermissionResponse extends FindOneResponse<PermissionResult> { }

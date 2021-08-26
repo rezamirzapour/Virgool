@@ -1,5 +1,5 @@
 
-import { GetAllParams, GetOneParams } from '../common/common.services.interface';
+import { GetAllParams, GetOneParams, FindAllResponse, FindOneResponse } from '../common/common.services.interface';
 
 export interface GetRolesParms extends GetAllParams {
     title?: string;
@@ -7,7 +7,7 @@ export interface GetRolesParms extends GetAllParams {
 
 export interface GetRoleParms extends GetOneParams { }
 
-export interface RolesPayloadResponse {
+export interface RolesResult {
     id: number;
     title: string;
     label: string;
@@ -15,7 +15,7 @@ export interface RolesPayloadResponse {
     updatedAt: Date;
 }
 
-export interface RolePayloadResponse {
+export interface RoleResult {
     id: number;
     title: string;
     label: string;
@@ -27,17 +27,9 @@ export interface RolePayloadResponse {
     }[]
 }
 
-export interface RolesResponse {
-    result: RolesPayloadResponse[];
-    count: number;
-    message: string;
-}
+export interface RolesResponse extends FindAllResponse<RolesResult> { }
 
-export interface RoleResponse {
-    result: RolePayloadResponse;
-    count: number;
-    message: string;
-}
+export interface RoleResponse extends FindOneResponse<RoleResult> { }
 
 export interface CreateRoleDto {
     title: string;

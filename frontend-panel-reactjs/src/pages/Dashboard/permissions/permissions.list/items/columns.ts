@@ -1,7 +1,7 @@
 import { IColumn } from 'components/AwesomeTable/items/interface';
-import { PermissionsPayload } from 'services';
+import { PermissionsResult } from 'services';
 
-const columns: IColumn<PermissionsPayload>[] = [
+const columns: IColumn<PermissionsResult>[] = [
     {
         title: 'شناسه',
         field: 'id',

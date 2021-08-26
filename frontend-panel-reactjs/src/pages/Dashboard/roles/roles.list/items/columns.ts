@@ -1,8 +1,8 @@
 import { IColumn } from 'components/AwesomeTable/items/interface';
-import { RolesPayloadResponse } from 'services/roles';
+import { RolesResult } from 'services/roles';
 import { parseDate } from 'utils';
 
-const columns: IColumn<RolesPayloadResponse>[] = [
+const columns: IColumn<RolesResult>[] = [
     {
         title: 'شناسه',
         field: 'id',

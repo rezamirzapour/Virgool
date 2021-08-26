@@ -8,6 +8,16 @@ export interface GetAllParams {
     endDate?: Date;
 }
 
+export interface FindAllResponse<T> {
+    result: T[];
+    count: number;
+    message: string;
+}
+export interface FindOneResponse<T> {
+    result: T;
+    message: string;
+}
+
 export interface GetOneParams {
     id: number;
 }

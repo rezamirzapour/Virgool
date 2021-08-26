@@ -12,7 +12,7 @@ export interface CreatePermissionDto {
 
 export interface UpdatePermissionDto extends CreatePermissionDto { }
 
-export interface PermissionsPayload {
+export interface PermissionsResult {
     title: string;
     createdAt: Date;
     updatedAt: Date;
@@ -25,7 +25,7 @@ export interface PermissionPayload {
 }
 
 export interface PermissoinsResponse {
-    result: PermissionsPayload[];
+    result: PermissionsResult[];
     count: number;
     message: string;
 }

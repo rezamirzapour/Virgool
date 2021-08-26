@@ -1,10 +1,10 @@
 import { IColumn } from 'components/AwesomeTable/items/interface';
-import { ArticlesPayloadResponse } from 'services/articles';
+import { ArticlesResult } from 'services/articles';
 import { colors, Avatar, Box } from '@material-ui/core';
 import { parseDate } from 'utils'
 import { STAUS_OPTIONS } from './options';
 
-const columns: IColumn<ArticlesPayloadResponse>[] = [
+const columns: IColumn<ArticlesResult>[] = [
     {
         title: 'شناسه',
         field: 'id',

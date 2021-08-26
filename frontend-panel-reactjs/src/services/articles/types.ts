@@ -1,4 +1,4 @@
-import { GetAllParams, GetOneParams } from '../common/common.services.interface';
+import { GetAllParams, GetOneParams, FindAllResponse, FindOneResponse } from '../common/common.services.interface';
 
 export interface GetArticlesParms extends GetAllParams {
     title?: string;
@@ -19,7 +19,7 @@ export interface CreateArticleDto {
 export interface UpdateArticleDto extends Partial<CreateArticleDto> { }
 
 
-export interface ArticlesPayloadResponse {
+export interface ArticlesResult {
     id: number;
     title: string;
     content: string;
@@ -42,14 +42,9 @@ export interface ArticlesPayloadResponse {
     updatedAt: Date
 }
 
-export interface ArticlesResponse {
-    result: ArticlesPayloadResponse[];
-    count: number;
-    message: string;
-}
+export interface ArticlesResponse extends FindAllResponse<ArticlesResult> { }
 
-
-export interface ArticlePayloadResponse {
+export interface ArticleResult {
     id: number;
     title: string;
     content: string;
@@ -65,7 +60,4 @@ export interface ArticlePayloadResponse {
     updatedAt: Date;
 }
 
-export interface ArticleResponse {
-    result: ArticlePayloadResponse;
-    message: string;
-}
+export interface ArticleResponse extends FindOneResponse<ArticleResult> { }

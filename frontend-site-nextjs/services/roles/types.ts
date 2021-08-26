@@ -7,7 +7,7 @@ export interface GetRolesParms extends GetAllParams {
 
 export interface GetRoleParms extends GetOneParams { }
 
-export interface RolesPayloadResponse {
+export interface RolesResult {
     id: number;
     title: string;
     label: string;
@@ -28,7 +28,7 @@ export interface RolePayloadResponse {
 }
 
 export interface RolesResponse {
-    result: RolesPayloadResponse[];
+    result: RolesResult[];
     count: number;
     message: string;
 }

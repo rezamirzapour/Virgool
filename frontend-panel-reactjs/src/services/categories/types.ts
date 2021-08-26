@@ -1,5 +1,5 @@
 
-import { GetAllParams, GetOneParams } from '../common/common.services.interface';
+import { GetAllParams, GetOneParams, FindAllResponse, FindOneResponse } from '../common/common.services.interface';
 
 export interface CreateCategoryDto {
     title: string
@@ -12,28 +12,20 @@ export interface GetCategoriesParms extends GetAllParams {
 }
 export interface GetCategoryParms extends GetOneParams { }
 
-export interface CategoriesPayloadResponse {
+export interface CategoriesResult {
     id: number;
     title: string;
     createdAt: Date;
     updatedAt: Date;
 }
 
-export interface CategoriesResponse {
-    result: CategoriesPayloadResponse[];
-    count: number;
-    message: string;
-}
+export interface CategoriesResponse extends FindAllResponse<CategoriesResult> { }
 
-export interface CategoryPayloadResponse {
+export interface CategoryResult {
     id: number;
     title: string;
     createdAt: Date;
     updatedAt: Date;
 }
 
-export interface CategoryResponse {
-    result: CategoryPayloadResponse;
-    count: number;
-    message: string;
-}
+export interface CategoryResponse extends FindOneResponse<CategoriesResult> { }
