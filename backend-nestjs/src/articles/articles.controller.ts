@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Param, Query, UsePipes, ValidationPipe, HttpCode } from '@nestjs/common';
+import { Body, Param, Query, ValidationPipe, HttpCode } from '@nestjs/common';
 import { ArticlesService } from './articles.service'
 import { CreateArticleDto, ListAllArticlesParams, ArticleDetailsParams, UpdateArticleDto } from './dto'
 import { ApiController, GetAllMethod, GetOneMethod, PostMethod, DeleteMethod, PutMethod, ID, User } from 'common/decorator';
@@ -9,7 +9,6 @@ export class ArticlesController {
     constructor(private articleService: ArticlesService) { }
 
     @HttpCode(201)
-    @UsePipes(ValidationPipe)
     // @ApiConsumes('multipart/form-data', 'application/json')
     @PostMethod()
     async create(

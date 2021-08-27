@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, Length, IsInt, IsArray, IsOptional, ValidateNested } from 'class-validator'
+import { IsNotEmpty, Length, IsInt, IsArray, IsOptional, IsNumber } from 'class-validator'
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger'
 export class CreateArticleDto {
@@ -12,16 +12,20 @@ export class CreateArticleDto {
     @ApiProperty()
     content: string;
 
-    @IsInt()
     @IsOptional()
+    @ApiProperty()
+    status: string;
+
+    @IsOptional()
+    @IsInt()
     @ApiProperty({ required: false, nullable: true, default: null, })
     @Type(() => Number)
     thumbnailId?: number | null;
 
+    @Type(() => Number)
     @IsArray()
-    @ValidateNested({ each: true })
+    @IsNumber({}, { each: true })
     @IsOptional()
     @ApiProperty({ required: false })
-    @Type(() => Number)
     categories?: number[];
 }

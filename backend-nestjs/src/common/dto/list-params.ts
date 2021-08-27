@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { IsInt, IsBoolean, IsOptional } from 'class-validator'
-import { Type } from 'class-transformer'
+import { Type, Transform } from 'class-transformer'
 import { ApiPropertyOptional } from '@nestjs/swagger';
 export class ListParams {
     @ApiPropertyOptional({ default: 10, type: 'integer' })
@@ -20,7 +20,7 @@ export class ListParams {
     @ApiPropertyOptional({ default: true, type: 'boolean' })
     @IsOptional()
     @IsBoolean()
-    @Type(() => Boolean)
-    // @Transform(({ value }) => value === 'true')
+    // @Type(() => Boolean)     // never use this 
+    @Transform(({ value }) => value === 'true')
     paginate = true
 }
