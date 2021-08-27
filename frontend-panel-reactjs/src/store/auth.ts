@@ -73,8 +73,8 @@ export function* loginSaga(action: any): Generator<any, any, any> {
         action.payload.enqueueSnackbar("با موفقیت وارد شدید", { variant: 'success' })
         yield put(setToken(accessToken))
         action.payload.hsitory.push("/home")
-    } catch (error) {
-        action.payload.enqueueSnackbar(error?.data?.message ?? "خطایی وجود دارد", { variant: 'error' })
+    } catch {
+        action.payload.enqueueSnackbar("خطایی وجود دارد", { variant: 'error' })
     } finally {
         yield put(finalLogin())
     }
@@ -85,8 +85,8 @@ export function* fetchProfileSaga(action: any): Generator<any, any, any> {
         yield put(startFetchProfile())
         const res: any = yield call(() => MeServices.getProfile())
         yield put(successFetchProfile(res.data))
-    } catch (error) {
-        yield action.payload.enqueueSnackbar(error?.data?.message ?? 'حطایی وجود دارد', { variant: 'error' })
+    } catch {
+        yield action.payload.enqueueSnackbar('حطایی وجود دارد', { variant: 'error' })
     } finally {
         yield put(finalFetchProfile())
     }

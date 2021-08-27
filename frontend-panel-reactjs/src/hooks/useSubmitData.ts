@@ -9,8 +9,8 @@ export default function useSubmitData() {
             setIsSubmitting(true)
             await submiter()
             enqueueSnackbar(message || "با موفقیت انجام شد", { variant: 'success' })
-        } catch (error) {
-            enqueueSnackbar(error?.data?.message ?? 'خطایی وحود دارد', { variant: 'error' })
+        } catch {
+            enqueueSnackbar('خطایی وحود دارد', { variant: 'error' })
         }
         finally {
             setIsSubmitting(false)
