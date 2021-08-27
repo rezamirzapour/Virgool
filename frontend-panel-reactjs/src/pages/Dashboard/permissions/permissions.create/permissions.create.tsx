@@ -4,21 +4,18 @@ import { Grid } from '@material-ui/core';
 import { TextField, Button } from 'components/material';
 import { useForm } from 'react-hook-form';
 import { CreatePermissionDto, PermissionsServices } from 'services'
-import { ValidationRule } from 'types';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup'
 
-const defaultValues: CreatePermissionDto = {
-    title: "",
-}
+const schema = yup.object().shape({
+    title: yup.string()
+        .required("عنوان اجباری می‌باشد")
+        .max(128, "طول عنوان حداکثر ۱۲۸ کاراکتر می‌باشد")
+})
 
-const RULES: ValidationRule<CreatePermissionDto> = {
-    title: {
-        required: 'عنوان اجباری می‌باشد',
-        maxLength: 128
-    },
-}
 
 export default function PermissionsCreate() {
-    const methods = useForm({ defaultValues })
+    const { handleSubmit, control } = useForm({ resolver: yupResolver(schema) })
     const { mutate, isSubmitting } = useSubmitData()
 
     const onSubmit = (data: CreatePermissionDto) => {
@@ -26,14 +23,13 @@ export default function PermissionsCreate() {
     }
 
     return <Page title="ایجاد دسترسی">
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <TextField
                         name="title"
                         label="عنوان"
-                        methods={methods}
-                        rules={RULES.title}
+                        control={control}
                     />
                 </Grid>
                 <Grid item>

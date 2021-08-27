@@ -6,48 +6,41 @@ import { Grid } from '@material-ui/core';
 import { TextField, Button } from 'components/material';
 import { useForm } from 'react-hook-form';
 import { UpdatePermissionDto, PermissionsServices, PermissionResponse } from 'services'
-import { ValidationRule } from 'types';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup'
 
-const defaultValues: UpdatePermissionDto = {
-    title: "",
-}
-
-const RULES: ValidationRule<UpdatePermissionDto> = {
-    title: {
-        required: 'عنوان اجباری می‌باشد',
-        maxLength: 128
-    },
-}
+const schema = yup.object().shape({
+    title: yup.string()
+        .required("عنوان اجباری می‌باشد")
+        .max(128, "طول عنوان حداکثر ۱۲۸ کاراکتر می‌باشد")
+})
 
 export default function PermissionsEdit() {
-    const methods = useForm({ defaultValues })
+    const { control, setValue, handleSubmit } = useForm({ resolver: yupResolver(schema) })
     const { mutate, isSubmitting } = useSubmitData()
     const { id } = useParams<{ id?: string }>()
     const { fetchData, loading, response } = useFetchDetails<PermissionResponse>()
 
     const onSubmit = (data: UpdatePermissionDto) => {
-        if (id)
-            return mutate(() => PermissionsServices.update(+id, data))
+        id && mutate(() => PermissionsServices.update(+id, data))
     }
 
     useEffect(() => {
-        if (id)
-            fetchData(() => PermissionsServices.findOne(+id))
-    }, [])
+        id && fetchData(() => PermissionsServices.findOne(+id))
+    }, [id])
 
     useEffect(() => {
-        methods.setValue("title", response.result?.title)
+        setValue("title", response.result?.title)
     }, [response])
 
     return <Page title="ویرایش دسترسی" loading={loading}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <TextField
                         name="title"
                         label="عنوان"
-                        methods={methods}
-                        rules={RULES.title}
+                        control={control}
                     />
                 </Grid>
                 <Grid item>

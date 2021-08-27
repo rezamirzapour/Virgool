@@ -4,35 +4,29 @@ import { Page } from 'components';
 import { Grid } from '@material-ui/core';
 import { TextField, Button, CheckBoxGroup } from 'components/material';
 import { useForm } from 'react-hook-form';
-import { CreateRoleDto, RolesServices } from 'services/roles'
-import { ValidationRule } from 'types';
+import { RolesServices } from 'services/roles'
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup'
 
-const defaultValues: CreateRoleDto = {
-    title: "",
-    label: "",
-    permissions: []
-}
-
-const RULES: ValidationRule<CreateRoleDto> = {
-    title: {
-        required: 'عنوان اجباری می‌باشد',
-        maxLength: 128
-    },
-    label: {
-        required: 'برچسب اجباری می‌باشد',
-        maxLength: 128
-    },
-}
+const schema = yup.object().shape({
+    title: yup.string()
+        .required("عنوان اجباری می‌باشد")
+        .max(128, "طول عنوان حداکثر ۱۲۸ کاراکتر می‌باشد"),
+    label: yup.string()
+        .required("برچسب اجباری می‌باشد")
+        .max(128, "طول برچسب حداکثر ۱۲۸ کاراکتر می‌باشد"),
+    permissions: yup.array().of(yup.number())
+})
 
 export default function RolesCreate() {
-    const methods = useForm({ defaultValues })
+    const { control, handleSubmit, getValues } = useForm({ resolver: yupResolver(schema) })
     const permissions = useEntity('permissions');
     const { mutate, isSubmitting } = useSubmitData()
     const [selectedPermissions, setSelectedPermissions] = useState<Array<number>>([])
 
     const onSubmit = () => {
         const requestBody = {
-            ...methods.getValues(),
+            ...getValues(),
             permissions: selectedPermissions
         }
         return mutate(() => RolesServices.create(requestBody))
@@ -47,22 +41,20 @@ export default function RolesCreate() {
     }
 
     return <Page title="ایجاد نقش">
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <TextField
                         name="title"
                         label="عنوان"
-                        methods={methods}
-                        rules={RULES.title}
+                        control={control}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
                         name="label"
                         label="برچسب"
-                        methods={methods}
-                        rules={RULES.label}
+                        control={control}
                     />
                 </Grid>
                 <Grid item xs={12}>

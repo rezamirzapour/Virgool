@@ -7,27 +7,25 @@ import { useSnackbar } from 'notistack';
 import { useRouter } from 'hooks';
 import { LoginDto } from "services";
 import { TextField, Button } from "components/material";
-import { ValidationRule } from 'types';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
-const defaultValues: LoginDto = {
-  email: "",
-  password: ""
-}
 
-const RULES: ValidationRule<LoginDto> = {
-  email: {
-    required: "ایمیل اجباری می‌باشد"
-  },
-  password: {
-    required: "رمز عبور اجباری می‌باشد",
-    minLength: { value: 8, message: 'طول رمز عبور حداقل ۸ باید باشد' }
-  }
-}
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("فرمت ایمیل معتبر نمی‌باشد")
+    .required('ایمیل اجباری است'),
+  password: yup
+    .string()
+    .min(8, 'طول رمز عبور حداقل ۸ می‌باشد')
+    .required('رمز عبور اجباری است'),
+});
 
 export default function Login() {
   const dispatch = useDispatch()
   const classes = useStyles();
-  const methods = useForm({ defaultValues })
+  const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) })
   const { navigate } = useRouter();
   const auth = useSelector((state: any) => state.auth)
   const { enqueueSnackbar } = useSnackbar()
@@ -47,21 +45,19 @@ export default function Login() {
       <Typography component="h1" variant="h5">
         ورود
       </Typography>
-      <form className={classes.form} onSubmit={methods.handleSubmit(onSubmit)}>
+      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
         <TextField
           margin="normal"
           label="ایمیل"
           name="email"
-          methods={methods}
-          rules={RULES.email}
+          control={control}
         />
         <TextField
           margin="normal"
           name="password"
           label="رمز عبور"
           type="password"
-          methods={methods}
-          rules={RULES.password}
+          control={control}
         />
         <Button
           fullWidth

@@ -5,24 +5,19 @@ import { Grid } from '@material-ui/core';
 import { CreateArticleDto, ArticleServices } from 'services';
 import { useEntity, useMutate, useRouter } from 'hooks';
 import { useForm } from 'react-hook-form';
-import { ValidationRule } from 'types';
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-const defaultValues: CreateArticleDto = {
-    content: '',
-    title: '',
-    categories: [],
-    thumbnailId: null
-}
+const schema = yup.object().shape({
+    title: yup.string().required("عنوان اجباری می‌باشد"),
+    content: yup.string(),
+    categories: yup.array().of(yup.number()),
+    thumbnailId: yup.number()
+})
 
-const RULES: ValidationRule<CreateArticleDto> = {
-    title: {
-        required: 'عنوان اجباری می‌باشد',
-        maxLength: 128
-    },
-}
 
 export default function ArticlesCreate() {
-    const methods = useForm({ defaultValues });
+    const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) });
     const categories = useEntity("categories")
     const { mutate, isSubmitting } = useMutate()
     const { editorState, getHtmlContent, setEditorState } = useTextEditor()
@@ -35,15 +30,14 @@ export default function ArticlesCreate() {
         return mutate(() => ArticleServices.create(requestBody))
     }
     return <Page title="ایجاد مقاله" >
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container>
                 <Grid lg={6} spacing={3} item container>
                     <Grid item lg={12}>
                         <TextField
                             name="title"
                             label="عنوان"
-                            methods={methods}
-                            rules={RULES.title}
+                            control={control}
                         />
                     </Grid>
                     <Grid item lg={12}>
@@ -52,13 +46,12 @@ export default function ArticlesCreate() {
                     <Grid item lg={12}>
                         <Select
                             options={categories.map((c: any) => ({ label: c.title, value: c.id }))}
-                            defaultValue={defaultValues.categories}
                             multiple
                             title="categories"
                             placeholder="دسته بندی"
                             name="categories"
                             label="دسته بندی"
-                            methods={methods}
+                            control={control}
                         />
                     </Grid>
                     <Grid item lg={12}>

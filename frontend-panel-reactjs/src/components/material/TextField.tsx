@@ -1,27 +1,28 @@
-import { useCallback, useEffect } from 'react';
 import { TextField as MaterialTextField, StandardTextFieldProps } from '@material-ui/core';
-import { Controller, UseFormMethods, ControllerProps } from 'react-hook-form'
+import { Control, useController } from 'react-hook-form'
 
 interface ITextFieldProps extends StandardTextFieldProps {
-    methods: Pick<UseFormMethods, 'control' | 'errors'>,
-    rules?: ControllerProps<'input'>['rules']
+    name: string,
+    control: Control<any>,
 }
 
-export function TextField({ methods, rules, ...rest }: ITextFieldProps) {
-    const getError = useCallback(() => methods.errors[rest.name as string]?.message ?? "", [methods.errors])
-
-    return <Controller
-        name={rest.name as string}
-        control={methods.control}
-        defaultValue={rest.defaultValue ?? ""}
-        {...(rules && { rules })}
-        render={(otherProps) => <MaterialTextField
-            variant={rest.variant ?? "outlined"}
-            fullWidth={rest.fullWidth ?? true}
-            error={Boolean(getError())}
-            helperText={getError()}
-            {...rest}
-            {...otherProps}
-        />}
+export function TextField({ control, ...rest }: ITextFieldProps) {
+    const {
+        field: { value, onChange, onBlur, ref },
+        fieldState: { invalid, error },
+    } = useController({
+        name: rest.name,
+        control,
+    });
+    return <MaterialTextField
+        variant={rest.variant ?? "outlined"}
+        fullWidth={rest.fullWidth ?? true}
+        error={Boolean(error?.message)}
+        helperText={error?.message}
+        inputRef={ref}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        {...rest}
     />
 }

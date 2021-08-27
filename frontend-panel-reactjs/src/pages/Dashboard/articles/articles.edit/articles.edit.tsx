@@ -7,19 +7,22 @@ import { ArticleServices, ArticleResponse, UpdateArticleDto } from 'services';
 import { useEntity, useFetchDetails, useMutate, useRouter } from 'hooks';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
-import { ValidationRule } from 'types';
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-const RULES: ValidationRule<UpdateArticleDto> = {
-    title: {
-        required: 'عنوان اجباری می‌باشد',
-        maxLength: 128
-    },
-}
+const schema = yup.object().shape({
+    title: yup.string()
+        .required("عنوان اجباری می‌باشد")
+        .max(128, 'طول عنوان نباید بیشتر از ۱۲۸ کاراکتر باشد'),
+    content: yup.string(),
+    categories: yup.array().of(yup.number()),
+    thumbnailId: yup.number()
+})
 
 export default function ArticlesEdit() {
     const { id } = useParams<{ id: string | undefined }>()
     const { fetchData: fetchArticle, loading: loadingArticle, response: articleResponse } = useFetchDetails<ArticleResponse>();
-    const methods = useForm();
+    const { control, handleSubmit, setValue } = useForm({ resolver: yupResolver(schema) });
     const categories = useEntity("categories")
     const { editorState, getHtmlContent, setEditorState } = useTextEditor(articleResponse?.result?.content ?? "")
     const { mutate, isSubmitting } = useMutate()
@@ -30,8 +33,8 @@ export default function ArticlesEdit() {
     }, [])
 
     useEffect(() => {
-        methods.setValue('title', articleResponse?.result?.title ?? '')
-        methods.setValue('categories', articleResponse?.result?.categories?.map?.(c => c.id) ?? [])
+        setValue('title', articleResponse?.result?.title ?? '')
+        setValue('categories', articleResponse?.result?.categories?.map?.(c => c.id) ?? [])
     }, [articleResponse])
 
     const onSubmit = (data: UpdateArticleDto) => {
@@ -43,7 +46,7 @@ export default function ArticlesEdit() {
     }
 
     return <Page loading={loadingArticle} title="ویرایش مقاله">
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container>
                 <Grid lg={6} spacing={3} item container>
                     <Grid item lg={12}>
@@ -51,8 +54,7 @@ export default function ArticlesEdit() {
                             name="title"
                             label="عنوان"
                             defaultValue={articleResponse?.result?.title}
-                            methods={methods}
-                            rules={RULES.title}
+                            control={control}
                         />
                     </Grid>
                     <Grid item lg={12}>
@@ -63,7 +65,7 @@ export default function ArticlesEdit() {
                             options={categories.map((c: any) => ({ label: c.title, value: c.id }))}
                             name="categories"
                             label="دسته بندی"
-                            methods={methods}
+                            control={control}
                         />
                     </Grid>
                     <Grid item lg={12}>

@@ -5,29 +5,23 @@ import { Page } from 'components';
 import { Grid } from '@material-ui/core';
 import { TextField, Button, CheckBoxGroup } from 'components/material';
 import { useForm } from 'react-hook-form';
-import { UpdateRoleDto, RolesServices, RoleResponse } from 'services/roles'
-import { ValidationRule } from 'types';
+import { RolesServices, RoleResponse } from 'services/roles'
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup'
 
-const defaultValues: UpdateRoleDto = {
-    title: "",
-    label: "",
-    permissions: []
-}
-
-const RULES: ValidationRule<UpdateRoleDto> = {
-    title: {
-        required: 'عنوان اجباری می‌باشد',
-        maxLength: 128
-    },
-    label: {
-        required: 'برچسب اجباری می‌باشد',
-        maxLength: 128
-    },
-}
+const schema = yup.object().shape({
+    title: yup.string()
+        .required("عنوان اجباری می‌باشد")
+        .max(128, "طول عنوان حداکثر ۱۲۸ کاراکتر می‌باشد"),
+    label: yup.string()
+        .required("برچسب اجباری می‌باشد")
+        .max(128, "طول برچسب حداکثر ۱۲۸ کاراکتر می‌باشد"),
+    permissions: yup.array().of(yup.number())
+})
 
 export default function RolesEdit() {
     const { id } = useParams<{ id: string | undefined }>();
-    const methods = useForm({ defaultValues })
+    const { control, setValue, getValues, handleSubmit } = useForm({ resolver: yupResolver(schema) })
     const permissions = useEntity('permissions');
     const { mutate, isSubmitting } = useSubmitData()
     const { fetchData, loading, response } = useFetchDetails<RoleResponse>()
@@ -35,11 +29,10 @@ export default function RolesEdit() {
 
     const onSubmit = () => {
         const requestBody = {
-            ...methods.getValues(),
+            ...getValues(),
             permissions: selectedPermissions
         }
-        if (id)
-            return mutate(() => RolesServices.update(+id, requestBody))
+        id && mutate(() => RolesServices.update(+id, requestBody))
     }
 
     const onToggleBox = (ev: ChangeEvent<HTMLInputElement>) => {
@@ -51,34 +44,31 @@ export default function RolesEdit() {
     }
 
     useEffect(() => {
-        if (id)
-            fetchData(() => RolesServices.findOne(+id))
+        id && fetchData(() => RolesServices.findOne(+id))
     }, [id])
 
     useEffect(() => {
-        methods.setValue("title", response.result?.title ?? '')
-        methods.setValue("label", response.result?.label ?? '')
-        methods.setValue("permissions", response.result?.permissions?.map(p => p.id) ?? [])
+        setValue("title", response.result?.title ?? '')
+        setValue("label", response.result?.label ?? '')
+        setValue("permissions", response.result?.permissions?.map(p => p.id) ?? [])
         setSelectedPermissions(response.result?.permissions?.map(p => p.id) ?? [])
     }, [response])
 
     return <Page title="ویرایش نقش" loading={loading}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <TextField
                         name="title"
                         label="عنوان"
-                        methods={methods}
-                        rules={RULES.title}
+                        control={control}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
                         name="label"
                         label="برچسب"
-                        methods={methods}
-                        rules={RULES.label}
+                        control={control}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -96,7 +86,7 @@ export default function RolesEdit() {
                         loading={isSubmitting}
                         type="submit"
                     >
-                        ویرایش تقش
+                        ویرایش نقش
                     </Button>
                 </Grid>
             </Grid>
