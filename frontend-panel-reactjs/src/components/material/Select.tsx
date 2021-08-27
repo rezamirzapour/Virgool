@@ -19,7 +19,7 @@ export function Select({ options, name, control, ...rest }: ISelectProps) {
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        error={Boolean(error?.message)}
+        error={invalid}
         variant={rest.variant ?? "outlined"}
         fullWidth={rest.fullWidth ?? true}
         inputRef={ref}

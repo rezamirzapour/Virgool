@@ -17,7 +17,7 @@ export function TextField({ control, ...rest }: ITextFieldProps) {
     return <MaterialTextField
         variant={rest.variant ?? "outlined"}
         fullWidth={rest.fullWidth ?? true}
-        error={Boolean(error?.message)}
+        error={invalid}
         helperText={error?.message}
         inputRef={ref}
         value={value}
