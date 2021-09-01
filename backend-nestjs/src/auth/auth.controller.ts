@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service'
 import { ApiController } from 'common/decorator';
 import { Response } from 'express'
+import { LoginDto } from './dto'
 @ApiController("auth")
 export class AuthController {
   constructor(private usersService: UsersService, private authService: AuthService) { }
@@ -18,7 +19,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard('local'))
   @Post('login')
-  async login(@Req() req, @Res() res: Response) {
+  async login(@Req() req, @Res() res: Response, @Body() loginDto: LoginDto) {
     const result = await this.authService.login(req.user);
     return res.cookie("access_token", result.access_token, {
       httpOnly: true,
