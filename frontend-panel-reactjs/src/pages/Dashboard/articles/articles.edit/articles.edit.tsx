@@ -3,8 +3,8 @@ import { Grid } from '@material-ui/core';
 import { TextField, Select, Button } from 'components/material';
 import { TextEditor, useTextEditor } from 'components/TextEditor';
 import { Page } from 'components';
-import { ArticleServices, ArticleResponse, UpdateArticleDto } from 'services';
-import { useEntity, useFetchDetails, useMutate, useRouter } from 'hooks';
+import { UpdateArticleDto } from 'services';
+import { useRouter, useGetArticleQuery, useUpdateArticleMutation, useGetCategoriesQuery } from 'hooks';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -21,28 +21,24 @@ const schema = yup.object().shape({
 
 export default function ArticlesEdit() {
     const { id } = useParams<{ id: string | undefined }>()
-    const { fetchData: fetchArticle, loading: loadingArticle, response: articleResponse } = useFetchDetails<ArticleResponse>();
+    const { data: categories } = useGetCategoriesQuery({})
+    const { data: article, isLoading: loadingArticle } = useGetArticleQuery(id ? +id : -1)
+    const [updateArticle, { isLoading: isSubmitting }] = useUpdateArticleMutation()
     const { control, handleSubmit, setValue } = useForm({ resolver: yupResolver(schema) });
-    const categories = useEntity("categories")
-    const { editorState, getHtmlContent, setEditorState } = useTextEditor(articleResponse?.result?.content ?? "")
-    const { mutate, isSubmitting } = useMutate()
+    const { editorState, getHtmlContent, setEditorState } = useTextEditor(article?.content ?? "")
     const { navigate } = useRouter()
 
     useEffect(() => {
-        id && fetchArticle(() => ArticleServices.findOne(+id))
-    }, [])
-
-    useEffect(() => {
-        setValue('title', articleResponse?.result?.title ?? '')
-        setValue('categories', articleResponse?.result?.categories?.map?.(c => c.id) ?? [])
-    }, [articleResponse])
+        setValue('title', article?.title ?? '')
+        setValue('categories', article?.categories?.map?.((c: any) => c.id) ?? [])
+    }, [article])
 
     const onSubmit = (data: UpdateArticleDto) => {
         const requestBody: UpdateArticleDto = {
             ...data,
             content: getHtmlContent()
         }
-        id && mutate(() => ArticleServices.update(+id, requestBody))
+        id && updateArticle({ id: +id, data: requestBody })
     }
 
     return <Page loading={loadingArticle} title="ویرایش مقاله">
@@ -53,16 +49,20 @@ export default function ArticlesEdit() {
                         <TextField
                             name="title"
                             label="عنوان"
-                            defaultValue={articleResponse?.result?.title}
+                            defaultValue={article?.title ?? ""}
                             control={control}
                         />
                     </Grid>
                     <Grid item lg={12}>
-                        <TextEditor label="محتوا" editorState={editorState} setEditorState={setEditorState} />
+                        <TextEditor
+                            label="محتوا"
+                            editorState={editorState}
+                            setEditorState={setEditorState}
+                        />
                     </Grid>
                     <Grid item lg={12}>
                         <Select
-                            options={categories.map((c: any) => ({ label: c.title, value: c.id }))}
+                            options={categories?.map?.((c: any) => ({ label: c.title, value: c.id })) ?? []}
                             name="categories"
                             label="دسته بندی"
                             control={control}

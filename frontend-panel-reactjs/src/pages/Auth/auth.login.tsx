@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Link, Typography, makeStyles } from "@material-ui/core";
 import { useForm } from 'react-hook-form'
 import { useSnackbar } from 'notistack';
-import { useRouter } from 'hooks';
+import { useRouter, useGetCategoriesQuery } from 'hooks';
 import { LoginDto } from "services";
-import { TextField, Button } from "components/material";
+import { Button } from "components/material";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-
+import { TextField } from 'material-hook-form'
+import { useState } from "react";
 
 const schema = yup.object().shape({
   email: yup
@@ -30,10 +31,12 @@ export default function Login() {
   const auth = useSelector((state: any) => state.auth)
   const { enqueueSnackbar } = useSnackbar()
   const history = useHistory()
+  const [paginate, setPaginate] = useState(true)
   const onSubmit = (data: LoginDto) => {
     dispatch({ type: "LOGIN_SAGA", payload: { data, enqueueSnackbar, history } })
   }
-
+  const { data: theCategories, error } = useGetCategoriesQuery({ paginate })
+  useEffect(() => { setTimeout(() => setPaginate(false), 6000) }, [theCategories])
   useEffect(() => {
     if (localStorage.getItem("access_token")) {
       navigate("dashboard")

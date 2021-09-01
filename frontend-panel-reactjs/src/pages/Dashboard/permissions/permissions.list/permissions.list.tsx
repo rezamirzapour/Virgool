@@ -33,7 +33,7 @@ export default function PermissionsList() {
                 variant="contained"
                 color="primary"
                 startIcon={<AddIcon />}
-                onClick={() => navigate("categories.create")}
+                onClick={() => navigate("permissions.create")}
             >
                 افزودن دسترسی
             </Button>

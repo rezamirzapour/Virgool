@@ -1,9 +1,8 @@
-import { useSubmitData } from 'hooks';
+import { useCreateCategoryMutation } from 'hooks';
 import { Page } from 'components';
 import { Grid } from '@material-ui/core';
 import { TextField, Button } from 'components/material';
 import { useForm } from 'react-hook-form';
-import { CategoriesServices } from 'services/categories'
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -14,12 +13,8 @@ const schema = yup.object().shape({
 })
 
 export default function CategoriesCreate() {
-    const { control, handleSubmit, getValues } = useForm({ resolver: yupResolver(schema) })
-    const { mutate, isSubmitting } = useSubmitData()
-
-    const onSubmit = () => {
-        return mutate(() => CategoriesServices.create(getValues()))
-    }
+    const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) })
+    const [onSubmit, { isLoading: isSubmitting }] = useCreateCategoryMutation()
 
     return <Page title="ایجاد دسته بندی">
         <form onSubmit={handleSubmit(onSubmit)}>

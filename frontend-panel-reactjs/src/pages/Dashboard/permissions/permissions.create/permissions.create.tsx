@@ -1,9 +1,8 @@
-import { useSubmitData } from 'hooks';
+import { useCreatePermissionMutation } from 'hooks';
 import { Page } from 'components';
 import { Grid } from '@material-ui/core';
 import { TextField, Button } from 'components/material';
 import { useForm } from 'react-hook-form';
-import { CreatePermissionDto, PermissionsServices } from 'services'
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -16,11 +15,7 @@ const schema = yup.object().shape({
 
 export default function PermissionsCreate() {
     const { handleSubmit, control } = useForm({ resolver: yupResolver(schema) })
-    const { mutate, isSubmitting } = useSubmitData()
-
-    const onSubmit = (data: CreatePermissionDto) => {
-        return mutate(() => PermissionsServices.create(data))
-    }
+    const [onSubmit, { isLoading: isSubmitting }] = useCreatePermissionMutation()
 
     return <Page title="ایجاد دسترسی">
         <form onSubmit={handleSubmit(onSubmit)}>

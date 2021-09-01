@@ -1,10 +1,10 @@
 import { useState, ChangeEvent } from 'react';
-import { useEntity, useSubmitData } from 'hooks';
+import { useGetPermissionsQuery, useCreateRoleMutation } from 'hooks';
 import { Page } from 'components';
 import { Grid } from '@material-ui/core';
 import { TextField, Button, CheckBoxGroup } from 'components/material';
 import { useForm } from 'react-hook-form';
-import { RolesServices } from 'services/roles'
+import { CreateRoleDto } from 'services/roles'
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -19,17 +19,17 @@ const schema = yup.object().shape({
 })
 
 export default function RolesCreate() {
-    const { control, handleSubmit, getValues } = useForm({ resolver: yupResolver(schema) })
-    const permissions = useEntity('permissions');
-    const { mutate, isSubmitting } = useSubmitData()
+    const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) })
+    const { data: permissions } = useGetPermissionsQuery({})
+    const [createRole, { isLoading: isSubmitting }] = useCreateRoleMutation()
     const [selectedPermissions, setSelectedPermissions] = useState<Array<number>>([])
 
-    const onSubmit = () => {
+    const onSubmit = (data: CreateRoleDto) => {
         const requestBody = {
-            ...getValues(),
+            ...data,
             permissions: selectedPermissions
         }
-        return mutate(() => RolesServices.create(requestBody))
+        return createRole(requestBody)
     }
 
     const onToggleBox = (ev: ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +60,7 @@ export default function RolesCreate() {
                 <Grid item xs={12}>
                     <CheckBoxGroup
                         label="دسترسی ها"
-                        options={permissions.map((p: any) => ({ label: p.title, value: p.id }))}
+                        options={permissions?.map?.((p: any) => ({ label: p.title, value: p.id })) ?? []}
                         onToggleBox={onToggleBox}
                         checkedValues={selectedPermissions}
                     />
