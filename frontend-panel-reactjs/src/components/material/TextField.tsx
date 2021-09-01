@@ -1,9 +1,10 @@
 import { TextField as MaterialTextField, StandardTextFieldProps } from '@material-ui/core';
 import { Control, useController } from 'react-hook-form'
 
-interface ITextFieldProps extends StandardTextFieldProps {
+interface ITextFieldProps extends Omit<StandardTextFieldProps, 'variant'> {
     name: string,
     control: Control<any>,
+    variant?: 'standard' | 'outlined'
 }
 
 export function TextField({ control, ...rest }: ITextFieldProps) {
@@ -15,14 +16,14 @@ export function TextField({ control, ...rest }: ITextFieldProps) {
         control,
     });
     return <MaterialTextField
-        variant={rest.variant ?? "outlined"}
-        fullWidth={rest.fullWidth ?? true}
         error={invalid}
         helperText={error?.message}
         inputRef={ref}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        variant="outlined"
+        fullWidth
         {...rest}
     />
 }

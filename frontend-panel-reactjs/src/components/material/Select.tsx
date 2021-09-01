@@ -3,20 +3,20 @@ import { Control, useController } from 'react-hook-form'
 
 interface ISelectProps extends SelectProps {
     name: string,
-    options: [{
+    options: {
         label: string,
         value: any
-    }],
+    }[],
     control: Control<any>,
 }
-export function Select({ options, name, control, ...rest }: ISelectProps) {
+export function Select({ options = [], name, control, ...rest }: ISelectProps) {
     const {
         field: { value, onChange, onBlur, ref },
         fieldState: { invalid, error },
     } = useController({ name, control })
     return <MaterialSelect
         name={name}
-        value={value}
+        value={rest.multiple ? Array.isArray(value) ? value : [] : value}
         onChange={onChange}
         onBlur={onBlur}
         error={invalid}
