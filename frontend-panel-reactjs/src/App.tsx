@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-d
 
 // providers
 import { RTLProvider } from "providers";
-import { SnackbarProvider } from 'notistack';
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Provider } from 'react-redux';
 
@@ -23,19 +22,14 @@ function App() {
       <Provider store={store}>
         <RTLProvider>
           <MuiPickersUtilsProvider utils={JalaliUtils} locale="fa">
-            <SnackbarProvider maxSnack={3} anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center'
-            }}>
-              <ToastContainer />
-              <Router>
-                <Switch>
-                  <Route path="/dashboard" component={Dashboard} />
-                  <Route path="/auth" component={Auth} />
-                  <Redirect to="/dashboard" />
-                </Switch>
-              </Router>
-            </SnackbarProvider>
+            <ToastContainer />
+            <Router>
+              <Switch>
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/auth" component={Auth} />
+                <Redirect to="/dashboard" />
+              </Switch>
+            </Router>
           </MuiPickersUtilsProvider>
         </RTLProvider>
       </Provider>
