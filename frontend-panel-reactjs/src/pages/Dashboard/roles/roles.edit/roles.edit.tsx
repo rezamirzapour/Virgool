@@ -1,11 +1,11 @@
 import { useState, useEffect, ChangeEvent } from 'react';
 import { useParams } from 'react-router-dom';
-import { useEntity, useSubmitData, useFetchDetails } from 'hooks';
+import { useGetPermissionsQuery, useUpdateRoleMutation, useGetRoleQuery } from 'hooks';
 import { Page } from 'components';
 import { Grid } from '@material-ui/core';
 import { TextField, Button, CheckBoxGroup } from 'components/material';
 import { useForm } from 'react-hook-form';
-import { RolesServices, RoleResponse } from 'services/roles'
+import { UpdateRoleDto } from 'services/roles'
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -21,18 +21,18 @@ const schema = yup.object().shape({
 
 export default function RolesEdit() {
     const { id } = useParams<{ id: string | undefined }>();
-    const { control, setValue, getValues, handleSubmit } = useForm({ resolver: yupResolver(schema) })
-    const permissions = useEntity('permissions');
-    const { mutate, isSubmitting } = useSubmitData()
-    const { fetchData, loading, response } = useFetchDetails<RoleResponse>()
+    const { data: role, isLoading } = useGetRoleQuery(id ? +id : -1)
+    const { data: permissions } = useGetPermissionsQuery({})
+    const [updateRole, { isLoading: isSubmitting }] = useUpdateRoleMutation()
+    const { control, setValue, handleSubmit } = useForm({ resolver: yupResolver(schema) })
     const [selectedPermissions, setSelectedPermissions] = useState<Array<number>>([])
 
-    const onSubmit = () => {
+    const onSubmit = (data: UpdateRoleDto) => {
         const requestBody = {
-            ...getValues(),
+            ...data,
             permissions: selectedPermissions
         }
-        id && mutate(() => RolesServices.update(+id, requestBody))
+        id && updateRole({ id: +id, data: requestBody })
     }
 
     const onToggleBox = (ev: ChangeEvent<HTMLInputElement>) => {
@@ -43,18 +43,15 @@ export default function RolesEdit() {
         )
     }
 
-    useEffect(() => {
-        id && fetchData(() => RolesServices.findOne(+id))
-    }, [id])
 
     useEffect(() => {
-        setValue("title", response.result?.title ?? '')
-        setValue("label", response.result?.label ?? '')
-        setValue("permissions", response.result?.permissions?.map(p => p.id) ?? [])
-        setSelectedPermissions(response.result?.permissions?.map(p => p.id) ?? [])
-    }, [response])
+        setValue("title", role?.title ?? '')
+        setValue("label", role?.label ?? '')
+        setValue("permissions", role?.permissions?.map(p => p.id) ?? [])
+        setSelectedPermissions(role?.permissions?.map(p => p.id) ?? [])
+    }, [role])
 
-    return <Page title="ویرایش نقش" loading={loading}>
+    return <Page title="ویرایش نقش" loading={isLoading}>
         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -74,7 +71,7 @@ export default function RolesEdit() {
                 <Grid item xs={12}>
                     <CheckBoxGroup
                         label="دسترسی ها"
-                        options={permissions.map((p: any) => ({ label: p.title, value: p.id }))}
+                        options={permissions?.map?.((p: any) => ({ label: p.title, value: p.id })) ?? []}
                         onToggleBox={onToggleBox}
                         checkedValues={selectedPermissions}
                     />

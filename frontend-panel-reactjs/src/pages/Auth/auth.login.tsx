@@ -3,7 +3,6 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Link, Typography, makeStyles } from "@material-ui/core";
 import { useForm } from 'react-hook-form'
-import { useSnackbar } from 'notistack';
 import { useRouter, useGetCategoriesQuery } from 'hooks';
 import { LoginDto } from "services";
 import { Button } from "components/material";
@@ -29,11 +28,10 @@ export default function Login() {
   const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) })
   const { navigate } = useRouter();
   const auth = useSelector((state: any) => state.auth)
-  const { enqueueSnackbar } = useSnackbar()
   const history = useHistory()
   const [paginate, setPaginate] = useState(true)
   const onSubmit = (data: LoginDto) => {
-    dispatch({ type: "LOGIN_SAGA", payload: { data, enqueueSnackbar, history } })
+    dispatch({ type: "LOGIN_SAGA", payload: { data, history } })
   }
   const { data: theCategories, error } = useGetCategoriesQuery({ paginate })
   useEffect(() => { setTimeout(() => setPaginate(false), 6000) }, [theCategories])

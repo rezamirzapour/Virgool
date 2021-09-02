@@ -1,16 +1,15 @@
 import { useState } from "react"
-import { useSnackbar, SnackbarMessage } from 'notistack';
+import { toast } from 'material-react-toastify'
 
 export default function useMutate() {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-    const { enqueueSnackbar } = useSnackbar();
     const mutate = async (submiter: Function, message?: string) => {
         try {
             setIsSubmitting(true)
             await submiter()
-            enqueueSnackbar(message || "با موفقیت انجام شد", { variant: 'success' })
+            toast.success(message || "با موفقیت انجام شد")
         } catch {
-            enqueueSnackbar('خطایی وحود دارد', { variant: 'error' })
+            toast.error('خطایی وحود دارد')
         }
         finally {
             setIsSubmitting(false)

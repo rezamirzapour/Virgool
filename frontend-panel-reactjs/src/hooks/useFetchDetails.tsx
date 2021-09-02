@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { useSnackbar } from 'notistack';
+import { toast } from 'material-react-toastify'
 import { AxiosResponse } from 'axios';
 
 export default function useFetchDetails<T>() {
-    const { enqueueSnackbar } = useSnackbar();
     const [response, setResponse] = useState<T>({} as T);
     const [loading, setLoading] = useState<boolean>(false)
 
@@ -12,7 +11,7 @@ export default function useFetchDetails<T>() {
             const res = await fetcherFn();
             setResponse(res.data)
         } catch (error) {
-            enqueueSnackbar("خطایی وجود دارد", { variant: 'error' })
+            toast.error("خطایی وجود دارد")
         } finally {
             setLoading(false)
         }

@@ -1,11 +1,17 @@
 @import "./font-face.scss";
 
+.Toastify__toast {
+    font-family: "YekanBakh";
+}
+
 body {
     font-family: YekanBakh !important;
 }
+
 #__next {
     min-height: 100vh;
 }
+
 .global__rtl {
     direction: rtl;
 }

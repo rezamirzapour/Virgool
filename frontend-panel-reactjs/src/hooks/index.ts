@@ -1,5 +1,4 @@
 export { default as useCopy } from './useCopy'
-export { default as useSnackbar } from './useSnackbar'
 export { default as useRouter } from './useRouter'
 export { default as useSubmitData } from './useSubmitData'
 export { default as useFetchDetails } from './useFetchDetails'

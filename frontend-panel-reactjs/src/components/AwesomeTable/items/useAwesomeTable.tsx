@@ -1,7 +1,6 @@
 import { useState, useReducer } from 'react';
 import { AxiosResponse } from 'axios';
-import { useSnackbar } from 'notistack';
-
+import { toast } from 'material-react-toastify'
 interface IPagination {
     size: number,
     offset: number,
@@ -42,7 +41,7 @@ export function useAwesomeTable<ResponseType>() {
     const [response, setResponse] = useState<ResponseType>({} as ResponseType)
     const [loading, setLoading] = useState<boolean>(true)
     const [pagination, dispatchPagination] = useReducer(paginationReducer, initialPagination)
-    const { enqueueSnackbar } = useSnackbar()
+
     const resetPage = (): void => void dispatchPagination({ type: 'RESET' })
     const setPage = (page: number): void => void dispatchPagination({ type: 'SET_PAGE', payload: page })
     const setSize = (size: number): void => void dispatchPagination({ type: 'SET_SIZE', payload: size })
@@ -54,7 +53,7 @@ export function useAwesomeTable<ResponseType>() {
 
         }
         catch (error) {
-            enqueueSnackbar("خطایی وجود دارد", { variant: 'error' });
+            toast.error("خطایی وجود دارد");
         }
         finally {
             setLoading(false);

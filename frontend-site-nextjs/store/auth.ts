@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { call, put } from 'redux-saga/effects';
 import { AuthServices, MeServices, LoginDto } from 'services';
-import { ProviderContext } from 'notistack';
 import { NextRouter } from 'next/router';
-
+import { toast } from 'material-react-toastify';
 interface InitialState {
     access_token: null | string,
     loginLoading: boolean;
@@ -17,13 +16,8 @@ interface InitialState {
     }
 }
 
-interface IFetchProfileSagaAction {
-    payload: { enqueueSnackbar: ProviderContext['enqueueSnackbar'] },
-}
-
 interface ILoginSagaAction {
     payload: {
-        enqueueSnackbar: ProviderContext['enqueueSnackbar'],
         data: LoginDto,
         router: NextRouter
     },
@@ -70,24 +64,24 @@ export function* loginSaga(action: ILoginSagaAction) {
         const res = yield call(() => AuthServices.login(action.payload.data))
         const accessToken = res.data.access_token;
         yield localStorage.setItem("access_token", accessToken);
-        yield action.payload.enqueueSnackbar("با موفقیت وارد شدید", { variant: 'success' })
+        yield toast("با موفقیت وارد شدید", { variant: 'success' })
         yield put(setToken(accessToken))
-        yield put({ type: 'AFTER_LOGIN_SAGA', payload: { enqueueSnackbar: action.payload.enqueueSnackbar } })
+        yield put({ type: 'AFTER_LOGIN_SAGA' })
         action.payload.router.push("/")
     } catch (error) {
-        action.payload.enqueueSnackbar(error?.response?.message ?? "خطایی وجود دارد", { variant: 'error' })
+        toast.error(error?.response?.message ?? "خطایی وجود دارد")
     } finally {
         yield put(finalLogin())
     }
 }
 
-export function* fetchProfileSaga(action: IFetchProfileSagaAction) {
+export function* fetchProfileSaga() {
     try {
         yield put(startFetchProfile())
         const res = yield call(() => MeServices.getProfile())
         yield put(successFetchProfile(res.data))
     } catch (error) {
-        yield action.payload.enqueueSnackbar(error?.response?.message ?? 'حطایی وجود دارد', { variant: 'error' })
+        yield toast.error(error?.response?.message ?? 'حطایی وجود دارد')
     } finally {
         yield put(finalFetchProfile())
     }

@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { call, put } from 'redux-saga/effects';
 import { AuthServices, MeServices, LoginDto } from 'services';
-import { ProviderContext } from 'notistack';
 import { History } from 'history';
-
+import { toast } from 'material-react-toastify';
 interface InitialState {
     access_token: null | string,
     loginLoading: boolean;
@@ -17,13 +16,8 @@ interface InitialState {
     }
 }
 
-interface IFetchProfileSagaAction {
-    payload: { enqueueSnackbar: ProviderContext['enqueueSnackbar'] },
-}
-
 interface ILoginSagaAction {
     payload: {
-        enqueueSnackbar: ProviderContext['enqueueSnackbar'],
         data: LoginDto,
         hsitory: History
     },
@@ -70,11 +64,11 @@ export function* loginSaga(action: any): Generator<any, any, any> {
         const res: any = yield call(() => AuthServices.login(action.payload.data))
         const accessToken = res.data.access_token;
         localStorage.setItem("access_token", accessToken);
-        action.payload.enqueueSnackbar("با موفقیت وارد شدید", { variant: 'success' })
+        toast.success("با موفقیت وارد شدید")
         yield put(setToken(accessToken))
         action.payload.hsitory.push("/home")
     } catch {
-        action.payload.enqueueSnackbar("خطایی وجود دارد", { variant: 'error' })
+        toast.error("خطایی وجود دارد")
     } finally {
         yield put(finalLogin())
     }
@@ -86,7 +80,7 @@ export function* fetchProfileSaga(action: any): Generator<any, any, any> {
         const res: any = yield call(() => MeServices.getProfile())
         yield put(successFetchProfile(res.data))
     } catch {
-        yield action.payload.enqueueSnackbar('حطایی وجود دارد', { variant: 'error' })
+        yield toast.error('حطایی وجود دارد')
     } finally {
         yield put(finalFetchProfile())
     }

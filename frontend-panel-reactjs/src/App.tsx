@@ -9,7 +9,9 @@ import { Provider } from 'react-redux';
 
 import JalaliUtils from "@date-io/jalaali";
 import store from './store'
+import { ToastContainer } from 'material-react-toastify';
 
+import 'material-react-toastify/dist/ReactToastify.css';
 import "./App.css";
 import "./assets/fonts/IRANSans/css/fontiran.css";
 import "./assets/css/styles.css";
@@ -25,6 +27,7 @@ function App() {
               vertical: 'bottom',
               horizontal: 'center'
             }}>
+              <ToastContainer />
               <Router>
                 <Switch>
                   <Route path="/dashboard" component={Dashboard} />

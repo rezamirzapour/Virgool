@@ -2,7 +2,6 @@ import AuthLayout from 'layouts/auth';
 import { AuthWrapper, Input, Button } from 'components';
 import { useForm } from 'react-hook-form';
 import { LoginDto } from 'services';
-import { useSnackbar } from 'notistack';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
@@ -13,13 +12,12 @@ const defaultValues: LoginDto = {
 
 export default function Login() {
     const methods = useForm({ defaultValues })
-    const { enqueueSnackbar } = useSnackbar()
     const { loginLoading } = useSelector((state: any) => state.auth)
     const router = useRouter()
     const dispatch = useDispatch()
 
     const onSubmit = async (data: LoginDto) => {
-        dispatch({ type: 'LOGIN_SAGA', payload: { data, enqueueSnackbar, router } })
+        dispatch({ type: 'LOGIN_SAGA', payload: { data, router } })
     }
 
     return (
