@@ -1,41 +1,26 @@
-import { ElementType } from 'react'
-import { Switch } from "react-router-dom";
-import { Route } from 'components'
+import { useEffect } from "react";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { CssBaseline, Grid } from "@material-ui/core";
-import { useRouter } from 'hooks';
+import { Grid } from "@material-ui/core";
 import AppBar from "./AppBar";
-import { useDispatch } from 'react-redux'
-import { dashboardRoutes as routes } from "routes";
 
 export default function Dashboard() {
   const classes = useStyles();
-  const { navigate } = useRouter()
-  const dispatch = useDispatch()
+  const naviage = useNavigate();
+  const location = useLocation();
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("access_token");
+  //   if (!token) naviage("auth/login");
+  // }, [location, naviage]);
+
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <AppBar />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Grid className={classes.container}>
-          <Switch>
-            {routes.map((route, i) => (
-              <Route key={i} render={routeProps => {
-                const Component = route.component as ElementType;
-                if (route.auth) {
-                  const token = localStorage.getItem("access_token")
-                  if (token) {
-                    dispatch({ type: "auth/saveToken", payload: token })
-                    return <Component {...routeProps} />
-                  }
-                  else
-                    navigate("auth.login")
-                  return ""
-                }
-              }} {...route} />
-            ))}
-          </Switch>
+          <Outlet />
         </Grid>
       </main>
     </div>

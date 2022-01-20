@@ -9,14 +9,14 @@ import {
   Button,
 } from "@material-ui/core";
 import { ChevronLeft as ChevronLeftIcon } from "@material-ui/icons";
-import MenuList from "./listItems";
+import MenuList from "./ListItems";
 import {
   Menu as MenuIcon,
   PowerSettingsNew as PowerOffIcon,
 } from "@material-ui/icons";
 import clsx from "clsx";
-import { makeStyles, CircularProgress } from "@material-ui/core";
-import { useAuth } from 'hooks'
+import { makeStyles } from "@material-ui/core";
+import { useAuth } from "hooks";
 
 const drawerWidth = 240;
 
@@ -28,8 +28,8 @@ export default function Appbar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const { logout, getLoginedUser } = useAuth()
-  const user = getLoginedUser()
+  const { logout, getLoginedUser } = useAuth();
+  const user = getLoginedUser();
   const classes = useStyles();
   return (
     <>
@@ -55,7 +55,9 @@ export default function Appbar() {
             aria-label="outlined button group"
             size="small"
           >
-            <Button className={classes.button}>{`${user?.firstName ?? ""} ${user?.lastName ?? ""}`}</Button>
+            <Button className={classes.button}>{`${user?.firstName ?? ""} ${
+              user?.lastName ?? ""
+            }`}</Button>
             <Button className={classes.button} onClick={logout}>
               <PowerOffIcon />
             </Button>
@@ -81,7 +83,6 @@ export default function Appbar() {
     </>
   );
 }
-
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {

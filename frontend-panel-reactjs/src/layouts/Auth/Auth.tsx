@@ -1,27 +1,24 @@
-import {
-  Avatar,
-  Paper,
-  Box,
-  Grid,
-} from "@material-ui/core";
+import { Avatar, Paper, Box, Grid } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
-import { authRoutes as routes } from "routes";
-import { Route, Switch } from "react-router-dom";
-import { Copyright } from './components'
+import { Outlet } from "react-router-dom";
+import { Copyright } from "./components";
 
 export default function AuthLayout() {
   const classes = useStyles();
   return (
-    <Grid container component="main" className={classes.root} justify={'center'}>
+    <Grid
+      container
+      component="main"
+      className={classes.root}
+      justify={"center"}
+    >
       <Grid item xs={12} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Switch>
-            {routes.map(({ path, exact, component }) => <Route key={path as string} path={path} exact={exact} component={component} />)}
-          </Switch>
+          <Outlet />
           <Box mt={5}>
             <Copyright />
           </Box>
@@ -31,12 +28,10 @@ export default function AuthLayout() {
   );
 }
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
-    alignItems: 'center'
+    alignItems: "center",
   },
   image: {
     backgroundImage: "url(https://source.unsplash.com/random)",

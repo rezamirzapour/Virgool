@@ -1,45 +1,46 @@
 import { useEffect } from "react";
-import { useHistory } from "react-router";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 import { Grid, Link, Typography, makeStyles } from "@material-ui/core";
-import { useForm } from 'react-hook-form'
-import { useRouter, useGetCategoriesQuery } from 'hooks';
-import { LoginDto } from "services";
+import { useForm } from "react-hook-form";
+import { useRouter, useGetCategoriesQuery } from "hooks";
+import type { LoginDto } from "types";
 import { Button } from "components/material";
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { TextField } from 'material-hook-form'
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { TextField } from "material-hook-form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   email: yup
     .string()
     .email("فرمت ایمیل معتبر نمی‌باشد")
-    .required('ایمیل اجباری است'),
+    .required("ایمیل اجباری است"),
   password: yup
     .string()
-    .min(8, 'طول رمز عبور حداقل ۸ می‌باشد')
-    .required('رمز عبور اجباری است'),
+    .min(8, "طول رمز عبور حداقل ۸ می‌باشد")
+    .required("رمز عبور اجباری است"),
 });
 
 export default function Login() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) })
-  const { navigate } = useRouter();
-  const auth = useSelector((state: any) => state.auth)
-  const history = useHistory()
-  const [paginate, setPaginate] = useState(true)
+  const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) });
+  const auth = useSelector((state: any) => state.auth);
+  const navigate = useNavigate();
+  const [paginate, setPaginate] = useState(true);
   const onSubmit = (data: LoginDto) => {
-    dispatch({ type: "LOGIN_SAGA", payload: { data, history } })
-  }
-  const { data: theCategories, error } = useGetCategoriesQuery({ paginate })
-  useEffect(() => { setTimeout(() => setPaginate(false), 6000) }, [theCategories])
+    dispatch({ type: "LOGIN_SAGA", payload: { data, history: navigate } });
+  };
+  const { data: theCategories, error } = useGetCategoriesQuery({ paginate });
+  useEffect(() => {
+    setTimeout(() => setPaginate(false), 6000);
+  }, [theCategories]);
   useEffect(() => {
     if (localStorage.getItem("access_token")) {
-      navigate("dashboard")
+      navigate("dashboard");
     }
-  }, [auth.access_token])
+  }, [auth.access_token]);
 
   return (
     <>
@@ -69,14 +70,18 @@ export default function Login() {
         >
           ورود
         </Button>
-        <Grid container style={{ marginTop: '1em' }}>
+        <Grid container style={{ marginTop: "1em" }}>
           <Grid item xs>
             <Link href="#" variant="body2">
               رمز عبورم را فراموشی کرده ام
             </Link>
           </Grid>
           <Grid item>
-            <Link onClick={() => navigate("auth.register")} style={{ cursor: 'pointer' }} variant="body2">
+            <Link
+              onClick={() => navigate("auth.register")}
+              style={{ cursor: "pointer" }}
+              variant="body2"
+            >
               {"در حال حاضر حسابی ندارید؟ ثبت نام کنید"}
             </Link>
           </Grid>
@@ -85,7 +90,6 @@ export default function Login() {
     </>
   );
 }
-
 
 const useStyles = makeStyles((theme) => ({
   form: {
