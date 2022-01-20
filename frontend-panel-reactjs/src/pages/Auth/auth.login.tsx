@@ -5,27 +5,18 @@ import { useForm } from "react-hook-form";
 import { useRouter, useGetCategoriesQuery } from "hooks";
 import type { LoginDto } from "types";
 import { Button } from "components/material";
-import * as yup from "yup";
+import { loginSchema } from "validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TextField } from "material-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email("فرمت ایمیل معتبر نمی‌باشد")
-    .required("ایمیل اجباری است"),
-  password: yup
-    .string()
-    .min(8, "طول رمز عبور حداقل ۸ می‌باشد")
-    .required("رمز عبور اجباری است"),
-});
-
 export default function Login() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) });
+  const { control, handleSubmit } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
   const auth = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
   const [paginate, setPaginate] = useState(true);

@@ -5,23 +5,13 @@ import { Grid } from "@material-ui/core";
 import { TextField, Button, CheckBoxGroup } from "components/material";
 import { useForm } from "react-hook-form";
 import type { CreateRoleDto } from "types";
-import * as yup from "yup";
+import { createRoleSchema } from "validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-const schema = yup.object().shape({
-  title: yup
-    .string()
-    .required("عنوان اجباری می‌باشد")
-    .max(128, "طول عنوان حداکثر ۱۲۸ کاراکتر می‌باشد"),
-  label: yup
-    .string()
-    .required("برچسب اجباری می‌باشد")
-    .max(128, "طول برچسب حداکثر ۱۲۸ کاراکتر می‌باشد"),
-  permissions: yup.array().of(yup.number()),
-});
-
 export default function RolesCreate() {
-  const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) });
+  const { control, handleSubmit } = useForm({
+    resolver: yupResolver(createRoleSchema),
+  });
   const { data: permissions } = useGetPermissionsQuery({});
   const [createRole, { isLoading: isSubmitting }] = useCreateRoleMutation();
   const [selectedPermissions, setSelectedPermissions] = useState<Array<number>>(

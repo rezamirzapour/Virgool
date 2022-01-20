@@ -6,20 +6,13 @@ import { Grid } from "@material-ui/core";
 import { TextField, Button } from "components/material";
 import { useForm } from "react-hook-form";
 import type { UpdatePermissionDto } from "types";
-import * as yup from "yup";
+import { updatePermissoinSchema } from "validations";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-const schema = yup.object().shape({
-  title: yup
-    .string()
-    .required("عنوان اجباری می‌باشد")
-    .max(128, "طول عنوان حداکثر ۱۲۸ کاراکتر می‌باشد"),
-});
 
 export default function PermissionsEdit() {
   const { id } = useParams();
   const { control, setValue, handleSubmit } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(updatePermissoinSchema),
   });
   const { data: permission, isLoading } = useGetPermissionQuery(id ? +id : -1);
   const [updatePermission, { isLoading: isSubmitting }] =

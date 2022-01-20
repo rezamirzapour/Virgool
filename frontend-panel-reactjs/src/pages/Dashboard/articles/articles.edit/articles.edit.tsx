@@ -12,18 +12,8 @@ import {
 } from "hooks";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { updateArticleSchema } from "validations";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-const schema = yup.object().shape({
-  title: yup
-    .string()
-    .required("عنوان اجباری می‌باشد")
-    .max(128, "طول عنوان نباید بیشتر از ۱۲۸ کاراکتر باشد"),
-  content: yup.string(),
-  categories: yup.array().of(yup.number()),
-  thumbnailId: yup.number(),
-});
 
 export default function ArticlesEdit() {
   const { id } = useParams();
@@ -34,7 +24,7 @@ export default function ArticlesEdit() {
   const [updateArticle, { isLoading: isSubmitting }] =
     useUpdateArticleMutation();
   const { control, handleSubmit, setValue } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(updateArticleSchema),
   });
   const { editorState, getHtmlContent, setEditorState } = useTextEditor(
     article?.content ?? ""

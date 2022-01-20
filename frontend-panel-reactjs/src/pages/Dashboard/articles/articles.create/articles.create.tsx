@@ -10,18 +10,13 @@ import {
   useGetCategoriesQuery,
 } from "hooks";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { createArticleSchema } from "validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-const schema = yup.object().shape({
-  title: yup.string().required("عنوان اجباری می‌باشد"),
-  content: yup.string(),
-  categories: yup.array().of(yup.number()),
-  thumbnailId: yup.number(),
-});
-
 export default function ArticlesCreate() {
-  const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) });
+  const { control, handleSubmit } = useForm({
+    resolver: yupResolver(createArticleSchema),
+  });
   const { data: categories } = useGetCategoriesQuery({});
   const [createCategory, { isLoading: isSubmitting }] =
     useCreateCategoryMutation();
