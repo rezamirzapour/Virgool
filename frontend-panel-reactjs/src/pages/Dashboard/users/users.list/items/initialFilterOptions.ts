@@ -1,5 +1,5 @@
 import { FilterOptions } from 'components/AwesomeFilter';
-import { GetUsersParms } from 'services/users';
+import type { GetUsersParms } from 'types';
 import { IS_EMAIL_VERIFIED_OPTIONS, IS_PHONE_NUMBER_VERIFIED_OPTIONS } from './options';
 
 const initialFilterOptions = (): FilterOptions<GetUsersParms> => ({

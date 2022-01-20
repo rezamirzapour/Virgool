@@ -1,12 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import {
-    ArticleServices,
+import {ArticleServices} from 'services';
+import type {
     CreateArticleDto,
     GetArticlesParms,
     UpdateArticleDto,
     ArticlesResult,
     ArticleResult
-} from 'services';
+} from 'types';
 import baseQuery from './baseQuery'
 
 export const articlesApi = createApi({

@@ -1,12 +1,13 @@
+
 import { createApi } from '@reduxjs/toolkit/query/react'
-import {
-    PermissionsServices,
+import { PermissionsServices } from 'services';
+import type {
     PermissionsResult,
     PermissionResult,
     CreatePermissionDto,
     GetPermissionsParams,
     UpdatePermissionDto,
-} from 'services';
+} from 'types';
 import baseQuery from './baseQuery'
 
 export const permissionsApi = createApi({

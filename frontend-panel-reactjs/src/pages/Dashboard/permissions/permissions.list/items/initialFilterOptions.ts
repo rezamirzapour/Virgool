@@ -1,5 +1,5 @@
 import { FilterOptions } from 'components/AwesomeFilter'
-import { GetPermissionsParams } from 'services'
+import { GetPermissionsParams } from 'types'
 
 const initialFilterOptions = (): FilterOptions<GetPermissionsParams> => ({
     defaultFilter: 'عنوان',

@@ -1,5 +1,5 @@
 import { IColumn } from 'components/AwesomeTable/items/interface';
-import { CategoriesResult } from 'services/categories';
+import type { CategoriesResult } from 'types';
 import { parseDate } from 'utils';
 
 const columns: IColumn<CategoriesResult>[] = [

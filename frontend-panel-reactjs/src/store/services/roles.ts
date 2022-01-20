@@ -1,12 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import {
-    RolesServices,
+import { RolesServices } from 'services';
+import type {
     RolesResult,
     CreateRoleDto,
     GetRolesParms,
     UpdateRoleDto,
     RoleResult,
-} from 'services';
+} from 'types';
+
 import baseQuery from './baseQuery'
 
 export const rolesApi = createApi({

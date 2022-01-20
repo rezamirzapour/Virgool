@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { call, put } from 'redux-saga/effects';
-import { AuthServices, MeServices, LoginDto } from 'services';
+import { AuthServices, MeServices } from 'services';
+import type { LoginDto } from 'types'
 import { History } from 'history';
 import { toast } from 'material-react-toastify';
 interface InitialState {

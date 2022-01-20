@@ -1,12 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import {
-    CategoriesServices,
+import { CategoriesServices } from 'services';
+import type {
     CreateCategoryDto,
     GetCategoriesParms,
     UpdateCategoryDto,
     CategoriesResult,
     CategoryResult
-} from 'services';
+} from 'types';
 import baseQuery from './baseQuery'
 
 export const categoriesApi = createApi({

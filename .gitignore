@@ -36,3 +36,6 @@ backend-nestjs/.DS_Store
 !/backend-nestjs/.vscode/extensions.json
 
 /frontend-site-nextjs/.next
+
+
+/ReactNativeApp

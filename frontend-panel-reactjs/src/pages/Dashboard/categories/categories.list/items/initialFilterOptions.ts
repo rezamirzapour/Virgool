@@ -1,5 +1,5 @@
 import { FilterOptions } from 'components/AwesomeFilter'
-import { GetCategoriesParms } from 'services/categories'
+import type { GetCategoriesParms } from 'types'
 
 const initialFilterOptions = (): FilterOptions<GetCategoriesParms> => ({
     defaultFilter: 'عنوان',

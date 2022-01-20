@@ -2,7 +2,7 @@ import { configureStore, Middleware } from '@reduxjs/toolkit'
 import createSagaMiddleware from "redux-saga";
 import logger from 'redux-logger';
 import saga from './saga';
-import { auth, entities } from './reducer';
+import { auth, entities, pageInfo } from './reducer';
 import { articlesApi, categoriesApi, rolesApi, permissionsApi } from './services'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -21,6 +21,7 @@ export const store = configureStore({
     reducer: {
         auth,
         entities,
+        pageInfo,
         [categoriesApi.reducerPath]: categoriesApi.reducer,
         [articlesApi.reducerPath]: articlesApi.reducer,
         [rolesApi.reducerPath]: rolesApi.reducer,

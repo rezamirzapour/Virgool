@@ -1,5 +1,5 @@
 import { IColumn } from 'components/AwesomeTable/items/interface';
-import { PermissionsResult } from 'services';
+import { PermissionsResult } from 'types';
 
 const columns: IColumn<PermissionsResult>[] = [
     {

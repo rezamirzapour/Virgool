@@ -1,5 +1,5 @@
 import { IColumn } from 'components/AwesomeTable/items/interface';
-import { RolesResult } from 'services/roles';
+import type { RolesResult } from 'types';
 import { parseDate } from 'utils';
 
 const columns: IColumn<RolesResult>[] = [

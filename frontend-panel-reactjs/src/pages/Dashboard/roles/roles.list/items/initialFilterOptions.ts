@@ -1,5 +1,5 @@
 import { FilterOptions } from 'components/AwesomeFilter'
-import { GetRolesParms } from 'services/roles'
+import type { GetRolesParms } from 'types'
 
 const initialFilterOptions = (): FilterOptions<GetRolesParms> => ({
     defaultFilter: 'عنوان',

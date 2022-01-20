@@ -1,6 +1,6 @@
 import { FilterOptions } from 'components/AwesomeFilter'
 import { STAUS_OPTIONS } from './options'
-import { GetArticlesParms } from 'services/articles'
+import { GetArticlesParms } from 'types'
 const initialFilterOptions = (): FilterOptions<GetArticlesParms> => ({
     defaultFilter: 'عنوان',
     filters: [

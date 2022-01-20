@@ -4,16 +4,16 @@ import {
     RegisterDto,
     LoginResponsePayload,
     RegisterResponsePayload
-} from './types';
+} from 'types';
 
-export const AuthServices = new class {
-    uri = '/auth';
+export const AuthServices = {
+    uri: '/auth',
 
     async login(data: LoginDto) {
         return http.post<LoginResponsePayload>(`${this.uri}/login`, data)
-    }
+    },
 
     async register(data: RegisterDto) {
         return http.post<RegisterResponsePayload>(`${this.uri}/register`, data)
-    }
-}()
+    },
+} as const
