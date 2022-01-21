@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React from "react";
 import { create } from "jss";
 import rtl from "jss-rtl";
 import {
@@ -10,9 +10,6 @@ import { ThemeProvider } from "@material-ui/styles";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-interface IProps {
-  children: ReactNode;
-}
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 const theme = createTheme({
@@ -28,7 +25,7 @@ const theme = createTheme({
   },
 });
 
-export default function RTLProvider({ children }: IProps) {
+const RTLProvider: React.FC = ({ children }) => {
   return (
     <StylesProvider jss={jss}>
       <ThemeProvider theme={theme}>
@@ -37,4 +34,5 @@ export default function RTLProvider({ children }: IProps) {
       </ThemeProvider>
     </StylesProvider>
   );
-}
+};
+export default RTLProvider;
