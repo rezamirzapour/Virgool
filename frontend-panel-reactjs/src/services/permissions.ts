@@ -6,28 +6,26 @@ import {
   UpdatePermissionDto,
 } from "types";
 
-class PermissionsServices {
-  uri = "permissions";
+export class PermissionsServices {
+  static uri = "permissions";
 
-  findAll = async (params?: GetPermissionsParams) => {
+  static findAll = async (params?: GetPermissionsParams) => {
     return http.get(this.uri, { params });
   };
 
-  findOne = async (id: number) => {
+  static findOne = async (id: number) => {
     return http.get(`${this.uri}/${id}`);
   };
 
-  create = async (data: CreatePermissionDto) => {
+  static create = async (data: CreatePermissionDto) => {
     return http.post(this.uri, data);
   };
 
-  update = async (id: number, data: UpdatePermissionDto) => {
+  static update = async (id: number, data: UpdatePermissionDto) => {
     return http.put(`${this.uri}/${id}`, data);
   };
 
-  remove = (id: number) => {
+  static remove = (id: number) => {
     return http.delete(`${this.uri}/${id}`);
   };
 }
-
-export default new PermissionsServices();

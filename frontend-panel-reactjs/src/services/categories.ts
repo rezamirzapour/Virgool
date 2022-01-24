@@ -7,27 +7,26 @@ import {
   UpdateCategoryDto,
 } from "types";
 
-class CategoriesServices {
-  uri = "/categories";
+export class CategoriesServices {
+  static uri = "/categories";
 
-  findAll = async (params?: GetCategoriesParms) => {
+  static findAll = async (params?: GetCategoriesParms) => {
     return http.get<CategoriesResponse>(this.uri, { params });
   };
 
-  findOne = async (id: number) => {
+  static findOne = async (id: number) => {
     return http.get<CategoryResponse>(`${this.uri}/${id}`);
   };
 
-  create = async (data: CreateCategoryDto) => {
+  static create = async (data: CreateCategoryDto) => {
     return http.post<any>(this.uri, data);
   };
 
-  update = async (id: number, data: UpdateCategoryDto) => {
+  static update = async (id: number, data: UpdateCategoryDto) => {
     return http.put<any>(`${this.uri}/${id}`, data);
   };
 
-  remove = async (id: number) => {
+  static remove = async (id: number) => {
     return http.delete(`${this.uri}/${id}`);
   };
 }
-export default new CategoriesServices();
