@@ -1,12 +1,12 @@
-import { http } from 'utils';
-import {
-    GetProfileResponse,
-} from 'types';
+import { http } from "utils";
+import { GetProfileResponse } from "types";
 
-export const MeServices = {
-    uri: '/me',
+class MeServices {
+  uri = "/me";
 
-    async getProfile() {
-        return http.get<GetProfileResponse>(`${this.uri}/profile`)
-    }
-} as const
+  getProfile = async () => {
+    return http.get<GetProfileResponse>(`${this.uri}/profile`);
+  };
+}
+
+export default new MeServices();

@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Grid } from "@material-ui/core";
 import {
   Edit as EditIcon,
   Add as AddIcon,
@@ -8,37 +6,37 @@ import {
 } from "@material-ui/icons";
 import { PermissionsServices } from "services";
 import type { PermissionsResponse } from "types";
-import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable";
-import { AwesomeFilter, useAwesomeFilter } from "components/AwesomeFilter";
+import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable2";
 import { Page } from "components";
 import { Button } from "components/material";
-import { useMutate } from "hooks";
+import { useDeletePermissionMutation } from "hooks";
 import { initialFilterOptions, columns } from "./items";
 
 export default function PermissionsList() {
-  const { fetchData, loading, pagination, response, setPage, setSize } =
-    useAwesomeTable<PermissionsResponse>();
-  const { getValues, register } = useAwesomeFilter(initialFilterOptions());
-  const navigate = useNavigate();
-  const { mutate, isSubmitting } = useMutate();
-
-  const onApplyFiler = () =>
-    fetchData(() =>
-      PermissionsServices.findAll({
-        offset: pagination.offset,
-        size: pagination.size,
-        ...getValues(),
-      })
-    );
-
+  const { register, refetch } = useAwesomeTable<PermissionsResponse>({
+    fetcherCallback: PermissionsServices.findAll,
+    filterOptions: initialFilterOptions(),
+  });
+  const [deletePermission, { isLoading: isSubmitting }] =
+    useDeletePermissionMutation();
   const onDelete = async (rd: any) => {
-    await mutate(() => PermissionsServices.remove(rd.id));
-    onApplyFiler();
+    await deletePermission(rd.id);
+    refetch();
   };
-
-  useEffect(() => {
-    onApplyFiler();
-  }, [pagination]);
+  const navigate = useNavigate();
+  const actions = [
+    {
+      icon: <EditIcon color="primary" />,
+      onClick: (rd: any) => navigate(`${rd.id}/edit`),
+      tooltip: "ویرایش",
+    },
+    {
+      icon: <DeleteIcon color="secondary" />,
+      onClick: onDelete,
+      tooltip: "حذف",
+      loading: isSubmitting,
+    },
+  ];
 
   return (
     <Page
@@ -54,33 +52,7 @@ export default function PermissionsList() {
         </Button>
       }
     >
-      <Grid spacing={3} container alignItems="center">
-        <Grid lg={6} item>
-          <AwesomeFilter onApplyFilter={onApplyFiler} register={register} />
-        </Grid>
-      </Grid>
-      <AwesomeTable
-        columns={columns}
-        loading={loading}
-        page={pagination.page}
-        query={{ data: response.result, totalCount: response.count }}
-        setPage={setPage}
-        setSize={setSize}
-        size={pagination.size}
-        actions={[
-          {
-            icon: <EditIcon color="primary" />,
-            onClick: (rd) => navigate(`permissions/${rd.id}/edit`),
-            tooltip: "ویرایش",
-          },
-          {
-            icon: <DeleteIcon color="secondary" />,
-            onClick: onDelete,
-            tooltip: "حذف",
-            loading: isSubmitting,
-          },
-        ]}
-      />
+      <AwesomeTable columns={columns} register={register} actions={actions} />
     </Page>
   );
 }

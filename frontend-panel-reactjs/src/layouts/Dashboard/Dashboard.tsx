@@ -41,5 +41,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1),
     paddingRight: theme.spacing(1),
     paddingLeft: theme.spacing(1),
+    height: "100vh",
   },
 }));

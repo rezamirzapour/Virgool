@@ -43,7 +43,6 @@ export default function ArticlesEdit() {
     };
     id && updateArticle({ id: +id, data: requestBody });
   };
-
   return (
     <Page loading={loadingArticle} title="ویرایش مقاله">
       <form onSubmit={handleSubmit(onSubmit)}>

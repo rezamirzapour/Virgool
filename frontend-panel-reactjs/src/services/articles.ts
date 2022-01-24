@@ -1,26 +1,34 @@
-import { http } from 'utils';
-import { GetArticlesParms, ArticlesResponse, CreateArticleDto, ArticleResponse, UpdateArticleDto } from 'types';
+import { http } from "utils";
+import {
+  GetArticlesParms,
+  ArticlesResponse,
+  CreateArticleDto,
+  ArticleResponse,
+  UpdateArticleDto,
+} from "types";
 
-export const ArticleServices = {
-    uri: '/articles',
+class ArticleServices {
+  uri = "/articles";
 
-    async findAll(params?: GetArticlesParms) {
-        return http.get<ArticlesResponse>(this.uri, { params })
-    },
+  findAll = async (params?: GetArticlesParms) => {
+    return http.get<ArticlesResponse>(this.uri, { params });
+  };
 
-    async findOne(id: number) {
-        return http.get<ArticleResponse>(`${this.uri}/${id}`)
-    },
+  findOne = async (id: number) => {
+    return http.get<ArticleResponse>(`${this.uri}/${id}`);
+  };
 
-    async create(data: CreateArticleDto) {
-        return http.post(this.uri, data);
-    },
+  create = async (data: CreateArticleDto) => {
+    return http.post(this.uri, data);
+  };
 
-    async update(id: number, data: UpdateArticleDto) {
-        return http.put(`${this.uri}/${id}`, data);
-    },
+  update = async (id: number, data: UpdateArticleDto) => {
+    return http.put(`${this.uri}/${id}`, data);
+  };
 
-    async remove(id: number) {
-        return http.delete(`${this.uri}/${id}`);
-    },
-} as const
+  remove = async (id: number) => {
+    return http.delete(`${this.uri}/${id}`);
+  };
+}
+
+export default new ArticleServices();

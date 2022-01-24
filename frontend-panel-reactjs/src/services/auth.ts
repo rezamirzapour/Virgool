@@ -1,19 +1,21 @@
-import { http } from 'utils';
+import { http } from "utils";
 import {
-    LoginDto,
-    RegisterDto,
-    LoginResponsePayload,
-    RegisterResponsePayload
-} from 'types';
+  LoginDto,
+  RegisterDto,
+  LoginResponsePayload,
+  RegisterResponsePayload,
+} from "types";
 
-export const AuthServices = {
-    uri: '/auth',
+class AuthServices {
+  uri = "/auth";
 
-    async login(data: LoginDto) {
-        return http.post<LoginResponsePayload>(`${this.uri}/login`, data)
-    },
+  login = async (data: LoginDto) => {
+    return http.post<LoginResponsePayload>(`${this.uri}/login`, data);
+  };
 
-    async register(data: RegisterDto) {
-        return http.post<RegisterResponsePayload>(`${this.uri}/register`, data)
-    },
-} as const
+  register = async (data: RegisterDto) => {
+    return http.post<RegisterResponsePayload>(`${this.uri}/register`, data);
+  };
+}
+
+export default new AuthServices();

@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Button, Grid } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import {
   Edit as EditIcon,
   Add as AddIcon,
@@ -7,37 +6,43 @@ import {
 } from "@material-ui/icons";
 import { ArticleServices } from "services";
 import type { ArticlesResponse } from "types";
-import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable";
-import { AwesomeFilter, useAwesomeFilter } from "components/AwesomeFilter";
+import {
+  AwesomeTable,
+  useAwesomeTable,
+  IAction,
+} from "components/AwesomeTable2";
 import { Page } from "components";
-import { useMutate } from "hooks";
+import { useDeleteArticleMutation } from "hooks";
 import { initialFilterOptions, columns } from "./items";
 import { useNavigate } from "react-router-dom";
 
 export default function ArticleList() {
-  const { fetchData, loading, pagination, response, setPage, setSize } =
-    useAwesomeTable<ArticlesResponse>();
-  const { getValues, register } = useAwesomeFilter(initialFilterOptions());
+  const { register, refetch } = useAwesomeTable<ArticlesResponse>({
+    fetcherCallback: ArticleServices.findAll,
+    filterOptions: initialFilterOptions(),
+  });
   const navigate = useNavigate();
-  const { mutate, isSubmitting } = useMutate();
-
-  const onApplyFiler = () =>
-    fetchData(() =>
-      ArticleServices.findAll({
-        offset: pagination.offset,
-        size: pagination.size,
-        ...getValues(),
-      })
-    );
+  const [deleteArticle, { isLoading: isSubmitting }] =
+    useDeleteArticleMutation();
 
   const onDelete = async (rd: any) => {
-    await mutate(() => ArticleServices.remove(rd.id));
-    onApplyFiler();
+    await deleteArticle(+rd.id);
+    refetch();
   };
 
-  useEffect(() => {
-    onApplyFiler();
-  }, [pagination]);
+  const actions: IAction[] = [
+    {
+      icon: <EditIcon color="primary" />,
+      onClick: (rd: any) => navigate(`${rd.id}/edit`),
+      tooltip: "ویرایش",
+    },
+    {
+      icon: <DeleteIcon color="secondary" />,
+      onClick: onDelete,
+      tooltip: "حذف",
+      loading: isSubmitting,
+    },
+  ];
 
   return (
     <Page
@@ -48,39 +53,13 @@ export default function ArticleList() {
           color="primary"
           variant="contained"
           startIcon={<AddIcon />}
-          onClick={() => navigate("articles.create")}
+          onClick={() => navigate("create")}
         >
           افزودن مقاله
         </Button>
       }
     >
-      <Grid spacing={3} container alignItems="center">
-        <Grid lg={6} item>
-          <AwesomeFilter onApplyFilter={onApplyFiler} register={register} />
-        </Grid>
-      </Grid>
-      <AwesomeTable
-        columns={columns}
-        loading={loading}
-        page={pagination.page}
-        query={{ data: response.result, totalCount: response.count }}
-        setPage={setPage}
-        setSize={setSize}
-        size={pagination.size}
-        actions={[
-          {
-            icon: <EditIcon color="primary" />,
-            onClick: (rd) => navigate("articles.edit"),
-            tooltip: "ویرایش",
-          },
-          {
-            icon: <DeleteIcon color="secondary" />,
-            onClick: onDelete,
-            tooltip: "حذف",
-            loading: isSubmitting,
-          },
-        ]}
-      />
+      <AwesomeTable columns={columns} register={register} actions={actions} />
     </Page>
   );
 }

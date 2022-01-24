@@ -1,26 +1,33 @@
-import { http } from 'utils';
-import { CreatePermissionDto, GetPermissionsParams, GetPermissionParams, UpdatePermissionDto } from 'types';
+import { http } from "utils";
+import {
+  CreatePermissionDto,
+  GetPermissionsParams,
+  GetPermissionParams,
+  UpdatePermissionDto,
+} from "types";
 
-export const PermissionsServices = {
-    uri: "permissions",
+class PermissionsServices {
+  uri = "permissions";
 
-    async findAll(params?: GetPermissionsParams) {
-        return http.get(this.uri, { params })
-    },
+  findAll = async (params?: GetPermissionsParams) => {
+    return http.get(this.uri, { params });
+  };
 
-    async findOne(id: number) {
-        return http.get(`${this.uri}/${id}`)
-    },
+  findOne = async (id: number) => {
+    return http.get(`${this.uri}/${id}`);
+  };
 
-    async create(data: CreatePermissionDto) {
-        return http.post(this.uri, data)
-    },
+  create = async (data: CreatePermissionDto) => {
+    return http.post(this.uri, data);
+  };
 
-    async update(id: number, data: UpdatePermissionDto) {
-        return http.put(`${this.uri}/${id}`, data)
-    },
+  update = async (id: number, data: UpdatePermissionDto) => {
+    return http.put(`${this.uri}/${id}`, data);
+  };
 
-    async remove(id: number) {
-        return http.delete(`${this.uri}/${id}`)
-    },
-} as const
+  remove = (id: number) => {
+    return http.delete(`${this.uri}/${id}`);
+  };
+}
+
+export default new PermissionsServices();

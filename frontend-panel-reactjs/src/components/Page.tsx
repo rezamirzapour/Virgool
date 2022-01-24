@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import Helmet from "react-helmet";
 import { Paper, Box } from "@material-ui/core";
 import { ChevronLeft as ChevronLeftIcon } from "@material-ui/icons";
@@ -10,18 +11,17 @@ interface IProps {
   title?: string;
   description?: string;
   meta?: any;
-  children?: any;
   returnTo?: string;
 }
 
-export default function Page({
+const Page: FC<IProps> = ({
   children,
   loading,
   title,
   description,
   meta,
   returnTo,
-}: IProps) {
+}) => {
   const navigate = useNavigate();
   if (loading) return <Loading />;
   return (
@@ -29,7 +29,7 @@ export default function Page({
       <Helmet>
         <title>ویرگول::{title}</title>
       </Helmet>
-      <Paper>
+      <Paper style={{ height: "100%" }}>
         <Box p={"3rem"}>
           <Box
             display="flex"
@@ -56,9 +56,13 @@ export default function Page({
               )}
             </Box>
           </Box>
-          <Box>{children}</Box>
+          <Box display={"flex"} height={"100%"}>
+            {children}
+          </Box>
         </Box>
       </Paper>
     </>
   );
-}
+};
+
+export default Page;

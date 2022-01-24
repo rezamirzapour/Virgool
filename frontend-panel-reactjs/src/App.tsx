@@ -1,4 +1,4 @@
-import { Routes, useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 
 // providers
 import { RTLProvider } from "providers";
@@ -16,7 +16,6 @@ import "./assets/fonts/IRANSans/css/fontiran.css";
 import "./assets/css/styles.css";
 
 function App() {
-  // const routing = useRoutes(routes);
   const routing = useRoutes(routes);
   return (
     <Provider store={store}>
