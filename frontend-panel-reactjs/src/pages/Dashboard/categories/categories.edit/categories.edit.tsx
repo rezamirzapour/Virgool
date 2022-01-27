@@ -27,7 +27,7 @@ export default function CategoriesEdit() {
   }, [category, setValue]);
 
   return (
-    <Page title="ویرایش دسته بندی" loading={isLoading}>
+    <Page title="ویرایش دسته بندی" loading={isLoading} container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3}>
           <TextField name="title" label="عنوان" control={control} />

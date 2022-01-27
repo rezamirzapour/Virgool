@@ -35,12 +35,11 @@ export default function RolesCreate() {
   };
 
   return (
-    <Page title="ایجاد نقش">
+    <Page title="ایجاد نقش" container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3}>
           <TextField name="title" label="عنوان" control={control} />
           <TextField name="label" label="برچسب" control={control} />
-
           <CheckBoxGroup
             label="دسترسی ها"
             options={

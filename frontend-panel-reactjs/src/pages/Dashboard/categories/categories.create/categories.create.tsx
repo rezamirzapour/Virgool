@@ -15,7 +15,7 @@ export default function CategoriesCreate() {
     useCreateCategoryMutation();
 
   return (
-    <Page title="ایجاد دسته بندی">
+    <Page title="ایجاد دسته بندی" container>
       <form
         onSubmit={handleSubmit((data: CreateCategoryDto) => onSubmit(data))}
       >

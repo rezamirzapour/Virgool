@@ -27,7 +27,7 @@ export default function PermissionsEdit() {
   }, [permission, setValue]);
 
   return (
-    <Page title="ویرایش دسترسی" loading={isLoading}>
+    <Page title="ویرایش دسترسی" loading={isLoading} container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3}>
           <TextField name="title" label="عنوان" control={control} />

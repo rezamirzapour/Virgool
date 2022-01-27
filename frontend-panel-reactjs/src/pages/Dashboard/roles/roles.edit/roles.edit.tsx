@@ -50,7 +50,7 @@ export default function RolesEdit() {
   }, [role]);
 
   return (
-    <Page title="ویرایش نقش" loading={isLoading}>
+    <Page title="ویرایش نقش" loading={isLoading} container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3}>
           <TextField name="title" label="عنوان" control={control} />

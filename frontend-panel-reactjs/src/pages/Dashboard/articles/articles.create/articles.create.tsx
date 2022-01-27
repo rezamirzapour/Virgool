@@ -8,7 +8,7 @@ import {
 } from "components/material";
 import { TextEditor, useTextEditor } from "components/TextEditor";
 import { Page } from "components";
-import { Grid, Stack } from "@mui/material";
+import { Grid, Stack, Container } from "@mui/material";
 import { useCreateCategoryMutation, useGetCategoriesQuery } from "hooks";
 import { useForm } from "react-hook-form";
 import { createArticleSchema } from "validations";
@@ -31,7 +31,7 @@ export default function ArticlesCreate() {
     createCategory(requestBody);
   };
   return (
-    <Page title="ایجاد مقاله">
+    <Page title="ایجاد مقاله" container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={3}>
           <TextField name="title" label="عنوان" control={control} />

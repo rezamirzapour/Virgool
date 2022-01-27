@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import type { UpdateArticleDto } from "types";
-import { Grid } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import { TextField, Select, Button } from "components/material";
 import { TextEditor, useTextEditor } from "components/TextEditor";
 import { Page } from "components";
@@ -46,58 +46,53 @@ export default function ArticlesEdit() {
     id && updateArticle(requestBody);
   };
   return (
-    <Page loading={loadingArticle} title="ویرایش مقاله">
+    <Page loading={loadingArticle} title="ویرایش مقاله" container>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container>
-          <Grid lg={6} spacing={3} item container>
-            <Grid item lg={12}>
-              <TextField
-                name="title"
-                label="عنوان"
-                defaultValue={article?.title ?? ""}
-                control={control}
-              />
-            </Grid>
-            <Grid item lg={12}>
-              <TextEditor
-                label="محتوا"
-                editorState={editorState}
-                setEditorState={setEditorState}
-              />
-            </Grid>
-            <Grid item lg={12}>
-              <Select
-                options={
-                  categories?.map?.((c: any) => ({
-                    label: c.title,
-                    value: c.id,
-                  })) ?? []
-                }
-                name="categories"
-                label="دسته بندی"
-                control={control}
-              />
-            </Grid>
-            <Grid item lg={12}>
-              <Button
-                variant="contained"
-                color="primary"
-                loading={isSubmitting}
-                type="submit"
-              >
-                ثبت
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => navigate("articles.list")}
-                sx={{ marginLeft: ".25em" }}
-              >
-                انصراف
-              </Button>
-            </Grid>
+        <Stack spacing={3}>
+          <TextField
+            name="title"
+            label="عنوان"
+            defaultValue={article?.title ?? ""}
+            control={control}
+          />
+
+          <TextEditor
+            label="محتوا"
+            editorState={editorState}
+            setEditorState={setEditorState}
+          />
+
+          <Select
+            options={
+              categories?.map?.((c: any) => ({
+                label: c.title,
+                value: c.id,
+              })) ?? []
+            }
+            name="categories"
+            label="دسته بندی"
+            control={control}
+          />
+
+          <Grid item lg={12}>
+            <Button
+              variant="contained"
+              color="primary"
+              loading={isSubmitting}
+              type="submit"
+            >
+              ثبت
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate("articles.list")}
+              sx={{ marginLeft: ".25em" }}
+            >
+              انصراف
+            </Button>
           </Grid>
-        </Grid>
+        </Stack>
       </form>
     </Page>
   );

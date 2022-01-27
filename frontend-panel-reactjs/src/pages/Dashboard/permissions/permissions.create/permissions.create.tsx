@@ -15,7 +15,7 @@ export default function PermissionsCreate() {
     useCreatePermissionMutation();
 
   return (
-    <Page title="ایجاد دسترسی">
+    <Page title="ایجاد دسترسی" container>
       <form onSubmit={handleSubmit((data: CreateArticleDto) => onSubmit(data))}>
         <Stack spacing={3}>
           <TextField name="title" label="عنوان" control={control} />
