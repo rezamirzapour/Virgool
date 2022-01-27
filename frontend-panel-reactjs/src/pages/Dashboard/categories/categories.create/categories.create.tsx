@@ -1,6 +1,6 @@
 import { useCreateCategoryMutation } from "hooks";
 import { Page } from "components";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import { TextField, Button } from "components/material";
 import { useForm } from "react-hook-form";
 import { createCategorySchema } from "validations";

@@ -1,16 +1,16 @@
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 import {
   Edit as EditIcon,
   Add as AddIcon,
   DeleteForever as DeleteIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import { ArticleServices } from "services";
 import type { ArticlesResponse } from "types";
 import {
   AwesomeTable,
   useAwesomeTable,
   IAction,
-} from "components/AwesomeTable2";
+} from "components/AwesomeTable";
 import { Page } from "components";
 import { useDeleteArticleMutation } from "hooks";
 import { initialFilterOptions, columns } from "./items";

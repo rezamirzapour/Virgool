@@ -12,11 +12,9 @@ import {
   CategoriesList,
   CategoriesCreate,
   CategoriesEdit,
-  Dashboard,
   Login,
-  Register,
 } from "pages";
-import { Auth, Dashboard as DashboardLayout } from "layouts";
+import { Dashboard as DashboardLayout } from "layouts";
 import { RouteObject, Outlet, Navigate } from "react-router-dom";
 
 const routes: RouteObject[] = [
@@ -113,18 +111,8 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: "auth",
-    element: <Auth />,
-    children: [
-      {
-        path: "register",
-        element: <Register />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-      },
-    ],
+    path: "login",
+    element: <Login />,
   },
 ];
 

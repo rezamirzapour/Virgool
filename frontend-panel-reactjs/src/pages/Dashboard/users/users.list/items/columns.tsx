@@ -1,7 +1,7 @@
 import { IColumn } from "components/AwesomeTable/items/interface";
 import type { UsersResult } from "types";
-import { colors, Avatar, Box } from "@material-ui/core";
-import { Check as CheckIcon, Close as CloseIcon } from "@material-ui/icons";
+import { colors, Avatar, Box } from "@mui/material";
+import { Check as CheckIcon, Close as CloseIcon } from "@mui/icons-material";
 import { parseDate } from "utils";
 
 const columns: IColumn<UsersResult>[] = [

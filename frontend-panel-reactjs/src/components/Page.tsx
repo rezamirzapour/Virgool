@@ -1,11 +1,10 @@
 import type { FC } from "react";
 import Helmet from "react-helmet";
-import { Paper, Box } from "@material-ui/core";
-import { ChevronLeft as ChevronLeftIcon } from "@material-ui/icons";
+import { ChevronLeft as ChevronLeftIcon } from "@mui/icons-material";
 import { Loading } from ".";
 import { Button } from "components/material";
 import { useNavigate } from "react-router-dom";
-
+import { Box, Paper, Typography } from "@mui/material";
 interface IProps {
   loading?: boolean;
   title?: string;
@@ -25,11 +24,11 @@ const Page: FC<IProps> = ({
   const navigate = useNavigate();
   if (loading) return <Loading />;
   return (
-    <>
+    <Box>
       <Helmet>
         <title>ویرگول::{title}</title>
       </Helmet>
-      <Paper style={{ height: "100%" }}>
+      <Paper>
         <Box p={"3rem"}>
           <Box
             display="flex"
@@ -37,7 +36,7 @@ const Page: FC<IProps> = ({
             alignItems="center"
           >
             <Box>
-              <h1>{title}</h1>
+              <Typography component={"h1"}>{title}</Typography>
               <span>{description}</span>
             </Box>
             <Box display="flex">
@@ -56,12 +55,12 @@ const Page: FC<IProps> = ({
               )}
             </Box>
           </Box>
-          <Box display={"flex"} height={"100%"}>
+          <Box display={"flex"} sx={{ width: "100%" }} height={"100%"}>
             {children}
           </Box>
         </Box>
       </Paper>
-    </>
+    </Box>
   );
 };
 

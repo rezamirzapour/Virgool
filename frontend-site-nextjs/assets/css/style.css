@@ -1,0 +1,174 @@
+@font-face {
+  font-family: DastNevis;
+  src: url("../fonts/Dastnevis/ADastNevis.ttf") format("truetype");
+  src: url("../fonts/Dastnevis/danstevis.otf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh;
+  font-weight: 400;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh;
+  font-weight: 300;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh;
+  font-weight: 500;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 05 Medium.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 05 Medium.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 05 Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh;
+  font-weight: 600;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh;
+  font-weight: bold;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh-en;
+  font-weight: 400;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh-en;
+  font-weight: 300;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh-en;
+  font-weight: 600;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh-en;
+  font-weight: bold;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.ttf") format("truetype");
+}
+
+.Toastify__toast {
+  font-family: "YekanBakh";
+}
+
+body {
+  font-family: YekanBakh !important;
+}
+
+#__next {
+  min-height: 100vh;
+}
+
+.global__rtl {
+  direction: rtl;
+}
+
+.global__ltr {
+  direction: ltr;
+}
+
+.global__main-color {
+  color: #3b3e44;
+}
+
+.global__unset-max-width {
+  max-width: unset !important;
+}
+
+.global__container {
+  max-width: 1366px;
+  padding-right: 32px;
+  padding-left: 32px;
+  margin: auto;
+}
+
+#header #top-search button {
+  height: 42px;
+  margin-right: 1px;
+}
+
+#header #top-search input {
+  height: 44px;
+}
+
+#header #top-search input:focus-visible {
+  outline: none;
+  border-color: #f9bb3d !important;
+}
+
+#header #auth-button {
+  min-width: 135px;
+  height: 44px;
+}
+
+#top-navigation {
+  height: 34px;
+}
+
+#contact-us-section input {
+  height: 44px;
+}
+
+#contact-us-section .contact-us-section__wrapper {
+  width: 360px;
+}
+
+.product-card:hover h6 {
+  color: #a56219;
+}
+
+.product-card:hover .seller-name {
+  color: #3b3e44;
+}
+
+#home-page #main-slider-wrapper {
+  width: calc(75% - 12px);
+}
+
+@media (max-width: 1024px) {
+  #home-page #main-slider-wrapper {
+    width: 100%;
+  }
+}
+
+#home-page #main-slider-wrapper #main-slider-nav-next-button img,
+#home-page #main-slider-wrapper #main-slider-nav-prev-button img {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+#home-page #main-slider-wrapper #main-slider-nav-next-button:hover img {
+  -webkit-transform: translateX(3px);
+          transform: translateX(3px);
+}
+
+#home-page #main-slider-wrapper #main-slider-nav-prev-button:hover img {
+  -webkit-transform: translateX(-3px);
+          transform: translateX(-3px);
+}
+
+#home-page #main-slider-wrapper-sibling {
+  width: calc(25% - 12px);
+}
+
+#auth-page #register-and-login-wrapper {
+  max-width: 360px;
+  height: 575px;
+}
+
+#auth-page #register-code-wrapper {
+  max-width: 360px;
+  height: 441px;
+}
+/*# sourceMappingURL=style.css.map */

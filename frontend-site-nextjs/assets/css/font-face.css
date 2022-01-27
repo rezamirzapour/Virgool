@@ -1,0 +1,60 @@
+@font-face {
+  font-family: DastNevis;
+  src: url("../fonts/Dastnevis/ADastNevis.ttf") format("truetype");
+  src: url("../fonts/Dastnevis/danstevis.otf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh;
+  font-weight: 400;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh;
+  font-weight: 300;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh;
+  font-weight: 500;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 05 Medium.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 05 Medium.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 05 Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh;
+  font-weight: 600;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh;
+  font-weight: bold;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh-en;
+  font-weight: 400;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 04 Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh-en;
+  font-weight: 300;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 03 Light.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh-en;
+  font-weight: 600;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: YekanBakh-en;
+  font-weight: bold;
+  src: url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff") format("woff"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.woff2") format("woff2"), url("../fonts/YekanBakh/Yekan Bakh FA 06 Bold.ttf") format("truetype");
+}
+/*# sourceMappingURL=font-face.css.map */

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { UpdateArticleDto } from "types";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import { TextField, Select, Button } from "components/material";
 import { TextEditor, useTextEditor } from "components/TextEditor";
 import { Page } from "components";

@@ -1,6 +1,6 @@
-import { Edit as EditIcon } from "@material-ui/icons";
+import { Edit as EditIcon } from "@mui/icons-material";
 import { UsersServices } from "services";
-import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable2";
+import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable";
 import { Page } from "components";
 import { initialFilterOptions, columns } from "./items";
 import { useNavigate } from "react-router-dom";

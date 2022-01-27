@@ -2,10 +2,10 @@ import {
   Edit as EditIcon,
   Add as AddIcon,
   DeleteForever as DeleteIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import { CategoriesServices } from "services";
 import type { CategoriesResponse } from "types";
-import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable2";
+import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable";
 import { Page } from "components";
 import { Button } from "components/material";
 import { initialFilterOptions, columns } from "./items";

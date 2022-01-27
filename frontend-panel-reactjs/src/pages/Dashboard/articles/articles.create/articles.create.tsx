@@ -3,7 +3,7 @@ import { Button } from "components/material";
 import { TextField, SelectField, RadioGroupField } from "material-hook-form";
 import { TextEditor, useTextEditor } from "components/TextEditor";
 import { Page } from "components";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import {
   useRouter,
   useCreateCategoryMutation,

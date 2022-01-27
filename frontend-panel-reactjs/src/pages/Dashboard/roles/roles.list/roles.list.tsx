@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { useTheme } from "@material-ui/core";
 import {
   Edit as EditIcon,
   Add as AddIcon,
   DeleteForever as DeleteIcon,
   VerifiedUser as VerifiedUserIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import { RolesServices } from "services";
 import type { RolesResponse } from "types";
-import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable2";
+import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable";
 import { Page } from "components";
 import { useDeleteRoleMutation } from "hooks";
 import { initialFilterOptions, columns } from "./items";
@@ -24,8 +23,6 @@ export default function RolesList() {
   const navigate = useNavigate();
   const [deleteRole, { isLoading: isSubmitting }] = useDeleteRoleMutation();
 
-  const theme = useTheme();
-
   const onDelete = async (rd: any) => {
     await deleteRole(+rd.id);
     refetch();
@@ -34,7 +31,7 @@ export default function RolesList() {
   const actions = [
     {
       icon: <EditIcon color="primary" />,
-      onClick: (rd: any) => navigate(`roles/${rd.id}/edit`),
+      onClick: (rd: any) => navigate(`${rd.id}/edit`),
       tooltip: "ویرایش",
     },
     {
@@ -44,7 +41,7 @@ export default function RolesList() {
       loading: isSubmitting,
     },
     {
-      icon: <VerifiedUserIcon style={{ color: theme.palette.success.main }} />,
+      icon: <VerifiedUserIcon />,
       onClick: (rd: any) => setIsOpenDialog(true),
       tooltip: "مشاهده دسترسی ها",
     },

@@ -3,10 +3,10 @@ import {
   Edit as EditIcon,
   Add as AddIcon,
   DeleteForever as DeleteIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 import { PermissionsServices } from "services";
 import type { PermissionsResponse } from "types";
-import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable2";
+import { AwesomeTable, useAwesomeTable } from "components/AwesomeTable";
 import { Page } from "components";
 import { Button } from "components/material";
 import { useDeletePermissionMutation } from "hooks";
@@ -46,7 +46,7 @@ export default function PermissionsList() {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          onClick={() => navigate("permissions.create")}
+          onClick={() => navigate("create")}
         >
           افزودن دسترسی
         </Button>

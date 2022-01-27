@@ -6,7 +6,7 @@ import {
   useGetRoleQuery,
 } from "hooks";
 import { Page } from "components";
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 import { TextField, Button, CheckBoxGroup } from "components/material";
 import { useForm } from "react-hook-form";
 import type { UpdateRoleDto } from "types";

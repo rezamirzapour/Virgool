@@ -1,4 +1,4 @@
-import { TextField, TextFieldProps } from '@material-ui/core';
+import { TextField, TextFieldProps } from "@mui/material";
 export default function TextFieldFilter(props: TextFieldProps) {
-    return <TextField fullWidth variant="outlined" {...props} />
+  return <TextField fullWidth variant="outlined" {...props} />;
 }

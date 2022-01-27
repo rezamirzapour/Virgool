@@ -1,2 +1,2 @@
 export * from "pages/Dashboard";
-export * from "pages/Auth";
+export { default as Login } from "./Login";

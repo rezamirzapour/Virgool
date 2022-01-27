@@ -1,6 +1,6 @@
 import { IColumn } from "components/AwesomeTable/items/interface";
 import { ArticlesResult } from "types";
-import { colors, Avatar, Box } from "@material-ui/core";
+import { colors, Avatar, Box } from "@mui/material";
 import { parseDate } from "utils";
 import { STAUS_OPTIONS } from "./options";
 
