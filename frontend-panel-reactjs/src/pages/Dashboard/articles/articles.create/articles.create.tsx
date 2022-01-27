@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import type { CreateArticleDto } from "types";
 import { Button } from "components/material";
 import {
@@ -8,11 +9,7 @@ import {
 import { TextEditor, useTextEditor } from "components/TextEditor";
 import { Page } from "components";
 import { Grid } from "@mui/material";
-import {
-  useRouter,
-  useCreateCategoryMutation,
-  useGetCategoriesQuery,
-} from "hooks";
+import { useCreateCategoryMutation, useGetCategoriesQuery } from "hooks";
 import { useForm } from "react-hook-form";
 import { createArticleSchema } from "validations";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -25,7 +22,7 @@ export default function ArticlesCreate() {
   const { mutate: createCategory, isLoading: isSubmitting } =
     useCreateCategoryMutation();
   const { editorState, getHtmlContent, setEditorState } = useTextEditor();
-  const { navigate } = useRouter();
+  const navigate = useNavigate();
   const onSubmit = (data: CreateArticleDto) => {
     const requestBody: CreateArticleDto = {
       ...data,

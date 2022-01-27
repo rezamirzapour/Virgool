@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { UpdateArticleDto } from "types";
+import { useNavigate } from "react-router-dom";
+import type { UpdateArticleDto } from "types";
 import { Grid } from "@mui/material";
 import { TextField, Select, Button } from "components/material";
 import { TextEditor, useTextEditor } from "components/TextEditor";
 import { Page } from "components";
 import {
-  useRouter,
   useGetArticleQuery,
   useUpdateArticleMutation,
   useGetCategoriesQuery,
@@ -31,7 +31,7 @@ export default function ArticlesEdit() {
   const { editorState, getHtmlContent, setEditorState } = useTextEditor(
     article?.content ?? ""
   );
-  const { navigate } = useRouter();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setValue("title", article?.title ?? "");

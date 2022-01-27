@@ -1,10 +1,13 @@
 import type { FC } from "react";
+import { Navigate } from "react-router-dom";
 import Helmet from "react-helmet";
 import { ChevronLeft as ChevronLeftIcon } from "@mui/icons-material";
 import { Loading } from ".";
 import { Button } from "components/material";
 import { useNavigate } from "react-router-dom";
 import { Box, Paper, Typography } from "@mui/material";
+import { isAuthenticated } from "utils";
+
 interface IProps {
   loading?: boolean;
   title?: string;
@@ -22,6 +25,9 @@ const Page: FC<IProps> = ({
   returnTo,
 }) => {
   const navigate = useNavigate();
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" replace />;
+  }
   if (loading) return <Loading />;
   return (
     <Box>

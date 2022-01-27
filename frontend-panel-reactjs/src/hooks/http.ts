@@ -1,10 +1,14 @@
-import { useQuery } from "react-query";
+import { toast } from "material-react-toastify";
+import { useQuery, useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import {
   ArticleServices,
   CategoriesServices,
   PermissionsServices,
   RolesServices,
   UsersServices,
+  MeServices,
+  AuthServices,
 } from "services";
 import {
   useUpdateMutation,
@@ -123,4 +127,24 @@ export function useGetUserQuery(id: number) {
   return useQuery(["user", id], () =>
     UsersServices.findOne(id).then((res) => res.data?.result)
   );
+}
+
+export function useGetProfileQuery() {
+  return useQuery("profile", () =>
+    MeServices.getProfile().then((res) => res.data)
+  );
+}
+
+export function useLoginMutation() {
+  const naviagate = useNavigate();
+  return useMutation(AuthServices.login, {
+    onSuccess: (data) => {
+      toast.success("با موفقیت وارد شدید");
+      localStorage.setItem("token", data.access_token);
+      naviagate("/dashboard");
+    },
+    onError: () => {
+      toast.error("مشکلی وجود دارد");
+    },
+  });
 }
