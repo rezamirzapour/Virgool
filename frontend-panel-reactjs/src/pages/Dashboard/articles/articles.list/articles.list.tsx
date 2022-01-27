@@ -22,7 +22,7 @@ export default function ArticleList() {
     filterOptions: initialFilterOptions(),
   });
   const navigate = useNavigate();
-  const [deleteArticle, { isLoading: isSubmitting }] =
+  const { mutate: deleteArticle, isLoading: isSubmitting } =
     useDeleteArticleMutation();
 
   const onDelete = async (rd: any) => {

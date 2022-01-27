@@ -17,15 +17,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function ArticlesEdit() {
   const { id } = useParams();
-  const { data: categories } = useGetCategoriesQuery({});
+  const { data: categories } = useGetCategoriesQuery();
   const { data: article, isLoading: loadingArticle } = useGetArticleQuery(
     id ? +id : -1
   );
-  const [updateArticle, { isLoading: isSubmitting }] =
-    useUpdateArticleMutation();
+  const { isLoading: isSubmitting, mutate: updateArticle } =
+    useUpdateArticleMutation(id ? +id : -1);
+
   const { control, handleSubmit, setValue } = useForm({
     resolver: yupResolver(updateArticleSchema),
   });
+
   const { editorState, getHtmlContent, setEditorState } = useTextEditor(
     article?.content ?? ""
   );
@@ -41,7 +43,7 @@ export default function ArticlesEdit() {
       ...data,
       content: getHtmlContent(),
     };
-    id && updateArticle({ id: +id, data: requestBody });
+    id && updateArticle(requestBody);
   };
   return (
     <Page loading={loadingArticle} title="ویرایش مقاله">
@@ -89,7 +91,7 @@ export default function ArticlesEdit() {
                 variant="contained"
                 color="secondary"
                 onClick={() => navigate("articles.list")}
-                style={{ marginRight: ".25em" }}
+                sx={{ marginLeft: ".25em" }}
               >
                 انصراف
               </Button>

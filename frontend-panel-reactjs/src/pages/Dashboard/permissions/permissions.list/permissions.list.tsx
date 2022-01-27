@@ -17,7 +17,7 @@ export default function PermissionsList() {
     fetcherCallback: PermissionsServices.findAll,
     filterOptions: initialFilterOptions(),
   });
-  const [deletePermission, { isLoading: isSubmitting }] =
+  const { mutate: deletePermission, isLoading: isSubmitting } =
     useDeletePermissionMutation();
   const onDelete = async (rd: any) => {
     await deletePermission(rd.id);

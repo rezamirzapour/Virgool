@@ -12,8 +12,9 @@ export default function RolesCreate() {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(createRoleSchema),
   });
-  const { data: permissions } = useGetPermissionsQuery({});
-  const [createRole, { isLoading: isSubmitting }] = useCreateRoleMutation();
+  const { data: permissions } = useGetPermissionsQuery();
+  const { mutate: createRole, isLoading: isSubmitting } =
+    useCreateRoleMutation();
   const [selectedPermissions, setSelectedPermissions] = useState<Array<number>>(
     []
   );

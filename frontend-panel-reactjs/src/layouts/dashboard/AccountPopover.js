@@ -11,7 +11,7 @@ import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '
 import MenuPopover from '../../components/MenuPopover';
 //
 import account from '../../_mocks_/account';
-
+import { useGetProfileQuery } from 'hooks';
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
@@ -45,6 +45,8 @@ export default function AccountPopover() {
     setOpen(false);
   };
 
+  const { data: user } = useGetProfileQuery()
+
   return (
     <>
       <IconButton
@@ -67,7 +69,7 @@ export default function AccountPopover() {
           })
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar src={user?.avatar} alt="photoURL" />
       </IconButton>
 
       <MenuPopover
@@ -78,10 +80,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {user?.firstName} {user?.lastName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {user?.email}
           </Typography>
         </Box>
 

@@ -62,7 +62,7 @@ export const getSortIcon = (
     case null:
       return (
         <ArrowLeftIcon
-          style={{ transform: "translateY(10px)" }}
+          sx={{ transform: "translateY(10px)" }}
           onClick={() => handleSort(column, "asc")}
           className={classes.sortIcon}
         />

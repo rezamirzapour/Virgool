@@ -21,7 +21,8 @@ export default function RolesList() {
     filterOptions: initialFilterOptions(),
   });
   const navigate = useNavigate();
-  const [deleteRole, { isLoading: isSubmitting }] = useDeleteRoleMutation();
+  const { mutate: deleteRole, isLoading: isSubmitting } =
+    useDeleteRoleMutation();
 
   const onDelete = async (rd: any) => {
     await deleteRole(+rd.id);

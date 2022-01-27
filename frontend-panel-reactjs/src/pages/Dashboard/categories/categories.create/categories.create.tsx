@@ -5,16 +5,20 @@ import { TextField, Button } from "components/material";
 import { useForm } from "react-hook-form";
 import { createCategorySchema } from "validations";
 import { yupResolver } from "@hookform/resolvers/yup";
+import type { CreateCategoryDto } from "types";
 
 export default function CategoriesCreate() {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(createCategorySchema),
   });
-  const [onSubmit, { isLoading: isSubmitting }] = useCreateCategoryMutation();
+  const { mutate: onSubmit, isLoading: isSubmitting } =
+    useCreateCategoryMutation();
 
   return (
     <Page title="ایجاد دسته بندی">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit((data: CreateCategoryDto) => onSubmit(data))}
+      >
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField name="title" label="عنوان" control={control} />

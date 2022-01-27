@@ -18,7 +18,7 @@ export default function CategoriesList() {
     filterOptions: initialFilterOptions(),
   });
   const navigate = useNavigate();
-  const [deleteCategory, { isLoading: isSubmitting }] =
+  const { mutate: deleteCategory, isLoading: isSubmitting } =
     useDeleteCategoryMutation();
 
   const onDelete = async (rd: any) => {

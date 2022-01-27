@@ -13,11 +13,11 @@ export default function CustomAvatar({
   ...rest
 }: AvatarProps) {
   return (
-    <Avatar style={{ width: size, height: size }} {...rest}>
+    <Avatar sx={{ width: size, height: size }} {...rest}>
       {children ? (
         <>{children}</>
       ) : (
-        <CameraAltOutlinedIcon style={{ width: size / 2, height: size / 2 }} />
+        <CameraAltOutlinedIcon sx={{ width: size / 2, height: size / 2 }} />
       )}
     </Avatar>
   );

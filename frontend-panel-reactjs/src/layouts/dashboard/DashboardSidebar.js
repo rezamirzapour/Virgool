@@ -12,7 +12,7 @@ import { MHidden } from 'components/@material-extend';
 //
 import sidebarConfig from './SidebarConfig';
 import account from '_mocks_/account';
-
+import { useGetProfileQuery } from 'hooks'
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -41,7 +41,7 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
-
+  const { data: user } = useGetProfileQuery()
   useEffect(() => {
     if (isOpenSidebar) {
       onCloseSidebar();
@@ -65,13 +65,13 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
+            <Avatar src={user?.avatar} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {user?.firstName} {user?.lastName}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
+                {/* {user?.role} */}
               </Typography>
             </Box>
           </AccountStyle>

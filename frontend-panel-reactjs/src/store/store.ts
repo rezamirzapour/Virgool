@@ -1,38 +1,23 @@
-import { configureStore, Middleware } from '@reduxjs/toolkit'
-import createSagaMiddleware from "redux-saga";
-import logger from 'redux-logger';
-import saga from './saga';
-import { auth, entities, pageInfo } from './reducer';
-import { articlesApi, categoriesApi, rolesApi, permissionsApi } from './services'
+import { configureStore, Middleware } from "@reduxjs/toolkit";
+import logger from "redux-logger";
+import { pageInfo } from "./reducer";
 
-const sagaMiddleware = createSagaMiddleware()
-const middleware: Middleware[] = [
-    sagaMiddleware,
-    categoriesApi.middleware,
-    articlesApi.middleware,
-    rolesApi.middleware,
-    permissionsApi.middleware,
-]
+const middleware: Middleware[] = [];
 
-if (process.env.NODE_ENV === "development")
-    middleware.push(logger)
+if (process.env.NODE_ENV === "development") middleware.push(logger);
 
 export const store = configureStore({
-    reducer: {
-        auth,
-        entities,
-        pageInfo,
-        [categoriesApi.reducerPath]: categoriesApi.reducer,
-        [articlesApi.reducerPath]: articlesApi.reducer,
-        [rolesApi.reducerPath]: rolesApi.reducer,
-        [permissionsApi.reducerPath]: permissionsApi.reducer,
-    },
-    middleware: (getDefaultMiddleware) => [...getDefaultMiddleware({ thunk: true }), ...middleware],
-    devTools: true,
-})
+  reducer: {
+    pageInfo,
+  },
+  middleware: (getDefaultMiddleware) => [
+    ...getDefaultMiddleware({ thunk: true }),
+    ...middleware,
+  ],
+  devTools: true,
+});
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
-sagaMiddleware.run(saga)
-export default store
+export default store;

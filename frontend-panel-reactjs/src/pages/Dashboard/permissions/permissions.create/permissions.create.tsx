@@ -5,16 +5,18 @@ import { TextField, Button } from "components/material";
 import { useForm } from "react-hook-form";
 import { createPermissoinSchema } from "validations";
 import { yupResolver } from "@hookform/resolvers/yup";
+import type { CreateArticleDto } from "types";
 
 export default function PermissionsCreate() {
   const { handleSubmit, control } = useForm({
     resolver: yupResolver(createPermissoinSchema),
   });
-  const [onSubmit, { isLoading: isSubmitting }] = useCreatePermissionMutation();
+  const { mutate: onSubmit, isLoading: isSubmitting } =
+    useCreatePermissionMutation();
 
   return (
     <Page title="ایجاد دسترسی">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit((data: CreateArticleDto) => onSubmit(data))}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField name="title" label="عنوان" control={control} />

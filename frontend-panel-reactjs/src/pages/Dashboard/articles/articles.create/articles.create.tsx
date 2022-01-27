@@ -1,6 +1,10 @@
 import type { CreateArticleDto } from "types";
 import { Button } from "components/material";
-import { TextField, SelectField, RadioGroupField } from "material-hook-form";
+import {
+  TextField,
+  Select as SelectField,
+  RadioGroupField,
+} from "components/material";
 import { TextEditor, useTextEditor } from "components/TextEditor";
 import { Page } from "components";
 import { Grid } from "@mui/material";
@@ -17,8 +21,8 @@ export default function ArticlesCreate() {
   const { control, handleSubmit } = useForm({
     resolver: yupResolver(createArticleSchema),
   });
-  const { data: categories } = useGetCategoriesQuery({});
-  const [createCategory, { isLoading: isSubmitting }] =
+  const { data: categories } = useGetCategoriesQuery();
+  const { mutate: createCategory, isLoading: isSubmitting } =
     useCreateCategoryMutation();
   const { editorState, getHtmlContent, setEditorState } = useTextEditor();
   const { navigate } = useRouter();
@@ -89,7 +93,7 @@ export default function ArticlesCreate() {
               variant="contained"
               color="secondary"
               onClick={() => navigate("articles.list")}
-              style={{ marginRight: ".25em" }}
+              sx={{ marginLeft: ".25em" }}
             >
               انصراف
             </Button>

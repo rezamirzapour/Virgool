@@ -16,8 +16,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 export default function RolesEdit() {
   const { id } = useParams();
   const { data: role, isLoading } = useGetRoleQuery(id ? +id : -1);
-  const { data: permissions } = useGetPermissionsQuery({});
-  const [updateRole, { isLoading: isSubmitting }] = useUpdateRoleMutation();
+  const { data: permissions } = useGetPermissionsQuery();
+  const { mutate: updateRole, isLoading: isSubmitting } = useUpdateRoleMutation(
+    id ? +id : -1
+  );
   const { control, setValue, handleSubmit } = useForm({
     resolver: yupResolver(updateRoleSchema),
   });
@@ -30,7 +32,7 @@ export default function RolesEdit() {
       ...data,
       permissions: selectedPermissions,
     };
-    id && updateRole({ id: +id, data: requestBody });
+    id && updateRole(requestBody);
   };
 
   const onToggleBox = (ev: ChangeEvent<HTMLInputElement>) => {

@@ -29,7 +29,7 @@ export function CheckBoxGroup({
               onChange={onToggleBox}
             />
             <FormLabel
-              style={{ cursor: "pointer" }}
+              sx={{ cursor: "pointer" }}
               htmlFor={`checkbox-${o.label}-${o.value}`}
             >
               {o.label}

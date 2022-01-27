@@ -15,11 +15,11 @@ export default function CategoriesEdit() {
     resolver: yupResolver(updateCategorySchema),
   });
   const { data: category, isLoading } = useGetCategoryQuery(id ? +id : -1);
-  const [updateCategory, { isLoading: isSubmitting }] =
-    useUpdateCategoryMutation();
+  const { mutate: updateCategory, isLoading: isSubmitting } =
+    useUpdateCategoryMutation(id ? +id : -1);
 
   const onSubmit = (data: UpdateCategoryDto) => {
-    id && updateCategory({ id: +id, data });
+    updateCategory(data);
   };
 
   useEffect(() => {

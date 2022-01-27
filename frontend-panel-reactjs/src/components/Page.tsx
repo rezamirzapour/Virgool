@@ -39,12 +39,12 @@ const Page: FC<IProps> = ({
               <Typography component={"h1"}>{title}</Typography>
               <span>{description}</span>
             </Box>
-            <Box display="flex">
+            <Box mt={"4rem"} display="flex">
               {meta}
               {returnTo && (
                 <Button
                   endIcon={<ChevronLeftIcon />}
-                  style={{ marginRight: ".5em" }}
+                  sx={{ marginLeft: ".5em" }}
                   color="secondary"
                   variant="contained"
                   // onClick={() => navigate(returnTo)}

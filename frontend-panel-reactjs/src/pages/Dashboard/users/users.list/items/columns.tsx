@@ -29,18 +29,18 @@ const columns: IColumn<UsersResult>[] = [
     title: "تاییدیه ایمیل",
     render: (rd) =>
       rd.isEmailVerified ? (
-        <CheckIcon style={{ color: colors.green[500] }} />
+        <CheckIcon sx={{ color: colors.green[500] }} />
       ) : (
-        <CloseIcon style={{ color: colors.red[500] }} />
+        <CloseIcon sx={{ color: colors.red[500] }} />
       ),
   },
   {
     title: "تاییدیه موبایل",
     render: (rd) =>
       rd.isPhoneNumberVerified ? (
-        <CheckIcon style={{ color: colors.green[500] }} />
+        <CheckIcon sx={{ color: colors.green[500] }} />
       ) : (
-        <CloseIcon style={{ color: colors.red[500] }} />
+        <CloseIcon sx={{ color: colors.red[500] }} />
       ),
   },
   {

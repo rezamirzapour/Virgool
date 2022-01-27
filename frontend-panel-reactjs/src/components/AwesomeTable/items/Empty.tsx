@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export function Empty() {
   return (
@@ -10,7 +10,9 @@ export function Empty() {
     >
       <Box display="flex" flexDirection="column" alignItems="center">
         {/* <img src={NoDataImage} width="200px" height="200px" /> */}
-        <span style={{ marginTop: "1em" }}>داده ای برای نمایش وجود ندارد.</span>
+        <Typography sx={{ marginTop: "1em" }}>
+          داده ای برای نمایش وجود ندارد.
+        </Typography>
       </Box>
     </Box>
   );

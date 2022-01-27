@@ -36,7 +36,7 @@ export default function Button({
       {loading && (
         <CircularProgress
           size={20}
-          style={{ marginRight: ".25em", color: "white" }}
+          sx={{ marginRight: ".25em", color: "white" }}
         />
       )}
     </button>

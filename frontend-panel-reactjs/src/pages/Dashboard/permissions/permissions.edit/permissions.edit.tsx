@@ -15,11 +15,11 @@ export default function PermissionsEdit() {
     resolver: yupResolver(updatePermissoinSchema),
   });
   const { data: permission, isLoading } = useGetPermissionQuery(id ? +id : -1);
-  const [updatePermission, { isLoading: isSubmitting }] =
-    useUpdatePermissionMutation();
+  const { mutate: updatePermission, isLoading: isSubmitting } =
+    useUpdatePermissionMutation(id ? +id : -1);
 
   const onSubmit = (data: UpdatePermissionDto) => {
-    id && updatePermission({ id: +id, data });
+    id && updatePermission(data);
   };
 
   useEffect(() => {
