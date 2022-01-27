@@ -1,6 +1,6 @@
 import { useCreatePermissionMutation } from "hooks";
 import { Page } from "components";
-import { Grid } from "@mui/material";
+import { Stack } from "@mui/material";
 import { TextField, Button } from "components/material";
 import { useForm } from "react-hook-form";
 import { createPermissoinSchema } from "validations";
@@ -17,21 +17,18 @@ export default function PermissionsCreate() {
   return (
     <Page title="ایجاد دسترسی">
       <form onSubmit={handleSubmit((data: CreateArticleDto) => onSubmit(data))}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TextField name="title" label="عنوان" control={control} />
-          </Grid>
-          <Grid item>
-            <Button
-              color="primary"
-              variant="contained"
-              loading={isSubmitting}
-              type="submit"
-            >
-              ایجاد دسترسی
-            </Button>
-          </Grid>
-        </Grid>
+        <Stack spacing={3}>
+          <TextField name="title" label="عنوان" control={control} />
+          <Button
+            color="primary"
+            variant="contained"
+            loading={isSubmitting}
+            type="submit"
+            sx={{ width: "fit-content" }}
+          >
+            ایجاد دسترسی
+          </Button>
+        </Stack>
       </form>
     </Page>
   );

@@ -8,7 +8,7 @@ import {
 } from "components/material";
 import { TextEditor, useTextEditor } from "components/TextEditor";
 import { Page } from "components";
-import { Grid } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
 import { useCreateCategoryMutation, useGetCategoriesQuery } from "hooks";
 import { useForm } from "react-hook-form";
 import { createArticleSchema } from "validations";
@@ -33,50 +33,40 @@ export default function ArticlesCreate() {
   return (
     <Page title="ایجاد مقاله">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container>
-          <Grid lg={6} spacing={3} item container>
-            <Grid item lg={12}>
-              <TextField name="title" label="عنوان" control={control} />
-            </Grid>
-            <Grid item lg={12}>
-              <TextEditor
-                label="محتوا"
-                editorState={editorState}
-                setEditorState={setEditorState}
-              />
-            </Grid>
-            <Grid item lg={12}>
-              <SelectField
-                options={
-                  categories?.map?.((c: any) => ({
-                    label: c.title,
-                    value: c.id,
-                  })) ?? []
-                }
-                multiple
-                name="categories"
-                label="دسته بندی"
-                control={control}
-              />
-            </Grid>
-          </Grid>
-          <Grid item lg={12}>
-            <RadioGroupField
-              options={[
-                {
-                  label: "منتشر شود",
-                  value: "publsihed",
-                },
-                {
-                  label: "بعنوان پیش‌نویس ذخیره شود",
-                  value: "unpublsihed",
-                },
-              ]}
-              name="status"
-              label="وضعیت انتشار"
-              control={control}
-            />
-          </Grid>
+        <Stack spacing={3}>
+          <TextField name="title" label="عنوان" control={control} />
+          <TextEditor
+            label="محتوا"
+            editorState={editorState}
+            setEditorState={setEditorState}
+          />
+          <SelectField
+            options={
+              categories?.map?.((c: any) => ({
+                label: c.title,
+                value: c.id,
+              })) ?? []
+            }
+            multiple
+            name="categories"
+            label="دسته بندی"
+            control={control}
+          />
+          <RadioGroupField
+            options={[
+              {
+                label: "منتشر شود",
+                value: "publsihed",
+              },
+              {
+                label: "بعنوان پیش‌نویس ذخیره شود",
+                value: "unpublsihed",
+              },
+            ]}
+            name="status"
+            label="وضعیت انتشار"
+            control={control}
+          />
           <Grid item lg={12}>
             <Button
               variant="contained"
@@ -95,7 +85,7 @@ export default function ArticlesCreate() {
               انصراف
             </Button>
           </Grid>
-        </Grid>
+        </Stack>
       </form>
     </Page>
   );

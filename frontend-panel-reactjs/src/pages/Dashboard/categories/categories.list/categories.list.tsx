@@ -48,7 +48,7 @@ export default function CategoriesList() {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          onClick={() => navigate("categories.create")}
+          onClick={() => navigate("create")}
         >
           افزودن دسته بندی
         </Button>

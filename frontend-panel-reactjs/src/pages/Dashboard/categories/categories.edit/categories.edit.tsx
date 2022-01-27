@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGetCategoryQuery, useUpdateCategoryMutation } from "hooks";
 import { Page } from "components";
-import { Grid } from "@mui/material";
+import { Stack } from "@mui/material";
 import { TextField, Button } from "components/material";
 import { useForm } from "react-hook-form";
 import type { UpdateCategoryDto } from "types";
@@ -29,21 +29,18 @@ export default function CategoriesEdit() {
   return (
     <Page title="ویرایش دسته بندی" loading={isLoading}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TextField name="title" label="عنوان" control={control} />
-          </Grid>
-          <Grid item>
-            <Button
-              color="primary"
-              variant="contained"
-              loading={isSubmitting}
-              type="submit"
-            >
-              ویرایش دسته بندی
-            </Button>
-          </Grid>
-        </Grid>
+        <Stack spacing={3}>
+          <TextField name="title" label="عنوان" control={control} />
+          <Button
+            color="primary"
+            variant="contained"
+            loading={isSubmitting}
+            type="submit"
+            sx={{ width: "fit-content" }}
+          >
+            ویرایش دسته بندی
+          </Button>
+        </Stack>
       </form>
     </Page>
   );

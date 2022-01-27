@@ -1,6 +1,6 @@
 import { useCreateCategoryMutation } from "hooks";
 import { Page } from "components";
-import { Grid } from "@mui/material";
+import { Stack } from "@mui/material";
 import { TextField, Button } from "components/material";
 import { useForm } from "react-hook-form";
 import { createCategorySchema } from "validations";
@@ -19,21 +19,18 @@ export default function CategoriesCreate() {
       <form
         onSubmit={handleSubmit((data: CreateCategoryDto) => onSubmit(data))}
       >
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <TextField name="title" label="عنوان" control={control} />
-          </Grid>
-          <Grid item>
-            <Button
-              color="primary"
-              variant="contained"
-              loading={isSubmitting}
-              type="submit"
-            >
-              ایجاد دسته بندی
-            </Button>
-          </Grid>
-        </Grid>
+        <Stack spacing={3}>
+          <TextField name="title" label="عنوان" control={control} />
+          <Button
+            color="primary"
+            variant="contained"
+            loading={isSubmitting}
+            type="submit"
+            sx={{ width: "fit-content" }}
+          >
+            ایجاد دسته بندی
+          </Button>
+        </Stack>
       </form>
     </Page>
   );
