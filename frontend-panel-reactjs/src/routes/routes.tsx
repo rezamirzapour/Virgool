@@ -13,6 +13,7 @@ import {
   CategoriesCreate,
   CategoriesEdit,
   Login,
+  Profile,
 } from "pages";
 import { Dashboard as DashboardLayout } from "layouts";
 import { RouteObject, Outlet, Navigate } from "react-router-dom";
@@ -26,6 +27,10 @@ const routes: RouteObject[] = [
     path: "dashboard",
     element: <DashboardLayout />,
     children: [
+      {
+        path: "profile",
+        element: <Profile />,
+      },
       {
         path: "articles",
         element: <Outlet />,

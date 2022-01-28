@@ -23,7 +23,7 @@ const MENU_OPTIONS = [
   {
     label: 'پروفایل',
     icon: personFill,
-    linkTo: '#'
+    linkTo: '/dashboard/profile'
   },
   {
     label: 'تنظیمات',

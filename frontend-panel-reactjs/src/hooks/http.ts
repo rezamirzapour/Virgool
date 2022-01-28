@@ -1,6 +1,8 @@
+import type { Dispatch, SetStateAction } from "react";
 import { toast } from "material-react-toastify";
 import { useQuery, useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+
 import {
   ArticleServices,
   CategoriesServices,
@@ -10,6 +12,7 @@ import {
   MeServices,
   AuthServices,
 } from "services";
+import { PhotoServices } from "services/photos";
 import {
   useUpdateMutation,
   useCreateMutation,
@@ -135,6 +138,17 @@ export function useGetProfileQuery() {
   );
 }
 
+export function useUpdateProfileMutation() {
+  return useMutation(MeServices.updateProfile, {
+    onSuccess: () => {
+      toast.success("پروفایل با موفقیت بروز شد");
+    },
+    onError: () => {
+      toast.error("خطایی در بروزرسانی پروفایل رخ داد");
+    },
+  });
+}
+
 export function useLoginMutation() {
   const naviagate = useNavigate();
   return useMutation(AuthServices.login, {
@@ -147,4 +161,27 @@ export function useLoginMutation() {
       toast.error("مشکلی وجود دارد");
     },
   });
+}
+
+// Photo
+export function useGetPhotosQuery() {
+  return useQuery("photos", () =>
+    PhotoServices.findAll({ size: 12 }).then((res) => res.data?.result)
+  );
+}
+
+export function useUploadPhotoMutation(
+  progressSetter?: Dispatch<SetStateAction<number>>
+) {
+  return useMutation(
+    (data: FormData) => PhotoServices.create(data, progressSetter),
+    {
+      onSuccess: () => {
+        toast.success("تصویر با موفقیت بارگذاری شد");
+      },
+      onError: () => {
+        toast.error("خطایی در بارگذاری تصویر وجود دارد");
+      },
+    }
+  );
 }

@@ -15,7 +15,7 @@ export default function UsersList() {
   const actions = [
     {
       icon: <EditIcon color="primary" />,
-      onClick: (rd: any) => navigate(`users/${rd.id}/edit`),
+      onClick: (rd: any) => navigate(`${rd.id}/edit`),
       tooltip: "ویرایش",
     },
   ];

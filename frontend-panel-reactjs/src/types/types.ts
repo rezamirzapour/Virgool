@@ -90,7 +90,7 @@ export interface ArticleResult {
   likeCount: number;
   status: string | null;
   authorId: number | null;
-  thumbnailId: number | null;
+  thumbnail: PhotosResult | null;
   categories: {
     id: number;
     title: string;
@@ -156,6 +156,7 @@ export interface GetProfileResponse {
   firstName: string;
   lastName: string;
   avatar: string;
+  description: string;
 }
 
 export interface GetPermissionsParams extends GetAllParams {
@@ -266,3 +267,22 @@ export interface UserResult {
 }
 
 export interface UserResponse extends FindOneResponse<UserResult> {}
+
+export interface PhotosResult {
+  id: number;
+  fullPath: string;
+  path: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface PhotosResponse extends FindAllResponse<PhotosResult> {}
+
+export interface GetPhotosParms extends GetAllParams {}
+
+export interface UpdateProfileDto {
+  email: string;
+  firstName: string;
+  lastName: string;
+  description: string;
+}

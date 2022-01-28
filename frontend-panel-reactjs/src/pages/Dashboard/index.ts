@@ -4,3 +4,4 @@ export * from "./categories";
 export * from "./roles";
 export * from "./permissions";
 export * from "./dashboard";
+export * from "./profile";
