@@ -65,7 +65,6 @@ export interface ArticlesResult {
   likeCount: number;
   status: string | null;
   authorId: number | null;
-  thumbnailId: number | null;
   author: {
     id: number;
     firstName: string;
@@ -76,7 +75,7 @@ export interface ArticlesResult {
     id: number;
     title: string;
   }[];
-  thumbnail: string | null;
+  thumbnail: PhotosResult;
   createdAt: Date;
   updatedAt: Date;
 }

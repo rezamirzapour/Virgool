@@ -39,7 +39,7 @@ const columns: IColumn<ArticlesResult>[] = [
     title: "نصویر شاخص",
     render: (rd) => (
       <Box display="flex" justifyContent="center">
-        <Avatar src={rd.thumbnailId?.toString() ?? ""} alt={rd.title}>
+        <Avatar src={rd.thumbnail?.fullPath ?? ""} alt={rd.title}>
           {rd.title[0]}
         </Avatar>
       </Box>
