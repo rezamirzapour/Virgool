@@ -35,6 +35,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { MulterModule } from '@nestjs/platform-express';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
@@ -73,6 +74,9 @@ import { MulterModule } from '@nestjs/platform-express';
     EventEmitterModule.forRoot(),
     MulterModule.register({
       dest: './files',
+    }),
+    GraphQLModule.forRoot({
+      autoSchemaFile: 'schema.gql',
     }),
     PassportModule,
     GuardsModule,

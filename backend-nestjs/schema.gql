@@ -1,0 +1,17 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Article {
+  id: Int!
+  title: String!
+  content: String
+  likeCount: Int!
+  status: String!
+  authorId: Int
+  thumbnailId: Int
+}
+
+type Query {
+  article(id: Int!): Article!
+}
