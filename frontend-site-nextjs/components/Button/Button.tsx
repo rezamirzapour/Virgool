@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { CircularProgress } from "@mui/material";
 import clsx from "clsx";
 
 interface IProps {
@@ -21,24 +20,18 @@ export default function Button({
       disabled={loading}
       className={clsx(
         "text-base font-medium py-2.5 w-full rounded flex justify-center items-center transition-1",
-        { "bg-gray-50 cursor-none": loading },
+        { "bg-gray-500 cursor-none": loading },
         {
-          "text-gray-10 bg-blue-50 hover:bg-blue-40":
+          "text-gray-100 bg-blue-500 hover:bg-blue-400":
             !loading && color == "primary",
         },
         {
-          "text-gray-80 bg-yellow-50 hover:bg-yellow-30":
+          "text-gray-800 bg-yellow-500 hover:bg-yellow-30":
             !loading && color == "secondary",
         }
       )}
     >
-      {children}{" "}
-      {loading && (
-        <CircularProgress
-          size={20}
-          sx={{ marginRight: ".25em", color: "white" }}
-        />
-      )}
+      {children}
     </button>
   );
 }
