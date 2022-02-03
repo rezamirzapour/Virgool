@@ -24,7 +24,7 @@ export default function ArticlesCreate() {
   const [selectedImaeg, setSelectedImage] = useState<PhotosResult>(
     {} as PhotosResult
   );
-  const { control, handleSubmit, setValue } = useForm({
+  const { control, handleSubmit } = useForm<CreateArticleDto>({
     resolver: yupResolver(createArticleSchema),
   });
   const { data: categories } = useGetCategoriesQuery();

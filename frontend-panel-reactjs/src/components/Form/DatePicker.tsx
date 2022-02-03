@@ -1,5 +1,4 @@
 import { makeStyles } from "@mui/styles";
-import moment from "moment";
 import { useState } from "react";
 interface IDatePicker {
   name?: string;

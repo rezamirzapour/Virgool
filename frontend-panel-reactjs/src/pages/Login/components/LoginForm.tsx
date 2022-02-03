@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useForm, FormProvider } from "react-hook-form";
 import eyeFill from "@iconify/icons-eva/eye-fill";
@@ -23,7 +23,7 @@ import type { LoginDto } from "types";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const methods = useForm({
+  const methods = useForm<LoginDto>({
     resolver: yupResolver(loginSchema),
   });
   const { mutate, isLoading } = useLoginMutation();
