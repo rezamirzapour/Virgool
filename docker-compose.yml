@@ -9,7 +9,7 @@ services:
         ports:
             - "3000:3000"
         volumes:
-            - ./virgool-panel:/app
+            - ./frontend-panel-reactjs
     site:
         container_name: virgool-site
         build:
@@ -19,7 +19,7 @@ services:
         ports:
             - "3001:3001"
         volumes:
-            - ./virgool-site:/app
+            - ./frontend-site-nextjs
     server:
         container_name: virgool-server
         build:
@@ -29,4 +29,4 @@ services:
         ports:
             - "8000:8000"
         volumes:
-            - ./virgool-server:/app
+            - ./backend-nestjs
