@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { ApiProperty } from '@nestjs/swagger'
+import { ApiProperty } from '@nestjs/swagger';
 export class FollowUserParams {
-    @ApiProperty({ type: 'integer' })
-    userId: number
+  @ApiProperty({ type: 'integer' })
+  userId: number;
 }

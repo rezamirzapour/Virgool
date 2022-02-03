@@ -2,6 +2,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class GetOneRoleDto {
-    @ApiProperty({ type: 'integer', required: true })
-    id: number;
+  @ApiProperty({ type: 'integer', required: true })
+  id: number;
 }

@@ -1,1 +1,1 @@
-export * from './user-followed.event'
+export * from './user-followed.event';

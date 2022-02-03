@@ -1,24 +1,32 @@
 /* eslint-disable prettier/prettier */
-import { Table, Model, Column, PrimaryKey, ForeignKey, BelongsTo, AutoIncrement } from 'sequelize-typescript'
-import { Role, User } from 'database/database.entities'
+import {
+  Table,
+  Model,
+  Column,
+  PrimaryKey,
+  ForeignKey,
+  BelongsTo,
+  AutoIncrement,
+} from 'sequelize-typescript';
+import { Role, User } from 'database/database.entities';
 @Table({ tableName: 'roleUser' })
 export class RoleUser extends Model {
-    @PrimaryKey
-    @AutoIncrement
-    @Column
-    id: number;
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
 
-    @ForeignKey(() => Role)
-    @Column
-    roleId: number;
+  @ForeignKey(() => Role)
+  @Column
+  roleId: number;
 
-    @BelongsTo(() => Role)
-    role: Role;
+  @BelongsTo(() => Role)
+  role: Role;
 
-    @ForeignKey(() => User)
-    @Column
-    userId: number;
+  @ForeignKey(() => User)
+  @Column
+  userId: number;
 
-    @BelongsTo(() => User)
-    user: User;
+  @BelongsTo(() => User)
+  user: User;
 }

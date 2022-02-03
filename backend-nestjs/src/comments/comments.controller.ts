@@ -2,11 +2,20 @@
 import { Body, Query, ValidationPipe } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CreateCommentDto, UpdateCommentDto, ListCommentsParams } from './dto';
-import { ApiController, GetAllMethod, GetOneMethod, PostMethod, PutMethod, DeleteMethod, ID, User } from 'common/decorator';
+import {
+  ApiController,
+  GetAllMethod,
+  GetOneMethod,
+  PostMethod,
+  PutMethod,
+  DeleteMethod,
+  ID,
+  User,
+} from 'common/decorator';
 
 @ApiController('comments')
 export class CommentsController {
-  constructor(private readonly commentsService: CommentsService) { }
+  constructor(private readonly commentsService: CommentsService) {}
 
   @PostMethod()
   create(@Body() createCommentDto: CreateCommentDto, @User() user) {
@@ -14,7 +23,10 @@ export class CommentsController {
   }
 
   @GetAllMethod()
-  findAll(@Query(new ValidationPipe({ transform: true })) listCommentsParams: ListCommentsParams) {
+  findAll(
+    @Query(new ValidationPipe({ transform: true }))
+    listCommentsParams: ListCommentsParams,
+  ) {
     return this.commentsService.findAll(listCommentsParams);
   }
 

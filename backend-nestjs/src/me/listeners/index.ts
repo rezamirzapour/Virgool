@@ -1,1 +1,1 @@
-export * from './user-followed.listener'
+export * from './user-followed.listener';

@@ -7,6 +7,6 @@ import { Comment } from './entities';
 @Module({
   controllers: [CommentsController],
   providers: [CommentsService],
-  imports: [SequelizeModule.forFeature([Comment])]
+  imports: [SequelizeModule.forFeature([Comment])],
 })
-export class CommentsModule { }
+export class CommentsModule {}

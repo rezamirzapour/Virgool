@@ -1,26 +1,26 @@
 /* eslint-disable prettier/prettier */
-import { IsInt, IsBoolean, IsOptional } from 'class-validator'
-import { Type, Transform } from 'class-transformer'
+import { IsInt, IsBoolean, IsOptional } from 'class-validator';
+import { Type, Transform } from 'class-transformer';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 export class ListParams {
-    @ApiPropertyOptional({ default: 10, type: 'integer' })
-    @IsOptional()
-    @IsInt()
-    @Type(() => Number)
-    // @Transform(({ value }) => +value)
-    size = 10
+  @ApiPropertyOptional({ default: 10, type: 'integer' })
+  @IsOptional()
+  @IsInt()
+  @Type(() => Number)
+  // @Transform(({ value }) => +value)
+  size = 10;
 
-    @ApiPropertyOptional({ default: 0, type: 'integer' })
-    @IsOptional()
-    @IsInt()
-    @Type(() => Number)
-    // @Transform(({ value }) => +value)
-    offset = 0
+  @ApiPropertyOptional({ default: 0, type: 'integer' })
+  @IsOptional()
+  @IsInt()
+  @Type(() => Number)
+  // @Transform(({ value }) => +value)
+  offset = 0;
 
-    @ApiPropertyOptional({ default: true, type: 'boolean' })
-    @IsOptional()
-    @IsBoolean()
-    // @Type(() => Boolean)     // never use this 
-    @Transform(({ value }) => value === 'true')
-    paginate = true
+  @ApiPropertyOptional({ default: true, type: 'boolean' })
+  @IsOptional()
+  @IsBoolean()
+  // @Type(() => Boolean)     // never use this
+  @Transform(({ value }) => value === 'true')
+  paginate = true;
 }

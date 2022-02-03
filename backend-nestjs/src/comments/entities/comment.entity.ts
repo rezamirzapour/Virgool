@@ -1,36 +1,46 @@
 /* eslint-disable prettier/prettier */
-import { Table, AutoIncrement, Model, Column, PrimaryKey, ForeignKey, BelongsTo, AllowNull, Default, DataType } from 'sequelize-typescript'
-import { User, Article } from 'database/database.entities'
+import {
+  Table,
+  AutoIncrement,
+  Model,
+  Column,
+  PrimaryKey,
+  ForeignKey,
+  BelongsTo,
+  AllowNull,
+  Default,
+  DataType,
+} from 'sequelize-typescript';
+import { User, Article } from 'database/database.entities';
 
 @Table({ tableName: 'comments' })
 export class Comment extends Model {
-    @PrimaryKey
-    @AutoIncrement
-    @Column
-    id: number;
+  @PrimaryKey
+  @AutoIncrement
+  @Column
+  id: number;
 
-    @ForeignKey(() => User)
-    @Column
-    authorId: number;
+  @ForeignKey(() => User)
+  @Column
+  authorId: number;
 
-    @BelongsTo(() => User)
-    author: User;
+  @BelongsTo(() => User)
+  author: User;
 
-    @Column(DataType.TEXT)
-    content: string;
+  @Column(DataType.TEXT)
+  content: string;
 
-    @AllowNull
-    @Column
-    parentId: number;
+  @AllowNull
+  @Column
+  parentId: number;
 
-    @Default(false)
-    @Column
-    accepted: boolean;
+  @Default(false)
+  @Column
+  accepted: boolean;
 
+  @ForeignKey(() => Article)
+  articleId: number;
 
-    @ForeignKey(() => Article)
-    articleId: number;
-
-    @BelongsTo(() => Article)
-    article: Article;
+  @BelongsTo(() => Article)
+  article: Article;
 }

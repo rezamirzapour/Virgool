@@ -11,4 +11,4 @@ import { SequelizeModule } from '@nestjs/sequelize';
   imports: [SequelizeModule.forFeature([User, Following, Notification])],
   exports: [SequelizeModule, UsersService],
 })
-export class UsersModule { }
+export class UsersModule {}

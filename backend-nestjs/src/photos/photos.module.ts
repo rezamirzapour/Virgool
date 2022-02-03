@@ -8,6 +8,6 @@ import { PhotosController } from './photos.controller';
   providers: [PhotosService],
   imports: [SequelizeModule.forFeature([Photo])],
   exports: [SequelizeModule],
-  controllers: [PhotosController]
+  controllers: [PhotosController],
 })
-export class PhotosModule { }
+export class PhotosModule {}

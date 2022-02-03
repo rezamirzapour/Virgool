@@ -1,1 +1,1 @@
-export { Permission } from './permission.entity'
+export { Permission } from './permission.entity';

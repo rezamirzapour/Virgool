@@ -1,12 +1,25 @@
 /* eslint-disable prettier/prettier */
 import { Body, Param, Query, HttpCode, ValidationPipe } from '@nestjs/common';
 import { PermissionsService } from './permissions.service';
-import { CreatePermissionDto, UpdatePermissionDto, ListPermissoinsParams, GetOnePermissionParams } from './dto';
-import { ApiController, GetAllMethod, GetOneMethod, PostMethod, PutMethod, DeleteMethod, ID } from 'common/decorator';
+import {
+  CreatePermissionDto,
+  UpdatePermissionDto,
+  ListPermissoinsParams,
+  GetOnePermissionParams,
+} from './dto';
+import {
+  ApiController,
+  GetAllMethod,
+  GetOneMethod,
+  PostMethod,
+  PutMethod,
+  DeleteMethod,
+  ID,
+} from 'common/decorator';
 
 @ApiController('permissions')
 export class PermissionsController {
-  constructor(private readonly permissionsService: PermissionsService) { }
+  constructor(private readonly permissionsService: PermissionsService) {}
 
   @HttpCode(201)
   @PostMethod()
@@ -15,7 +28,10 @@ export class PermissionsController {
   }
 
   @GetAllMethod()
-  findAll(@Query(new ValidationPipe({ transform: true })) listPermissoinsParams: ListPermissoinsParams) {
+  findAll(
+    @Query(new ValidationPipe({ transform: true }))
+    listPermissoinsParams: ListPermissoinsParams,
+  ) {
     return this.permissionsService.findAll(listPermissoinsParams);
   }
 
@@ -25,7 +41,11 @@ export class PermissionsController {
   }
 
   @PutMethod(':id')
-  update(@Param() params: GetOnePermissionParams, id: number, @Body() updatePermissionDto: UpdatePermissionDto) {
+  update(
+    @Param() params: GetOnePermissionParams,
+    id: number,
+    @Body() updatePermissionDto: UpdatePermissionDto,
+  ) {
     return this.permissionsService.update(id, updatePermissionDto);
   }
 

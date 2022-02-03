@@ -8,6 +8,6 @@ import { UserFollowedListener } from './listeners';
 @Module({
   controllers: [MeController],
   providers: [MeService, UserFollowedListener],
-  imports: [UsersModule]
+  imports: [UsersModule],
 })
-export class MeModule { }
+export class MeModule {}

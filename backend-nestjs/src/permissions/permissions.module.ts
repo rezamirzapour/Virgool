@@ -7,6 +7,6 @@ import { Permission } from './entities';
 @Module({
   controllers: [PermissionsController],
   providers: [PermissionsService],
-  imports: [SequelizeModule.forFeature([Permission])]
+  imports: [SequelizeModule.forFeature([Permission])],
 })
-export class PermissionsModule { }
+export class PermissionsModule {}

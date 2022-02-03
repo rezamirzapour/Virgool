@@ -1,1 +1,1 @@
-export { Comment } from './comment.entity'
+export { Comment } from './comment.entity';
