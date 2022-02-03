@@ -1,0 +1,32 @@
+version: "3"
+services:
+    panel:
+        container_name: virgool-panel
+        build:
+            context: ./frontend-panel-reactjs
+            dockerfile: dockerfile
+        image: virgool:panel
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./virgool-panel:/app
+    site:
+        container_name: virgool-site
+        build:
+            context: ./frontend-site-nextjs
+            dockerfile: dockerfile
+        image: virgool:site
+        ports:
+            - "3001:3001"
+        volumes:
+            - ./virgool-site:/app
+    server:
+        container_name: virgool-server
+        build:
+            context: ./backend-nestjs
+            dockerfile: dockerfile
+        image: virgool:server
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./virgool-server:/app
