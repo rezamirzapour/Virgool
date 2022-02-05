@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import type { CreateCategoryDto } from "types";
 
 export default function CategoriesCreate() {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<CreateCategoryDto>({
     resolver: yupResolver(createCategorySchema),
   });
   const { mutate: onSubmit, isLoading: isSubmitting } =
@@ -16,9 +16,7 @@ export default function CategoriesCreate() {
 
   return (
     <Page title="ایجاد دسته بندی" container>
-      <form
-        onSubmit={handleSubmit((data: CreateCategoryDto) => onSubmit(data))}
-      >
+      <form onSubmit={handleSubmit((data) => onSubmit(data))}>
         <Stack spacing={3}>
           <TextField name="title" label="عنوان" control={control} />
           <Button

@@ -9,7 +9,6 @@ import {
 import { TextField, Button } from "components/material";
 import { Page, ImageExplorer } from "components";
 import { useGetProfileQuery, useUpdateProfileMutation } from "hooks";
-import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { updateProfileSchema } from "validations";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,7 +22,7 @@ export default function Profile() {
   const { isLoading: isSubmitting, mutate: updateProfile } =
     useUpdateProfileMutation();
   const { data: profile, isLoading } = useGetProfileQuery();
-  const { control, handleSubmit, setValue } = useForm({
+  const { control, handleSubmit, setValue } = useForm<UpdateProfileDto>({
     resolver: yupResolver(updateProfileSchema),
   });
 

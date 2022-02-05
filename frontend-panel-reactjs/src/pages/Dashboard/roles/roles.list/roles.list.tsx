@@ -15,7 +15,6 @@ import { Button } from "components/material";
 import { useNavigate } from "react-router-dom";
 
 export default function RolesList() {
-  const [isOpenDialog, setIsOpenDialog] = useState(false);
   const { register, refetch } = useAwesomeTable<RolesResponse>({
     fetcherCallback: RolesServices.findAll,
     filterOptions: initialFilterOptions(),
@@ -43,7 +42,7 @@ export default function RolesList() {
     },
     {
       icon: <VerifiedUserIcon />,
-      onClick: (rd: any) => setIsOpenDialog(true),
+      onClick: (rd: any) => {},
       tooltip: "مشاهده دسترسی ها",
     },
   ];

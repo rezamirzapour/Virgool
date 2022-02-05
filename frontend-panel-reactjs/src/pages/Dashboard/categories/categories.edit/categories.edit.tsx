@@ -11,7 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function CategoriesEdit() {
   const { id } = useParams();
-  const { control, handleSubmit, setValue } = useForm({
+  const { control, handleSubmit, setValue } = useForm<UpdateCategoryDto>({
     resolver: yupResolver(updateCategorySchema),
   });
   const { data: category, isLoading } = useGetCategoryQuery(id ? +id : -1);

@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-
 // services
 export interface GetAllParams {
   size?: number;

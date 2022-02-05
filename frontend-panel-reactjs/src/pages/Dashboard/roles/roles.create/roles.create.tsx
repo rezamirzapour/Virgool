@@ -1,15 +1,15 @@
-import { useState, ChangeEvent } from "react";
-import { useGetPermissionsQuery, useCreateRoleMutation } from "hooks";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Stack } from "@mui/material";
 import { Page } from "components";
-import { Grid, Stack } from "@mui/material";
-import { TextField, Button, CheckBoxGroup } from "components/material";
+import { Button, CheckBoxGroup, TextField } from "components/material";
+import { useCreateRoleMutation, useGetPermissionsQuery } from "hooks";
+import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { CreateRoleDto } from "types";
 import { createRoleSchema } from "validations";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function RolesCreate() {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<CreateRoleDto>({
     resolver: yupResolver(createRoleSchema),
   });
   const { data: permissions } = useGetPermissionsQuery();

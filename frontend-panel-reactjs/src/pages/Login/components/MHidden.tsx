@@ -1,20 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "@mui/material";
 
-interface IProps {
-  width:
-    | "xsDown"
-    | "smDown"
-    | "mdDown"
-    | "lgDown"
-    | "xlDown"
-    | "xsUp"
-    | "smUp"
-    | "mdUp"
-    | "lgUp"
-    | "xlUp";
-}
-
 const MHidden: React.FC<any> = ({ width, children }) => {
   const breakpoint = width.substring(0, 2);
 

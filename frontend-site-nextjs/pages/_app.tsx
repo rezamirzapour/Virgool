@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import { Router } from "next/router";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { useState } from "react";
+import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import NProgress from "nprogress";
 import { ReactQueryDevtools } from "react-query/devtools";
 // import store from "store";
@@ -8,8 +9,6 @@ import "assets/css/style.scss";
 import "tailwindcss/tailwind.css";
 import "material-react-toastify/dist/ReactToastify.css";
 import "nprogress/nprogress.css";
-
-const queryClient = new QueryClient();
 
 NProgress.configure({
   minimum: 0.3,
@@ -22,10 +21,13 @@ Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(() => new QueryClient());
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-      <ReactQueryDevtools />
+      <Hydrate state={pageProps.dehydratedState}>
+        <Component {...pageProps} />
+        <ReactQueryDevtools />
+      </Hydrate>
     </QueryClientProvider>
   );
 }

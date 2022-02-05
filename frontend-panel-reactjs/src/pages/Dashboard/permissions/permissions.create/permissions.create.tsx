@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import type { CreateArticleDto } from "types";
 
 export default function PermissionsCreate() {
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control } = useForm<CreateArticleDto>({
     resolver: yupResolver(createPermissoinSchema),
   });
   const { mutate: onSubmit, isLoading: isSubmitting } =

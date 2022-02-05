@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
-import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
+import { Box, Link, Drawer, Typography, Avatar } from '@mui/material';
 // components
 import Logo from 'components/Logo';
 import Scrollbar from 'components/Scrollbar';
@@ -11,7 +11,6 @@ import NavSection from 'components/NavSection';
 import { MHidden } from 'components/@material-extend';
 //
 import sidebarConfig from './SidebarConfig';
-import account from '_mocks_/account';
 import { useGetProfileQuery } from 'hooks'
 // ----------------------------------------------------------------------
 

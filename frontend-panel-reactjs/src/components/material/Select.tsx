@@ -12,7 +12,7 @@ interface ISelectProps extends SelectProps {
 export function Select({ options = [], name, control, ...rest }: ISelectProps) {
   const {
     field: { value, onChange, onBlur, ref },
-    fieldState: { invalid, error },
+    fieldState: { invalid },
   } = useController({ name, control });
   return (
     <MaterialSelect

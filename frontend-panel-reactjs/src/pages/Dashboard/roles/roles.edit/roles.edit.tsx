@@ -1,18 +1,18 @@
-import { useState, useEffect, ChangeEvent } from "react";
-import { useParams } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Stack } from "@mui/material";
+import { Page } from "components";
+import { Button, CheckBoxGroup, TextField } from "components/material";
 import {
   useGetPermissionsQuery,
-  useUpdateRoleMutation,
   useGetRoleQuery,
+  useUpdateRoleMutation,
 } from "hooks";
-import { Page } from "components";
-import { Grid, Stack } from "@mui/material";
-import { TextField, Button, CheckBoxGroup } from "components/material";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import type { UpdateRoleDto } from "types";
+import { useParams } from "react-router-dom";
 import { updateRoleSchema } from "validations";
-import { yupResolver } from "@hookform/resolvers/yup";
 
+import type { UpdateRoleDto } from "types";
 export default function RolesEdit() {
   const { id } = useParams();
   const { data: role, isLoading } = useGetRoleQuery(id ? +id : -1);
@@ -20,7 +20,7 @@ export default function RolesEdit() {
   const { mutate: updateRole, isLoading: isSubmitting } = useUpdateRoleMutation(
     id ? +id : -1
   );
-  const { control, setValue, handleSubmit } = useForm({
+  const { control, setValue, handleSubmit } = useForm<UpdateRoleDto>({
     resolver: yupResolver(updateRoleSchema),
   });
   const [selectedPermissions, setSelectedPermissions] = useState<Array<number>>(

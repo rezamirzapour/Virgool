@@ -9,8 +9,6 @@ import { alpha } from '@mui/material/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
 // components
 import MenuPopover from '../../components/MenuPopover';
-//
-import account from '../../_mocks_/account';
 import { useGetProfileQuery } from 'hooks';
 // ----------------------------------------------------------------------
 

@@ -25,7 +25,7 @@ import {
   CloudUpload as CloudUploadIcon,
 } from "@mui/icons-material";
 import type { TransitionProps } from "@mui/material/transitions";
-import { Skeleton, LoadingButton } from "@mui/lab";
+import { Skeleton } from "@mui/lab";
 import { useGetPhotosQuery, useUploadPhotoMutation } from "hooks";
 import type { PhotosResult } from "types";
 import { LinearWithValueLabel } from "./items";
@@ -58,7 +58,7 @@ const FileExplorer: FC<IProps> = ({
   const [progress, setProgress] = useState(0);
   const {
     mutate,
-    data: uploadedPhoto,
+    // data: uploadedPhoto,
     isLoading: isUploading,
   } = useUploadPhotoMutation(setProgress);
   const inputRef = useRef<HTMLInputElement>(null);
