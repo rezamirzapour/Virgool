@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Sequelize } from 'sequelize-typescript';
+import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 import {
   Article,
   User,
@@ -21,12 +21,14 @@ export const databaseProviders = [
     provide: 'SEQUELIZE',
     useFactory: async () => {
       const sequelize = new Sequelize({
-        dialect: 'mariadb',
-        host: 'localhost',
-        port: 3306,
-        username: 'root',
-        password: '',
-        database: 'virgool-nestjs',
+        dialect:
+          (process.env.DATEBASE_DIALECTT as SequelizeOptions['dialect']) ||
+          'mysql',
+        host: process.env.DATABASE_HOST || '127.0.0.1',
+        port: +process.env.DATABASE_PORT || 6033,
+        username: process.env.DATABASE_USERNAME || 'root',
+        password: process.env.DATABASE_PASSWORD || 'admin1234',
+        database: process.env.DATABASE_NAME || 'virgool-nestjs',
       });
       sequelize.addModels([
         Article,
