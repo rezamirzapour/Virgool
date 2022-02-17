@@ -16,7 +16,7 @@ import { LoadingButton } from "@mui/lab";
 
 export default function Profile() {
   const [open, setOpen] = useState(false);
-  const [selectedImaeg, setSelectedImage] = useState<PhotosResult>(
+  const [selectedImage, setSelectedImage] = useState<PhotosResult>(
     {} as PhotosResult
   );
   const { isLoading: isSubmitting, mutate: updateProfile } =
@@ -33,12 +33,13 @@ export default function Profile() {
     setValue("lastName", profile?.lastName ?? "");
     setValue("email", profile?.email ?? "");
     setValue("description", profile?.description ?? "");
-    // setSelectedImage(article?.thumbnail ?? ({} as PhotosResult));
+    setSelectedImage(profile?.avatar ?? ({} as PhotosResult));
   }, [profile]);
 
   const onSubmit = (data: UpdateProfileDto) => {
     const requestBody: UpdateProfileDto = {
       ...data,
+      avatarId: selectedImage.id,
     };
     updateProfile(requestBody);
   };
@@ -72,7 +73,7 @@ export default function Profile() {
           </Grid>
           <Grid pt={2} pl={2} lg={6}>
             <TextField
-              name="desription"
+              name="description"
               label="توضیحات"
               defaultValue={profile?.description ?? ""}
               control={control}
@@ -83,7 +84,7 @@ export default function Profile() {
             <Stack alignItems={"center"} sx={{ width: "100%" }}>
               <Avatar
                 variant="circular"
-                src={selectedImaeg.fullPath}
+                src={selectedImage.fullPath}
                 sx={{ width: "200px", height: "200px" }}
               >
                 <PersonIcon sx={{ width: "100px", height: "100px" }} />
@@ -123,7 +124,7 @@ export default function Profile() {
         open={open}
         setOpen={setOpen}
         onAcceptImage={setSelectedImage}
-        defaultSelected={selectedImaeg}
+        defaultSelected={selectedImage}
       />
     </Page>
   );

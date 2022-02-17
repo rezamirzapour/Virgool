@@ -3,7 +3,7 @@ import { IsEmail, MinLength, IsNotEmpty } from "class-validator";
 import msg from "./messages";
 
 export class LoginSchema {
-  @IsEmail({ message: msg.email() })
+  @IsEmail({ message: msg.email("ایمیل") })
   @IsNotEmpty({ message: msg.required("ایمیل") })
   email: string;
 

@@ -2,18 +2,23 @@ import type { GetServerSideProps, NextPage } from "next";
 import { Profile } from "views";
 import { QueryClient, dehydrate } from "react-query";
 import { MeServices } from "services";
+import { AuthOperations } from "utils";
 
-const ProfilePage: NextPage = ({ profile }) => {
-  return <Profile profile={profile} />;
+const ProfilePage: NextPage = () => {
+  return <Profile />;
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery("profile", MeServices.getProfile);
+  await queryClient.prefetchQuery("profile", () =>
+    MeServices.getProfile(AuthOperations.generateAuthHeaderFromReq(req)).then(
+      ({ data }) => data
+    )
+  );
 
   return {
     props: {
-      profile: dehydrate(queryClient),
+      dehydratedState: dehydrate(queryClient),
     },
   };
 };

@@ -1,35 +1,35 @@
 import type { FC } from "react";
-import type { GetProfileResponse } from "../../types";
+import { useQuery } from "react-query";
+import { MeServices } from "services";
 
-interface IProps {
-  profile: GetProfileResponse;
-}
-
-const Profile: FC<IProps> = ({ profile }) => {
+const Profile: FC = () => {
+  const { data } = useQuery("profile", () =>
+    MeServices.getProfile().then(({ data }) => data)
+  );
   return (
-    <div>
+    <div className="pt-8">
       <div className="flex flex-col items-center">
         <img
-          src={profile.avatar}
-          alt={profile.firstName}
-          className="rounded-full"
+          src={data.avatar?.fullPath}
+          alt={data.firstName}
+          className="rounded-full w-[100px] h-[100px]"
         />
-        <h1>
-          {profile.firstName} {profile.lastName}
+        <h1 className="text-gray-900 text-md font-bold mt-3">
+          {data.firstName} {data.lastName}
         </h1>
-        <h2>{user.description}</h2>
-        <div className="flex">
+        <h2 className="mt-2">{data.description}</h2>
+        <div className="flex mt-2">
           <div>
             توسط
-            <bdi>25</bdi>
+            <bdi className="font-medium mx-1">25</bdi>
             نفر دنبال می‌شود
           </div>
           <div className="mr-4">
-            <bdi>36</bdi>
+            <bdi className="font-medium mx-1">36</bdi>
             نفر را دنبال می‌کند
           </div>
         </div>
-        <button className="rounded-xl border-2 border-gray-700 text-gray-700 hover:text-white hover:bg-gray-700 px-5 py-1">
+        <button className="rounded-3xl border-2 border-gray-700 text-gray-700 hover:text-white hover:bg-gray-700 font-medium px-5 py-1 mt-2 transition-all">
           تنظیمات حساب کاربری
         </button>
       </div>

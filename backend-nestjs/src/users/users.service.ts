@@ -65,6 +65,7 @@ export class UsersService {
       attributes: {
         exclude: ['avatarId'],
       },
+      include: 'avatar',
     });
     if (!result) throw new NotFoundException();
     return result.get();

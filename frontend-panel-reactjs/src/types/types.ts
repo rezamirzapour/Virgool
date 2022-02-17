@@ -154,7 +154,7 @@ export interface GetProfileResponse {
   email: string;
   firstName: string;
   lastName: string;
-  avatar: string;
+  avatar: PhotosResult;
   description: string;
 }
 
@@ -246,7 +246,7 @@ export interface UsersResult {
   isPhoneNumberVerified: boolean;
   createdAt: Date;
   updatedAt: Date;
-  avatar: string | null;
+  avatar: PhotosResult | null;
 }
 
 export interface UsersResponse extends FindAllResponse<UsersResult> {}
@@ -280,6 +280,7 @@ export interface PhotosResponse extends FindAllResponse<PhotosResult> {}
 export interface GetPhotosParms extends GetAllParams {}
 
 export interface UpdateProfileDto {
+  avatarId: number;
   email: string;
   firstName: string;
   lastName: string;

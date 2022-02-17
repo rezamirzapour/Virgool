@@ -114,10 +114,10 @@ export class ArticlesService {
     return true;
   }
 
-  async create(createArticleDto: CreateArticleDto, author) {
+  async create(createArticleDto: CreateArticleDto, author: User) {
     try {
       const article = await this.articleModel.create(createArticleDto);
-      article.$set('author', author);
+      article.$set('authorId', author.id);
       if (createArticleDto.categories) {
         article.$set('categories', createArticleDto.categories);
       }

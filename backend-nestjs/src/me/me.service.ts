@@ -12,7 +12,7 @@ import { User, Following, Notification } from 'database/database.entities';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { FindAllResponse } from 'common/httpResponse';
-import { GetFollowingsQuery } from './dto';
+import { GetFollowingsQuery, UpdateProfileDto } from './dto';
 import { UserFollowedEvent } from './events';
 
 @Injectable()
@@ -25,9 +25,9 @@ export class MeService {
     @InjectModel(Following) private followingRepository: typeof Following,
     private eventEmitter: EventEmitter2,
   ) {}
-  async updateProfile(user: User, updateUserDto: UpdateUserDto) {
+  async updateProfile(user: User, updateProfileDto: UpdateProfileDto) {
     try {
-      await this.usersService.update(user, updateUserDto);
+      await this.usersService.update(user, updateProfileDto);
       return new UpdateResponse();
     } catch (error) {
       throw new InternalServerErrorException();

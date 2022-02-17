@@ -47,7 +47,7 @@ const columns: IColumn<UsersResult>[] = [
     title: "نصویر شاخص",
     render: (rd) => (
       <Box display="flex" justifyContent="center">
-        <Avatar src={rd.avatar?.toString() ?? ""} alt={rd.firstName}>
+        <Avatar src={rd.avatar?.fullPath ?? ""} alt={rd.firstName}>
           {rd.firstName[0]}
         </Avatar>
       </Box>

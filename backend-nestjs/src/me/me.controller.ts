@@ -12,12 +12,11 @@ import {
   Query,
 } from '@nestjs/common';
 import { MeService } from './me.service';
-import { FollowUserParams, GetFollowingsQuery } from './dto';
+import { FollowUserParams, GetFollowingsQuery, UpdateProfileDto } from './dto';
 import { ApiController, User } from 'common/decorator';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
-import { UpdateUserDto } from 'users/dto';
 @ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
 @ApiController('me')
@@ -30,8 +29,11 @@ export class MeController {
   }
 
   @Put('profile')
-  async updateProfile(@User() user, @Body() updateUserDto: UpdateUserDto) {
-    return this.meService.updateProfile(user, updateUserDto);
+  async updateProfile(
+    @User() user,
+    @Body() updateProfileDto: UpdateProfileDto,
+  ) {
+    return this.meService.updateProfile(user, updateProfileDto);
   }
 
   @Get('users/followers')
