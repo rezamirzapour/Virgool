@@ -25,8 +25,8 @@
     <li>Create a article by users</li>
     <li>Get the articles list</li>
     <li>Get an article</li>
-    <li>Update an article by it's owner or admins</li>
-    <li>Delete an article by it's owner or admins</li>
+    <li>Update an article by its owner or admins</li>
+    <li>Delete an article by its owner or admins</li>
     <li>Search & filter the articles list</li>
     <li>Like an article by users</li>
     <li>Bookmark an article</li>
@@ -47,8 +47,8 @@
     <li>Create comment by users on an article</li>
     <li>Reply to comments by users</li>
     <li>Like comments by users</li>
-    <li>Update a comment by it's owner</li>
-    <li>Delete a comment by it's owner</li>
+    <li>Update a comment by its owner</li>
+    <li>Delete a comment by its owner</li>
     <li>Get comments lists</li>
     <li>Get comments lists of an article</li>
     <li>Search & filter the comments list</li>
