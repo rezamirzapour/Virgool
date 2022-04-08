@@ -1,8 +1,12 @@
 <h1>Virgool</h1>
 <p>
     A Fullstack Typescript Project
-    using Nestjs as backend, Reactjs as frontend of the panel, and Nextjs as frontend of the site
-    I want to focus on typescript language. so I decided to start a new project to improve my typescript knowledge. I will work on this project when my time be free.    
+</p>
+<p>
+    using Nestjs as backend, Reactjs as frontend of the panel, and Nextjs as frontend of the site.   
+</p>
+<p>
+    I want to focus on typescript language. so I decided to start a new project to improve my typescript knowledge. I will work on this project when my time be free.
 </p>
 <h3>
     Backend Features
