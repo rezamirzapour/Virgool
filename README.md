@@ -8,10 +8,55 @@
 <p>
     I want to focus on typescript language. so I decided to start a new project to improve my typescript knowledge. I will work on this project when my time be free.
 </p>
+
+<h3>Backend:</h3>
+
+<code>
+     cd .\backend-nestjs\
+</code>
+<p>Change .env content. then run these commands</p>
+
+<code>
+     npm install
+</code>
+<br/>
+<code>
+     npm run start:dev
+</code>
+<p>Navigate to localhost:8000</p>
+
+<h3>Frontend (Panel):</h3>
+<code>
+     cd .\frontend-panel-reactjs\
+</code>
+<br/>
+<code>
+     npm install
+</code>
+<br/>
+<code>
+     npm start
+</code>
+<p>Navigate to localhost:3000</p>
+
+<h3>Frontend (Site):</h3>
+<code>
+     cd .\frontend-site-nextjs\
+</code>
+<br/>
+<code>
+     npm install
+</code>
+<br/>
+<code>
+     npm run dev
+</code>
+<p>Navigate to localhost:3001</p>
+
+
 <h3>
     Backend Features
 </h3>
-
 
 <h4>Auth</h4>
   <ul>
