@@ -7,20 +7,20 @@ import {
   useGetRoleQuery,
   useUpdateRoleMutation,
 } from "hooks";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { updateRoleSchema } from "validations";
-
 import type { UpdateRoleDto } from "types";
+
 export default function RolesEdit() {
   const { id } = useParams();
-  const { data: role, isLoading } = useGetRoleQuery(id ? +id : -1);
+  const { data: role, isLoading } = useGetRoleQuery(+id!);
   const { data: permissions } = useGetPermissionsQuery();
   const { mutate: updateRole, isLoading: isSubmitting } = useUpdateRoleMutation(
-    id ? +id : -1
+    +id!
   );
-  const { control, setValue, handleSubmit } = useForm<UpdateRoleDto>({
+  const { control, handleSubmit, reset } = useForm<UpdateRoleDto>({
     resolver: yupResolver(updateRoleSchema),
   });
   const [selectedPermissions, setSelectedPermissions] = useState<Array<number>>(
@@ -32,7 +32,7 @@ export default function RolesEdit() {
       ...data,
       permissions: selectedPermissions,
     };
-    id && updateRole(requestBody);
+    updateRole(requestBody);
   };
 
   const onToggleBox = (ev: ChangeEvent<HTMLInputElement>) => {
@@ -43,11 +43,21 @@ export default function RolesEdit() {
   };
 
   useEffect(() => {
-    setValue("title", role?.title ?? "");
-    setValue("label", role?.label ?? "");
-    setValue("permissions", role?.permissions?.map((p: any) => p.id) ?? []);
-    setSelectedPermissions(role?.permissions?.map((p: any) => p.id) ?? []);
-  }, [role]);
+    if (role) {
+      const permissions = role?.permissions?.map((p: any) => p.id) || [];
+      reset({ ...role, permissions });
+      setSelectedPermissions(role?.permissions?.map((p: any) => p.id) || []);
+    }
+  }, [role, reset]);
+
+  const permissionsOptions = useMemo(
+    () =>
+      permissions?.map?.((p: any) => ({
+        label: p.title,
+        value: p.id,
+      })) || [],
+    [permissions]
+  );
 
   return (
     <Page title="ویرایش نقش" loading={isLoading} container>
@@ -57,12 +67,7 @@ export default function RolesEdit() {
           <TextField name="label" label="برچسب" control={control} />
           <CheckBoxGroup
             label="دسترسی ها"
-            options={
-              permissions?.map?.((p: any) => ({
-                label: p.title,
-                value: p.id,
-              })) ?? []
-            }
+            options={permissionsOptions}
             onToggleBox={onToggleBox}
             checkedValues={selectedPermissions}
           />

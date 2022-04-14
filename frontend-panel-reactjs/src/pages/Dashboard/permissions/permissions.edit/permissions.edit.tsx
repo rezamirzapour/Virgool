@@ -11,20 +11,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function PermissionsEdit() {
   const { id } = useParams();
-  const { control, setValue, handleSubmit } = useForm<UpdatePermissionDto>({
+  const { control, handleSubmit, reset } = useForm<UpdatePermissionDto>({
     resolver: yupResolver(updatePermissoinSchema),
   });
-  const { data: permission, isLoading } = useGetPermissionQuery(id ? +id : -1);
+  const { data: permission, isLoading } = useGetPermissionQuery(+id!);
   const { mutate: updatePermission, isLoading: isSubmitting } =
-    useUpdatePermissionMutation(id ? +id : -1);
+    useUpdatePermissionMutation(+id!);
 
   const onSubmit = (data: UpdatePermissionDto) => {
-    id && updatePermission(data);
+    updatePermission(data);
   };
 
   useEffect(() => {
-    permission && setValue("title", permission.title);
-  }, [permission, setValue]);
+    permission && reset({ ...permission });
+  }, [permission, reset]);
 
   return (
     <Page title="ویرایش دسترسی" loading={isLoading} container>

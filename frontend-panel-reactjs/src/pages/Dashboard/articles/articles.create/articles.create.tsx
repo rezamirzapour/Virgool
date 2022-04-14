@@ -9,12 +9,16 @@ import {
 } from "components/material";
 import { TextEditor, useTextEditor } from "components/TextEditor";
 import { Page, ImageExplorer } from "components";
-import { Grid, Stack, Avatar } from "@mui/material";
+import { Grid, Stack, Avatar, Box } from "@mui/material";
 import {
   PhotoCamera as PhotoCameraIcon,
   CloudUpload as CloudUploadIcon,
 } from "@mui/icons-material";
-import { useCreateArticleMutation, useGetCategoriesQuery } from "hooks";
+import {
+  useCreateArticleMutation,
+  useGetCategoriesQuery,
+  useGetProfileQuery,
+} from "hooks";
 import { useForm } from "react-hook-form";
 import { createArticleSchema } from "validations";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -30,6 +34,7 @@ export default function ArticlesCreate() {
   const { data: categories } = useGetCategoriesQuery();
   const { mutate: createArticle, isLoading: isSubmitting } =
     useCreateArticleMutation();
+  const { data: profile } = useGetProfileQuery();
   const { editorState, getHtmlContent, setEditorState, getPlainContent } =
     useTextEditor();
   const navigate = useNavigate();
@@ -49,6 +54,14 @@ export default function ArticlesCreate() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container>
           <Grid xs={12} lg={6}>
+            <Stack spacing={3}>
+              <Box>
+                نویسنده:{" "}
+                <span>
+                  {profile?.firstName} {profile?.lastName}
+                </span>
+              </Box>
+            </Stack>
             <Stack spacing={3}>
               <TextField name="title" label="عنوان" control={control} />
               <TextEditor

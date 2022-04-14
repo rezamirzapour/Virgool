@@ -11,20 +11,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function CategoriesEdit() {
   const { id } = useParams();
-  const { control, handleSubmit, setValue } = useForm<UpdateCategoryDto>({
+  const { control, handleSubmit, reset } = useForm<UpdateCategoryDto>({
     resolver: yupResolver(updateCategorySchema),
   });
-  const { data: category, isLoading } = useGetCategoryQuery(id ? +id : -1);
+  const { data: category, isLoading } = useGetCategoryQuery(+id!);
   const { mutate: updateCategory, isLoading: isSubmitting } =
-    useUpdateCategoryMutation(id ? +id : -1);
+    useUpdateCategoryMutation(+id!);
 
   const onSubmit = (data: UpdateCategoryDto) => {
     updateCategory(data);
   };
 
   useEffect(() => {
-    category && setValue("title", category.title);
-  }, [category, setValue]);
+    category && reset({ ...category });
+  }, [category, reset]);
 
   return (
     <Page title="ویرایش دسته بندی" loading={isLoading} container>

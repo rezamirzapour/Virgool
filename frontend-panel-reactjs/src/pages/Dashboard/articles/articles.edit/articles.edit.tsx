@@ -32,27 +32,26 @@ export default function ArticlesEdit() {
   );
   const { id } = useParams();
   const { data: categories } = useGetCategoriesQuery();
-  const { data: article, isLoading: loadingArticle } = useGetArticleQuery(
-    id ? +id : -1
-  );
+  const { data: article, isLoading: loadingArticle } = useGetArticleQuery(+id!);
   const { isLoading: isSubmitting, mutate: updateArticle } =
-    useUpdateArticleMutation(id ? +id : -1);
+    useUpdateArticleMutation(+id!);
 
-  const { control, handleSubmit, setValue } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(updateArticleSchema),
   });
 
   const { editorState, getHtmlContent, setEditorState } = useTextEditor(
-    article?.content ?? ""
+    article?.content || ""
   );
   const navigate = useNavigate();
 
   useEffect(() => {
-    setValue("title", article?.title ?? "");
-    setValue("categories", article?.categories?.map?.((c: any) => c.id) ?? []);
-    setValue("status", article?.status ?? "");
-    setSelectedImage(article?.thumbnail ?? ({} as PhotosResult));
-  }, [article]);
+    if (article) {
+      const categories = article.categories?.map?.((c: any) => c.id) || [];
+      reset({ ...article, categories });
+      setSelectedImage(article.thumbnail || ({} as PhotosResult));
+    }
+  }, [article, reset]);
 
   const onSubmit = (data: UpdateArticleDto) => {
     const requestBody: UpdateArticleDto = {
@@ -60,7 +59,7 @@ export default function ArticlesEdit() {
       content: getHtmlContent(),
       thumbnailId: selectedImaeg.id,
     };
-    id && updateArticle(requestBody);
+    updateArticle(requestBody);
   };
   return (
     <Page loading={loadingArticle} title="ویرایش مقاله">

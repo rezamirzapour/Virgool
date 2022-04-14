@@ -22,19 +22,10 @@ export default function Profile() {
   const { isLoading: isSubmitting, mutate: updateProfile } =
     useUpdateProfileMutation();
   const { data: profile, isLoading } = useGetProfileQuery();
-  const { control, handleSubmit, setValue } = useForm<UpdateProfileDto>({
+  const { control, handleSubmit, reset } = useForm<UpdateProfileDto>({
     resolver: yupResolver(updateProfileSchema),
   });
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    setValue("firstName", profile?.firstName ?? "");
-    setValue("lastName", profile?.lastName ?? "");
-    setValue("email", profile?.email ?? "");
-    setValue("description", profile?.description ?? "");
-    setSelectedImage(profile?.avatar ?? ({} as PhotosResult));
-  }, [profile]);
 
   const onSubmit = (data: UpdateProfileDto) => {
     const requestBody: UpdateProfileDto = {
@@ -43,6 +34,14 @@ export default function Profile() {
     };
     updateProfile(requestBody);
   };
+
+  useEffect(() => {
+    if (profile) {
+      reset({ ...profile });
+      setSelectedImage(profile.avatar || ({} as PhotosResult));
+    }
+  }, [profile, reset]);
+
   return (
     <Page loading={isLoading} title="ویرایش پروفایل">
       <form style={{ width: "100%" }} onSubmit={handleSubmit(onSubmit)}>
