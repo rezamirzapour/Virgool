@@ -21,7 +21,7 @@ import {
   PermissionRole,
   Role,
   Notification,
-} from 'src/database/database.entities';
+} from './database/database.entities';
 import { LoggerMiddleware, ParseIntIdMiddleware } from 'src/common/middleware';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -36,6 +36,7 @@ import { PermissionsModule } from './permissions/permissions.module';
 import { MeModule } from './me/me.module';
 import { AuthModule } from './auth/auth.module';
 import { GuardsModule } from './gurad/guards.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
