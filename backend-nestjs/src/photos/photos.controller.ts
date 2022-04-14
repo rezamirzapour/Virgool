@@ -14,15 +14,8 @@ import {
   GetAllMethod,
   GetOneMethod,
   ID,
-} from 'common/decorator';
+} from 'src/common/decorator';
 import { PhotosService } from './photos.service';
-import {
-  FindOneResponse,
-  CreateResponse,
-  DestroyResponse,
-  UpdateResponse,
-  FindAllResponse,
-} from 'common/httpResponse';
 import { ListAllArticlesParams, PhotoDetailsParams } from './dto';
 @ApiController('photos')
 export class PhotosController {

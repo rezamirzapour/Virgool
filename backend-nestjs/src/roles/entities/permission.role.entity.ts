@@ -8,7 +8,7 @@ import {
   PrimaryKey,
   AutoIncrement,
 } from 'sequelize-typescript';
-import { Role, Permission } from 'database/database.entities';
+import { Role, Permission } from 'src/database/database.entities';
 
 @Table({ tableName: 'permissionRole' })
 export class PermissionRole extends Model {

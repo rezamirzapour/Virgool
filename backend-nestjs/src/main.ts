@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 declare const module: any;
 import { NestFactory } from '@nestjs/core';
-import * as cookieParser from 'cookie-parser';
-import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { HttpExceptionFilter } from 'common/filter';
+import * as cookieParser from 'cookie-parser';
+import { HttpExceptionFilter } from 'src/common/filter';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

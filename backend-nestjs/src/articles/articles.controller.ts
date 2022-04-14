@@ -16,13 +16,13 @@ import {
   PutMethod,
   ID,
   User,
-} from 'common/decorator';
+} from 'src/common/decorator';
 import {
   FindOneResponse,
   CreateResponse,
   DestroyResponse,
   UpdateResponse,
-} from 'common/httpResponse';
+} from 'src/common/httpResponse';
 @ApiController('articles')
 export class ArticlesController {
   constructor(private articleService: ArticlesService) {}

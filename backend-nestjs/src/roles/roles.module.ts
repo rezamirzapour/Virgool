@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { Role } from 'src/database/database.entities';
 import { RolesService } from './roles.service';
 import { RolesController } from './roles.controller';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { Role } from 'database/database.entities';
 
 @Module({
   controllers: [RolesController],

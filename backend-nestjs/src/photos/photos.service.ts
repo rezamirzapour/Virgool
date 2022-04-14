@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { FindAllResponse, PaginateResponse } from 'common/httpResponse';
-import { Photo } from 'database/database.entities';
+import { FindAllResponse, PaginateResponse } from 'src/common/httpResponse';
+import { Photo } from 'src/database/database.entities';
 import { ListAllArticlesParams } from './dto';
 
 @Injectable()

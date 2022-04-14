@@ -15,7 +15,7 @@ import {
   PutMethod,
   DeleteMethod,
   ID,
-} from 'common/decorator';
+} from 'src/common/decorator';
 
 @ApiController('permissions')
 export class PermissionsController {

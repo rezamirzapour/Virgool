@@ -1,19 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
-import { LoggerMiddleware, ParseIntIdMiddleware } from './common/middleware';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ArticlesModule } from './articles/articles.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { UsersModule } from './users/users.module';
-import { PhotosModule } from './photos/photos.module';
-import { DatabaseModule } from './database/database.module';
-import { CategoriesModule } from './categories/categories.module';
-import { CommentsModule } from './comments/comments.module';
-import { RolesModule } from './roles/roles.module';
-import { PermissionsModule } from './permissions/permissions.module';
-import { MeModule } from './me/me.module';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { MulterModule } from '@nestjs/platform-express';
+import { GraphQLModule } from '@nestjs/graphql';
 import {
   Article,
   User,
@@ -28,15 +21,21 @@ import {
   PermissionRole,
   Role,
   Notification,
-} from 'database/database.entities';
+} from 'src/database/database.entities';
+import { LoggerMiddleware, ParseIntIdMiddleware } from 'src/common/middleware';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { ArticlesModule } from './articles/articles.module';
+import { UsersModule } from './users/users.module';
+import { PhotosModule } from './photos/photos.module';
+import { DatabaseModule } from './database/database.module';
+import { CategoriesModule } from './categories/categories.module';
+import { CommentsModule } from './comments/comments.module';
+import { RolesModule } from './roles/roles.module';
+import { PermissionsModule } from './permissions/permissions.module';
+import { MeModule } from './me/me.module';
 import { AuthModule } from './auth/auth.module';
 import { GuardsModule } from './gurad/guards.module';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
-import { EventEmitterModule } from '@nestjs/event-emitter';
-import { MulterModule } from '@nestjs/platform-express';
-import { GraphQLModule } from '@nestjs/graphql';
-
 @Module({
   imports: [
     ConfigModule.forRoot(),

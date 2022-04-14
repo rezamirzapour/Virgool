@@ -1,21 +1,10 @@
 /* eslint-disable prettier/prettier */
-import {
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Put,
-  UseGuards,
-  Req,
-  Query,
-} from '@nestjs/common';
-import { MeService } from './me.service';
+import { Get, Post, Body, Param, Put, UseGuards, Query } from '@nestjs/common';
 import { FollowUserParams, GetFollowingsQuery, UpdateProfileDto } from './dto';
-import { ApiController, User } from 'common/decorator';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiController, User } from 'src/common/decorator';
+import { MeService } from './me.service';
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))

@@ -14,12 +14,12 @@ import {
   PutMethod,
   DeleteMethod,
   ID,
-} from 'common/decorator';
+} from 'src/common/decorator';
 import {
   CreateResponse,
   FindOneResponse,
   UpdateResponse,
-} from 'common/httpResponse';
+} from 'src/common/httpResponse';
 
 @ApiController('categories')
 export class CategoriesController {

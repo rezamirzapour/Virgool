@@ -1,13 +1,16 @@
 /* eslint-disable prettier/prettier */
-import { GraphQLModule } from '@nestjs/graphql';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ArticlesController } from './articles.controller';
 import { ArticlesService } from './articles.service';
 import { ArticlesResolver } from './articles.resolver';
-import { Article, ArticleCategory, Category } from 'database/database.entities';
-import { DatabaseModule } from 'database/database.module';
-import { CategoriesService } from 'categories/categories.service';
+import {
+  Article,
+  ArticleCategory,
+  Category,
+} from 'src/database/database.entities';
+import { DatabaseModule } from 'src/database/database.module';
+import { CategoriesService } from 'src/categories/categories.service';
 @Module({
   controllers: [ArticlesController],
   providers: [ArticlesService, ArticlesResolver, CategoriesService],

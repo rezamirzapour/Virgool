@@ -11,7 +11,7 @@ import {
   Default,
   DataType,
 } from 'sequelize-typescript';
-import { User, Article } from 'database/database.entities';
+import { User, Article } from 'src/database/database.entities';
 
 @Table({ tableName: 'comments' })
 export class Comment extends Model {

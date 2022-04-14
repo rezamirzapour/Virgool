@@ -7,8 +7,8 @@ import {
 } from './dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
-import { Category } from 'database/database.entities';
-import { FindAllResponse, PaginateResponse } from 'common/httpResponse';
+import { Category } from 'src/database/database.entities';
+import { FindAllResponse, PaginateResponse } from 'src/common/httpResponse';
 
 @Injectable()
 export class CategoriesService {

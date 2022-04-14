@@ -8,7 +8,7 @@ import {
   BelongsTo,
   AutoIncrement,
 } from 'sequelize-typescript';
-import { Role, User } from 'database/database.entities';
+import { Role, User } from 'src/database/database.entities';
 @Table({ tableName: 'roleUser' })
 export class RoleUser extends Model {
   @PrimaryKey

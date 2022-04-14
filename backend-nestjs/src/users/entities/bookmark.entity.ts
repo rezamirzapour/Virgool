@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-import { Article, User } from 'database/database.entities';
 import {
   Table,
   Model,
@@ -8,6 +7,7 @@ import {
   BelongsTo,
   PrimaryKey,
 } from 'sequelize-typescript';
+import { Article, User } from 'src/database/database.entities';
 
 @Table({ tableName: 'bookmark' })
 export class Bookmark extends Model {

@@ -5,13 +5,12 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { UsersService } from 'users/users.service';
-import { UpdateUserDto } from 'users/dto';
-import { PaginateResponse, UpdateResponse } from 'common/httpResponse';
-import { User, Following, Notification } from 'database/database.entities';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
-import { FindAllResponse } from 'common/httpResponse';
+import { UsersService } from 'src/users/users.service';
+import { PaginateResponse, UpdateResponse } from 'src/common/httpResponse';
+import { User, Following, Notification } from 'src/database/database.entities';
+import { FindAllResponse } from 'src/common/httpResponse';
 import { GetFollowingsQuery, UpdateProfileDto } from './dto';
 import { UserFollowedEvent } from './events';
 

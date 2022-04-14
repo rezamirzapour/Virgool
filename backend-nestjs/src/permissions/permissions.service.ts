@@ -12,7 +12,7 @@ import {
   FindOneResponse,
   PaginateResponse,
   UpdateResponse,
-} from 'common/httpResponse';
+} from 'src/common/httpResponse';
 import {
   CreatePermissionDto,
   UpdatePermissionDto,

@@ -6,7 +6,7 @@ import {
   Column,
   BelongsTo,
 } from 'sequelize-typescript';
-import { User } from 'database/database.entities';
+import { User } from 'src/database/database.entities';
 @Table({ tableName: 'following' })
 export class Following extends Model {
   @ForeignKey(() => User)

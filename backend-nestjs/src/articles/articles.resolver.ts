@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Resolver, Int, Args, Query } from '@nestjs/graphql';
-import { CategoriesService } from 'categories/categories.service';
-import { Article } from 'database/database.entities';
+import { CategoriesService } from 'src/categories/categories.service';
+import { Article } from 'src/database/database.entities';
 import { ArticlesService } from './articles.service';
 
 @Resolver((of) => Article)

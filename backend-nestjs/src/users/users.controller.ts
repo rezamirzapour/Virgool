@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 import { Param, Query, ValidationPipe } from '@nestjs/common';
-import { ListUsersParams, GetOneUserDto } from './dto';
-import { UsersService } from './users.service';
 import {
   ApiController,
   GetAllMethod,
   GetOneMethod,
   ID,
-} from 'common/decorator';
+} from 'src/common/decorator';
+import { ListUsersParams, GetOneUserDto } from './dto';
+import { UsersService } from './users.service';
 
 @ApiController('users')
 export class UsersController {

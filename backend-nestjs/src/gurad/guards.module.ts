@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Module, Global } from '@nestjs/common';
-import { UsersModule } from 'users/users.module';
+import { UsersModule } from 'src/users/users.module';
 import { RolesGuard } from './roles.guard';
 
 @Global()

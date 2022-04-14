@@ -1,19 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { InjectModel } from '@nestjs/sequelize';
-import { User } from './entities/user.entity';
-import * as bcrypt from 'bcrypt';
-import { ListUsersParams, UpdateUserDto } from './dto';
 import { Op } from 'sequelize';
-import {
-  PaginateResponse,
-  FindAllResponse,
-  FindOneResponse,
-} from 'common/httpResponse';
-import { Role } from 'roles/entities';
-
-const saltOrRounds = 10;
+import { InjectModel } from '@nestjs/sequelize';
+import { PaginateResponse, FindAllResponse } from 'src/common/httpResponse';
+import { Role } from 'src/roles/entities';
+import { User } from './entities/user.entity';
+import { ListUsersParams, UpdateUserDto, CreateUserDto } from './dto';
 
 @Injectable()
 export class UsersService {

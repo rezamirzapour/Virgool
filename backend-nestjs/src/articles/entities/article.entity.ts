@@ -22,7 +22,7 @@ import {
   ArticleCategory,
   Category,
   Comment,
-} from 'database/database.entities';
+} from 'src/database/database.entities';
 
 type Status = 'published' | 'unpublished';
 

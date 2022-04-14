@@ -7,7 +7,7 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 import { Article } from './article.entity';
-import { Category } from 'categories/entities/category.entity';
+import { Category } from 'src/categories/entities/category.entity';
 
 @Table({ tableName: 'articleCategory', createdAt: false, updatedAt: false })
 export class ArticleCategory extends Model {

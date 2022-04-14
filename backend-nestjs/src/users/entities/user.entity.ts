@@ -21,7 +21,7 @@ import {
   Following,
   Role,
   Notification,
-} from 'database/database.entities';
+} from 'src/database/database.entities';
 import { hash } from 'bcrypt';
 
 @Table({ tableName: 'users' })

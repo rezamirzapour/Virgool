@@ -2,7 +2,7 @@
 import { IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { ListParams } from 'common/dto';
+import { ListParams } from 'src/common/dto';
 
 export class ListAllArticlesParams extends ListParams {
   @ApiProperty({ required: false })

@@ -2,10 +2,10 @@
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
-import { jwtConstants } from './constants';
 import { Request } from 'express';
-import { UsersService } from 'users/users.service';
-import { User } from 'database/database.entities';
+import { UsersService } from 'src/users/users.service';
+import { User } from 'src/database/database.entities';
+import { jwtConstants } from './constants';
 
 const getJwtFromCookieOrHeader = (req: Request) => {
   const accessTokenFromCookie = req.cookies['access_token'];

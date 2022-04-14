@@ -4,14 +4,8 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import {
-  CreateRoleDto,
-  UpdateRoleDto,
-  ListRolesParams,
-  AddUsersDto,
-} from './dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { Role, Permission } from 'database/database.entities';
+import { Role, Permission } from 'src/database/database.entities';
 import {
   CreateResponse,
   DestroyResponse,
@@ -19,7 +13,13 @@ import {
   FindOneResponse,
   PaginateResponse,
   UpdateResponse,
-} from 'common/httpResponse';
+} from 'src/common/httpResponse';
+import {
+  CreateRoleDto,
+  UpdateRoleDto,
+  ListRolesParams,
+  AddUsersDto,
+} from './dto';
 
 @Injectable()
 export class RolesService {

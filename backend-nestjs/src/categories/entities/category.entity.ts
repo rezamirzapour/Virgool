@@ -7,7 +7,7 @@ import {
   AutoIncrement,
   BelongsToMany,
 } from 'sequelize-typescript';
-import { Article, ArticleCategory } from 'articles/entities';
+import { Article, ArticleCategory } from 'src/articles/entities';
 @Table({ tableName: 'categories' })
 export class Category extends Model {
   @PrimaryKey

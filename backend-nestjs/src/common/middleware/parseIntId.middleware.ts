@@ -1,9 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {
-  NestMiddleware,
-  Injectable,
-  BadRequestException,
-} from '@nestjs/common';
+import { NestMiddleware, Injectable } from '@nestjs/common';
 import { Response, NextFunction } from 'express';
 
 @Injectable()

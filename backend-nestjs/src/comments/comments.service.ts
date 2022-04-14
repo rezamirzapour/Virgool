@@ -4,17 +4,17 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateCommentDto, UpdateCommentDto, ListCommentsParams } from './dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { Comment } from './entities';
-import { User } from 'users/entities';
 import {
   CreateResponse,
   DestroyResponse,
   FindAllResponse,
   FindOneResponse,
   PaginateResponse,
-} from 'common/httpResponse';
+} from 'src/common/httpResponse';
+import { User } from 'src/users/entities';
+import { Comment } from './entities';
+import { CreateCommentDto, UpdateCommentDto, ListCommentsParams } from './dto';
 
 @Injectable()
 export class CommentsService {

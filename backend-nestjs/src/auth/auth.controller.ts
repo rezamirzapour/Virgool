@@ -8,12 +8,11 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { RegisterDto } from './dto';
-import { AuthService } from './auth.service';
-import { UsersService } from '../users/users.service';
-import { ApiController } from 'common/decorator';
 import { Response } from 'express';
-import { LoginDto } from './dto';
+import { UsersService } from 'src/users/users.service';
+import { ApiController } from 'src/common/decorator';
+import { RegisterDto, LoginDto } from './dto';
+import { AuthService } from './auth.service';
 @ApiController('auth')
 export class AuthController {
   constructor(

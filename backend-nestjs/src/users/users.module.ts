@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { User, Following, Notification } from 'src/database/database.entities';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
-import { User, Following, Notification } from 'database/database.entities';
-import { SequelizeModule } from '@nestjs/sequelize';
 
 @Module({
   providers: [UsersService],

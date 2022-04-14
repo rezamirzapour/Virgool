@@ -2,7 +2,7 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional, IsEmail } from 'class-validator';
 import { Type } from 'class-transformer';
-import { ListParams } from 'common/dto';
+import { ListParams } from 'src/common/dto';
 export class ListUsersParams extends ListParams {
   @IsOptional()
   @ApiPropertyOptional()

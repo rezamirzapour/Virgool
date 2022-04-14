@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Get, Redirect } from '@nestjs/common';
-import { AppService } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
+import { AppService } from './app.service';
 
 @ApiTags('Home')
 @Controller()

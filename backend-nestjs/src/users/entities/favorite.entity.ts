@@ -6,7 +6,7 @@ import {
   BelongsTo,
   Column,
 } from 'sequelize-typescript';
-import { User, Article } from 'database/database.entities';
+import { User, Article } from 'src/database/database.entities';
 
 @Table({ tableName: 'favorites', createdAt: false, updatedAt: false })
 export class Favorite extends Model {

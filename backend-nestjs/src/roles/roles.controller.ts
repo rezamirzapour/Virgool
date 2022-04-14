@@ -1,12 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {
-  Body,
-  Param,
-  Query,
-  HttpCode,
-  ValidationPipe,
-  UsePipes,
-} from '@nestjs/common';
+import { Body, Param, Query, HttpCode, ValidationPipe } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import {
   CreateRoleDto,
@@ -23,7 +16,7 @@ import {
   PutMethod,
   DeleteMethod,
   ID,
-} from 'common/decorator';
+} from 'src/common/decorator';
 
 @ApiController('roles')
 export class RolesController {

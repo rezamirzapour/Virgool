@@ -6,13 +6,13 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
-import { Article, Category, User } from 'database/database.entities';
+import { Article, Category, User } from 'src/database/database.entities';
 import {
   ListAllArticlesParams,
   CreateArticleDto,
   UpdateArticleDto,
 } from './dto';
-import { PaginateResponse, FindAllResponse } from 'common/httpResponse';
+import { PaginateResponse, FindAllResponse } from 'src/common/httpResponse';
 
 @Injectable()
 export class ArticlesService {

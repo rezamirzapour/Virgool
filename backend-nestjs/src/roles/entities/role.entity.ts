@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { PermissionRole, User } from 'database/database.entities';
-import { Permission } from 'permissions/entities';
+import { PermissionRole, User } from 'src/database/database.entities';
+import { Permission } from 'src/permissions/entities';
 import {
   Table,
   Model,

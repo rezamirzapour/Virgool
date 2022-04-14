@@ -11,7 +11,7 @@ import {
   DeleteMethod,
   ID,
   User,
-} from 'common/decorator';
+} from 'src/common/decorator';
 
 @ApiController('comments')
 export class CommentsController {
