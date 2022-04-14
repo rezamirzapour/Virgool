@@ -17,11 +17,6 @@ import { initialFilterOptions, columns } from "./items";
 import { useNavigate } from "react-router-dom";
 
 export default function ArticleList() {
-  const { register, refetch } = useAwesomeTable<ArticlesResponse>({
-    fetcherCallback: ArticleServices.findAll,
-    filterOptions: initialFilterOptions(),
-  });
-  const navigate = useNavigate();
   const { mutate: deleteArticle, isLoading: isSubmitting } =
     useDeleteArticleMutation();
 
@@ -44,6 +39,15 @@ export default function ArticleList() {
     },
   ];
 
+  const { register, refetch } = useAwesomeTable<ArticlesResponse>({
+    fetcherCallback: ArticleServices.findAll,
+    filterOptions: initialFilterOptions(),
+    columns,
+    actions,
+  });
+
+  const navigate = useNavigate();
+
   return (
     <Page
       title="لیست مقالات"
@@ -59,7 +63,7 @@ export default function ArticleList() {
         </Button>
       }
     >
-      <AwesomeTable columns={columns} register={register} actions={actions} />
+      <AwesomeTable register={register} />
     </Page>
   );
 }

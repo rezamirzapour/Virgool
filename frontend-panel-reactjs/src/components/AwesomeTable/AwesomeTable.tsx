@@ -19,14 +19,8 @@ import {
   getIcon,
   getOnClickFunction,
   getTooltipTitle,
-  getSortIcon,
 } from "./items";
-import {
-  IColumn,
-  ISortValue,
-  AwesomeTableProps,
-  ISort,
-} from "./items/interface";
+import type { AwesomeTableProps } from "./items/interface";
 import { makeStyles } from "@mui/styles";
 import { AwesomeFilter } from "components/AwesomeFilter";
 export function AwesomeTable({
@@ -43,9 +37,9 @@ export function AwesomeTable({
     onDeleteFilter,
     onFilterChange,
     onApplyFilter,
+    columns = [],
+    actions = [],
   },
-  columns = [],
-  actions = [],
 }: AwesomeTableProps) {
   const classes = useStyles();
 

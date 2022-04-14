@@ -1,4 +1,4 @@
-import { Select, ListItem, SelectProps } from "@mui/material";
+import { Select, MenuItem, SelectProps } from "@mui/material";
 
 interface IProps {
   selectProps?: SelectProps;
@@ -9,7 +9,9 @@ export default function SelectFilter({ selectProps, options }: IProps) {
   return (
     <Select fullWidth variant="outlined" {...selectProps}>
       {options?.map((o) => (
-        <ListItem value={o.value}>{o.label}</ListItem>
+        <MenuItem key={o.value} value={o.value}>
+          {o.label}
+        </MenuItem>
       ))}
     </Select>
   );

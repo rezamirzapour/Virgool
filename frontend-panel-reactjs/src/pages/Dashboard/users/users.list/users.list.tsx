@@ -7,10 +7,6 @@ import { useNavigate } from "react-router-dom";
 import type { UsersResponse } from "types";
 
 export default function UsersList() {
-  const { register } = useAwesomeTable<UsersResponse>({
-    fetcherCallback: UsersServices.findAll,
-    filterOptions: initialFilterOptions(),
-  });
   const navigate = useNavigate();
   const actions = [
     {
@@ -19,9 +15,16 @@ export default function UsersList() {
       tooltip: "ویرایش",
     },
   ];
+  const { register } = useAwesomeTable<UsersResponse>({
+    fetcherCallback: UsersServices.findAll,
+    filterOptions: initialFilterOptions(),
+    columns,
+    actions,
+  });
+
   return (
     <Page title="لیست کاربران">
-      <AwesomeTable columns={columns} register={register} actions={actions} />
+      <AwesomeTable register={register} />
     </Page>
   );
 }

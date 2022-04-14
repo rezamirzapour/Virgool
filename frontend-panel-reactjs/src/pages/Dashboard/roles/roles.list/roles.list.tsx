@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Edit as EditIcon,
   Add as AddIcon,
@@ -15,10 +14,6 @@ import { Button } from "components/material";
 import { useNavigate } from "react-router-dom";
 
 export default function RolesList() {
-  const { register, refetch } = useAwesomeTable<RolesResponse>({
-    fetcherCallback: RolesServices.findAll,
-    filterOptions: initialFilterOptions(),
-  });
   const navigate = useNavigate();
   const { mutate: deleteRole, isLoading: isSubmitting } =
     useDeleteRoleMutation();
@@ -46,6 +41,12 @@ export default function RolesList() {
       tooltip: "مشاهده دسترسی ها",
     },
   ];
+  const { register, refetch } = useAwesomeTable<RolesResponse>({
+    fetcherCallback: RolesServices.findAll,
+    filterOptions: initialFilterOptions(),
+    columns,
+    actions,
+  });
 
   return (
     <Page
@@ -61,7 +62,7 @@ export default function RolesList() {
         </Button>
       }
     >
-      <AwesomeTable columns={columns} register={register} actions={actions} />
+      <AwesomeTable register={register} />
     </Page>
   );
 }

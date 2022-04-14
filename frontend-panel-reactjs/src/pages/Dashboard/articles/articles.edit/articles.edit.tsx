@@ -119,7 +119,7 @@ export default function ArticlesEdit() {
                 options={[
                   {
                     label: "منتشر شود",
-                    value: "publsihed",
+                    value: "published",
                   },
                   {
                     label: "بعنوان پیش‌نویس ذخیره شود",

@@ -4,7 +4,7 @@ import {
   DateTimeRangeValue,
   NumberRangeValue,
 } from "./items/interface";
-import { Grid, Select, ListItem, Button, Chip } from "@mui/material";
+import { Grid, Select, MenuItem, Button, Chip } from "@mui/material";
 import { Sort as SortIcon } from "@mui/icons-material";
 import { useState } from "react";
 import {
@@ -125,9 +125,9 @@ export default function AwesomeFilter(props: IProps) {
           onChange={(ev) => onSelectChange(ev.target.value as string)}
         >
           {filterOptions.filters.map((filter) => (
-            <ListItem key={filter.label} value={filter.label}>
+            <MenuItem key={filter.label} value={filter.label}>
               {filter.label}
-            </ListItem>
+            </MenuItem>
           ))}
         </Select>
       </Grid>

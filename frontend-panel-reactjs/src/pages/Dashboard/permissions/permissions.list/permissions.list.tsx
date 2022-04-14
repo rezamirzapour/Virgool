@@ -13,10 +13,6 @@ import { useDeletePermissionMutation } from "hooks";
 import { initialFilterOptions, columns } from "./items";
 
 export default function PermissionsList() {
-  const { register, refetch } = useAwesomeTable<PermissionsResponse>({
-    fetcherCallback: PermissionsServices.findAll,
-    filterOptions: initialFilterOptions(),
-  });
   const { mutate: deletePermission, isLoading: isSubmitting } =
     useDeletePermissionMutation();
   const onDelete = async (rd: any) => {
@@ -38,6 +34,13 @@ export default function PermissionsList() {
     },
   ];
 
+  const { register, refetch } = useAwesomeTable<PermissionsResponse>({
+    fetcherCallback: PermissionsServices.findAll,
+    filterOptions: initialFilterOptions(),
+    columns,
+    actions,
+  });
+
   return (
     <Page
       title="لیست دسترسی ها"
@@ -52,7 +55,7 @@ export default function PermissionsList() {
         </Button>
       }
     >
-      <AwesomeTable columns={columns} register={register} actions={actions} />
+      <AwesomeTable register={register} />
     </Page>
   );
 }

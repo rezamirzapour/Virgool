@@ -48,6 +48,4 @@ export interface ISort {
 
 export interface AwesomeTableProps {
   register: IUseAwesomeTableReturnType["register"];
-  columns: IColumn[];
-  actions?: IAction[];
 }

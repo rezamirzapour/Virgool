@@ -4,6 +4,7 @@ import { toast } from "material-react-toastify";
 import type { FindAllResponse } from "types";
 import type { FilterOptions, Filters } from "components/AwesomeFilter";
 import { parseDate } from "utils";
+import { IColumn, IAction } from "./interface";
 
 interface IFetcherParams {
   offset: number;
@@ -12,6 +13,8 @@ interface IFetcherParams {
 
 interface IUseAwesomeTableParams<T extends FindAllResponse<any>> {
   fetcherCallback: (params: IFetcherParams) => Promise<AxiosResponse<T>>;
+  columns: IColumn[];
+  actions?: IAction[];
   fetchOnMount?: boolean;
   filterOptions?: FilterOptions;
 }
@@ -26,6 +29,8 @@ export function useAwesomeTable<ResponseType extends FindAllResponse<any>>({
   fetcherCallback,
   fetchOnMount = true,
   filterOptions,
+  columns = [],
+  actions = [],
 }: IUseAwesomeTableParams<ResponseType>) {
   const [response, setResponse] = useState<ResponseType>({
     result: [],
@@ -176,6 +181,8 @@ export function useAwesomeTable<ResponseType extends FindAllResponse<any>>({
       getValues,
       filterOptions: state,
       onDeleteFilter,
+      columns,
+      actions,
     },
     getValues,
     refetch,

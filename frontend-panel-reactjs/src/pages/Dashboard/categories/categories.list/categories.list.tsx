@@ -13,11 +13,6 @@ import { useNavigate } from "react-router-dom";
 import { useDeleteCategoryMutation } from "hooks";
 
 export default function CategoriesList() {
-  const { register, refetch } = useAwesomeTable<CategoriesResponse>({
-    fetcherCallback: CategoriesServices.findAll,
-    filterOptions: initialFilterOptions(),
-  });
-  const navigate = useNavigate();
   const { mutate: deleteCategory, isLoading: isSubmitting } =
     useDeleteCategoryMutation();
 
@@ -40,6 +35,15 @@ export default function CategoriesList() {
     },
   ];
 
+  const { register, refetch } = useAwesomeTable<CategoriesResponse>({
+    fetcherCallback: CategoriesServices.findAll,
+    filterOptions: initialFilterOptions(),
+    columns,
+    actions,
+  });
+
+  const navigate = useNavigate();
+
   return (
     <Page
       title="لیست دسته ها"
@@ -54,7 +58,7 @@ export default function CategoriesList() {
         </Button>
       }
     >
-      <AwesomeTable columns={columns} register={register} actions={actions} />
+      <AwesomeTable register={register} />
     </Page>
   );
 }

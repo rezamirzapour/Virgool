@@ -93,7 +93,7 @@ export default function ArticlesCreate() {
                 options={[
                   {
                     label: "منتشر شود",
-                    value: "publsihed",
+                    value: "published",
                   },
                   {
                     label: "بعنوان پیش‌نویس ذخیره شود",
