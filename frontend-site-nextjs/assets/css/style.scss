@@ -1,11 +1,14 @@
 @import "./font-face.scss";
-
+@font-face {
+    font-family: 'vazir';
+    src: url('../fonts/vazir-font-v27.2.2-Fontjo.com/Farsi-Digits/Vazir-Regular-FD.ttf');
+}
 .Toastify__toast {
-    font-family: "YekanBakh";
+    font-family: "vazir";
 }
 
 body {
-    font-family: YekanBakh !important;
+    font-family: "vazir" !important;
     direction: rtl;
 }
 

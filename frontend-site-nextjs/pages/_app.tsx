@@ -4,6 +4,7 @@ import { useState } from "react";
 import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
 import NProgress from "nprogress";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { Main } from "layouts";
 // import store from "store";
 import "assets/css/style.scss";
 import "tailwindcss/tailwind.css";
@@ -25,7 +26,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <Component {...pageProps} />
+        <Main>
+          <Component {...pageProps} />
+        </Main>
         <ReactQueryDevtools />
       </Hydrate>
     </QueryClientProvider>

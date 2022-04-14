@@ -1,5 +1,26 @@
-export default function Home() {
-    return <div className="flex h-screen items-center justify-center">
-        <h1 className="text-3xl">صفحه اصلی</h1>
-    </div>
+import type { GetServerSideProps } from "next";
+import { QueryClient, dehydrate } from "react-query";
+import { ArticleServices } from "services";
+import { Home } from "views";
+
+export default function HomePage() {
+  return <Home />;
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery("choosen-articles", () =>
+    ArticleServices.findAll({ size: 10, offset: 0, paginate: true }).then(
+      ({ data }) => data
+    )
+  );
+  await queryClient.prefetchQuery("articles", () =>
+    ArticleServices.findAll().then(({ data }) => data)
+  );
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+      name: "Reza",
+    },
+  };
+};

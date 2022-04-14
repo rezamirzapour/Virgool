@@ -10,14 +10,14 @@ const Profile: FC = () => {
     <div className="pt-8">
       <div className="flex flex-col items-center">
         <img
-          src={data.avatar?.fullPath}
-          alt={data.firstName}
+          src={data?.avatar?.fullPath}
+          alt={data?.firstName}
           className="rounded-full w-[100px] h-[100px]"
         />
         <h1 className="text-gray-900 text-md font-bold mt-3">
-          {data.firstName} {data.lastName}
+          {data?.firstName} {data?.lastName}
         </h1>
-        <h2 className="mt-2">{data.description}</h2>
+        <h2 className="mt-2">{data?.description}</h2>
         <div className="flex mt-2">
           <div>
             توسط

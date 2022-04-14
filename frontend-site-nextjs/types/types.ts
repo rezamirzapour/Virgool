@@ -70,6 +70,12 @@ export interface ArticleResult {
   likeCount: number;
   status: string | null;
   authorId: number | null;
+  author: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    avatar: string | null;
+  };
   thumbnail: PhotosResult | null;
   categories: {
     id: number;
