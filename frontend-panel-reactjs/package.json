@@ -65,7 +65,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "set \"CI=false\" react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --passWithNoTests --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
