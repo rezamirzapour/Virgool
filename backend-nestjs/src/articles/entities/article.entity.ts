@@ -46,6 +46,11 @@ export class Article extends Model {
   @Column(DataType.TEXT)
   content: string;
 
+  @Field({ nullable: true })
+  @AllowNull
+  @Column(DataType.TEXT)
+  plainContent: string;
+
   @Field((type) => Int)
   @Default(0)
   @Column

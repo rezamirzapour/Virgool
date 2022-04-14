@@ -19,6 +19,10 @@ export class CreateArticleDto {
   @ApiProperty()
   content: string;
 
+  @IsNotEmpty()
+  @ApiProperty()
+  plainContent: string;
+
   @IsOptional()
   @ApiProperty()
   status: string;

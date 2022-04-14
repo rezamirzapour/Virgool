@@ -6,26 +6,24 @@ interface IProps extends React.HTMLProps<HTMLDivElement> {
   card?: ArticleResult;
 }
 
-const SmallCard: FC<IProps> = ({ card, ...rest }) => {
+const BigCard: FC<IProps> = ({ card, ...rest }) => {
   return (
-    <article
-      className="flex bg-gray-100 mb-4 last:mb-0 max-h-[220px]"
-      {...rest}
-    >
+    <article className="w-full" {...rest}>
       <img
-        className="w-[170px] h-[220px] object-cover"
+        className="h-[220px] object-cover"
+        width="100%"
         src={card?.thumbnail.fullPath}
         alt={card?.title}
       />
-      <div className="p-4 flex flex-col justify-between">
+      <div className="py-4 h-[calc(100%-220px)] flex flex-col justify-between">
         <div>
           <Link href={`/articles/${card?.id}/show`}>
             <a>{card?.title}</a>
           </Link>
-          <div>
+          <p className="mt-4">
             {card?.plainContent?.slice(0, 128)}{" "}
             {card?.plainContent?.length > 128 && "..."}
-          </div>
+          </p>
         </div>
         <div className="flex justify-between">
           <div>
@@ -40,4 +38,4 @@ const SmallCard: FC<IProps> = ({ card, ...rest }) => {
   );
 };
 
-export default SmallCard;
+export default BigCard;

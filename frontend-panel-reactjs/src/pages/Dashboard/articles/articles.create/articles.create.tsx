@@ -30,7 +30,8 @@ export default function ArticlesCreate() {
   const { data: categories } = useGetCategoriesQuery();
   const { mutate: createArticle, isLoading: isSubmitting } =
     useCreateArticleMutation();
-  const { editorState, getHtmlContent, setEditorState } = useTextEditor();
+  const { editorState, getHtmlContent, setEditorState, getPlainContent } =
+    useTextEditor();
   const navigate = useNavigate();
 
   const onSubmit = (data: CreateArticleDto) => {
@@ -38,6 +39,7 @@ export default function ArticlesCreate() {
       ...data,
       content: getHtmlContent(),
       thumbnailId: selectedImaeg.id ?? null,
+      plainContent: getPlainContent(),
     };
     createArticle(requestBody);
   };

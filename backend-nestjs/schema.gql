@@ -6,6 +6,7 @@ type Article {
   id: Int!
   title: String!
   content: String
+  plainContent: String
   likeCount: Int!
   status: String!
   authorId: Int

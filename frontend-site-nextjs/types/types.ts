@@ -43,6 +43,7 @@ export interface ArticlesResult {
   id: number;
   title: string;
   content: string;
+  plainContent: string;
   likeCount: number;
   status: string | null;
   authorId: number | null;
@@ -67,6 +68,7 @@ export interface ArticleResult {
   id: number;
   title: string;
   content: string;
+  plainContent: string;
   likeCount: number;
   status: string | null;
   authorId: number | null;

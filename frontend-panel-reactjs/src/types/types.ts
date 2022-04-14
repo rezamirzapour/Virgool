@@ -52,6 +52,7 @@ export interface GetArticleParms extends GetOneParams {}
 export interface CreateArticleDto {
   title: string;
   content: string;
+  plainContent: string;
   thumbnailId: number | null;
   categories: number[];
 }
@@ -62,6 +63,7 @@ export interface ArticlesResult {
   id: number;
   title: string;
   content: string;
+  plainContent: string;
   likeCount: number;
   status: string | null;
   authorId: number | null;
