@@ -1,0 +1,24 @@
+on:
+  schedule:
+    - cron: 0 0 * * 3
+name: Update Site Dependencies Schedule
+jobs:
+  package-update:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend-site-nextjs
+    steps:
+      - uses: actions/checkout@master
+      - name: set remote url
+        run: git remote set-url --push origin https://$GITHUB_ACTOR:${{ secrets.ACCESS_TOKEN }}@github.com/$GITHUB_REPOSITORY
+      - name: package-update
+        uses: taichi/actions-package-update@master
+        env:
+          AUTHOR_EMAIL: mirzaandrampage@gmail.com
+          AUTHOR_NAME: rezamirzapour
+          EXECUTE: "true"
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          LOG_LEVEL: debug
+        with:
+          args: -u --packageFile package.json --loglevel verbose
