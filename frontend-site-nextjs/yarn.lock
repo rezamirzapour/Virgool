@@ -297,15 +297,15 @@
   "resolved" "https://registry.npmjs.org/@hookform/resolvers/-/resolvers-2.8.8.tgz"
   "version" "2.8.8"
 
-"@next/env@12.1.0":
-  "integrity" "sha512-nrIgY6t17FQ9xxwH3jj0a6EOiQ/WDHUos35Hghtr+SWN/ntHIQ7UpuvSi0vaLzZVHQWaDupKI+liO5vANcDeTQ=="
-  "resolved" "https://registry.npmjs.org/@next/env/-/env-12.1.0.tgz"
-  "version" "12.1.0"
+"@next/env@12.1.5":
+  "integrity" "sha512-+34yUJslfJi7Lyx6ELuN8nWcOzi27izfYnZIC1Dqv7kmmfiBVxgzR3BXhlvEMTKC2IRJhXVs2FkMY+buQe3k7Q=="
+  "resolved" "https://registry.npmjs.org/@next/env/-/env-12.1.5.tgz"
+  "version" "12.1.5"
 
-"@next/swc-win32-x64-msvc@12.1.0":
-  "integrity" "sha512-aBvcbMwuanDH4EMrL2TthNJy+4nP59Bimn8egqv6GHMVj0a44cU6Au4PjOhLNqEh9l+IpRGBqMTzec94UdC5xg=="
-  "resolved" "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-12.1.0.tgz"
-  "version" "12.1.0"
+"@next/swc-win32-x64-msvc@12.1.5":
+  "integrity" "sha512-/SoXW1Ntpmpw3AXAzfDRaQidnd8kbZ2oSni8u5z0yw6t4RwJvmdZy1eOaAADRThWKV+2oU90++LSnXJIwBRWYQ=="
+  "resolved" "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-12.1.5.tgz"
+  "version" "12.1.5"
 
 "@nodelib/fs.scandir@2.1.5":
   "integrity" "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="
@@ -371,6 +371,13 @@
   "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.4.tgz"
   "version" "15.7.4"
 
+"@types/react-dom@^18.0.0":
+  "integrity" "sha512-49897Y0UiCGmxZqpC8Blrf6meL8QUla6eb+BBhn69dTXlmuOlzkfr7HHY/O8J25e1lTUMs+YYxSlVDAaGHCOLg=="
+  "resolved" "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.0.0.tgz"
+  "version" "18.0.0"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-redux@^7.1.16":
   "integrity" "sha512-9iwAsPyJ9DLTRH+OFeIrm9cAbIj1i2ANL3sKQFATqnPWRbg+jEFXyZOKHiQK/N86pNRXbb4HRxAxo0SIX1XwzQ=="
   "resolved" "https://registry.npmjs.org/@types/react-redux/-/react-redux-7.1.18.tgz"
@@ -381,10 +388,10 @@
     "hoist-non-react-statics" "^3.3.0"
     "redux" "^4.0.0"
 
-"@types/react@*", "@types/react@^17.0.17":
-  "integrity" "sha512-nrfi7I13cAmrd0wje8czYpf5SFbryczCtPzFc6ijqvdjKcyA3tCvGxwchOUlxb2ucBPuJ9Y3oUqKrRqZvrz0lw=="
-  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.17.tgz"
-  "version" "17.0.17"
+"@types/react@*", "@types/react@^18.0.5":
+  "integrity" "sha512-UPxNGInDCIKlfqBrm8LDXYWNfLHwIdisWcsH5GpMyGjhEDLFgTtlRBaoWuCua9HcyuE0rMkmAeZ3FXV1pYLIYQ=="
+  "resolved" "https://registry.npmjs.org/@types/react/-/react-18.0.5.tgz"
+  "version" "18.0.5"
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -1148,28 +1155,28 @@
   "resolved" "https://registry.npmjs.org/nanoid/-/nanoid-3.3.1.tgz"
   "version" "3.3.1"
 
-"next@^12.1.0":
-  "integrity" "sha512-s885kWvnIlxsUFHq9UGyIyLiuD0G3BUC/xrH0CEnH5lHEWkwQcHOORgbDF0hbrW9vr/7am4ETfX4A7M6DjrE7Q=="
-  "resolved" "https://registry.npmjs.org/next/-/next-12.1.0.tgz"
-  "version" "12.1.0"
+"next@^12.1.5":
+  "integrity" "sha512-YGHDpyfgCfnT5GZObsKepmRnne7Kzp7nGrac07dikhutWQug7hHg85/+sPJ4ZW5Q2pDkb+n0FnmLkmd44htIJQ=="
+  "resolved" "https://registry.npmjs.org/next/-/next-12.1.5.tgz"
+  "version" "12.1.5"
   dependencies:
-    "@next/env" "12.1.0"
+    "@next/env" "12.1.5"
     "caniuse-lite" "^1.0.30001283"
     "postcss" "8.4.5"
-    "styled-jsx" "5.0.0"
-    "use-subscription" "1.5.1"
+    "styled-jsx" "5.0.1"
   optionalDependencies:
-    "@next/swc-android-arm64" "12.1.0"
-    "@next/swc-darwin-arm64" "12.1.0"
-    "@next/swc-darwin-x64" "12.1.0"
-    "@next/swc-linux-arm-gnueabihf" "12.1.0"
-    "@next/swc-linux-arm64-gnu" "12.1.0"
-    "@next/swc-linux-arm64-musl" "12.1.0"
-    "@next/swc-linux-x64-gnu" "12.1.0"
-    "@next/swc-linux-x64-musl" "12.1.0"
-    "@next/swc-win32-arm64-msvc" "12.1.0"
-    "@next/swc-win32-ia32-msvc" "12.1.0"
-    "@next/swc-win32-x64-msvc" "12.1.0"
+    "@next/swc-android-arm-eabi" "12.1.5"
+    "@next/swc-android-arm64" "12.1.5"
+    "@next/swc-darwin-arm64" "12.1.5"
+    "@next/swc-darwin-x64" "12.1.5"
+    "@next/swc-linux-arm-gnueabihf" "12.1.5"
+    "@next/swc-linux-arm64-gnu" "12.1.5"
+    "@next/swc-linux-arm64-musl" "12.1.5"
+    "@next/swc-linux-x64-gnu" "12.1.5"
+    "@next/swc-linux-x64-musl" "12.1.5"
+    "@next/swc-win32-arm64-msvc" "12.1.5"
+    "@next/swc-win32-ia32-msvc" "12.1.5"
+    "@next/swc-win32-x64-msvc" "12.1.5"
 
 "node-releases@^1.1.71":
   "integrity" "sha512-caJBVempXZPepZoZAPCWRTNxYQ+xtG/KAi4ozTA5A+nJ7IU+kLQCbqaUjb5Rwy14M9upBWiQ4NutcmW04LJSRw=="
@@ -1337,14 +1344,13 @@
   "resolved" "https://registry.npmjs.org/quick-lru/-/quick-lru-5.1.1.tgz"
   "version" "5.1.1"
 
-"react-dom@^17.0.2", "react-dom@^17.0.2 || ^18.0.0-0", "react-dom@>=16.6.0":
-  "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
-  "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
-  "version" "17.0.2"
+"react-dom@^17.0.2 || ^18.0.0-0", "react-dom@^18.0.0", "react-dom@>=16.6.0":
+  "integrity" "sha512-XqX7uzmFo0pUceWFCt7Gff6IyIMzFUn7QMZrbrQfGxtaxXZIcGQzoNpRLE3fQLnS4XzLLPMZX2T9TRcSrasicw=="
+  "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.0.0.tgz"
+  "version" "18.0.0"
   dependencies:
     "loose-envify" "^1.1.0"
-    "object-assign" "^4.1.1"
-    "scheduler" "^0.20.2"
+    "scheduler" "^0.21.0"
 
 "react-hook-form@^7.0.0", "react-hook-form@^7.25.3":
   "integrity" "sha512-jL4SByMaC8U3Vhu9s7CwgJBP4M6I3Kpwxib9LrCwWSRPnXDrNQL4uihSTqLLoDICqSUhwwvian9uVYfv+ITtGg=="
@@ -1407,13 +1413,12 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^16.14.0 || ^17.0.0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.2", "react@^17.0.2 || ^18.0.0-0", "react@>= 16.8.0 || 17.x.x || 18.x.x", "react@>=16", "react@>=16.6.0", "react@>=16.8.0", "react@0.14 || 15 || 16 || 17 || 18", "react@17.0.2":
-  "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
-  "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
-  "version" "17.0.2"
+"react@*", "react@^16.14.0 || ^17.0.0", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.2 || ^18.0.0-0", "react@^18.0.0", "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", "react@>=16", "react@>=16.6.0", "react@>=16.8.0", "react@0.14 || 15 || 16 || 17 || 18":
+  "integrity" "sha512-x+VL6wbT4JRVPm7EGxXhZ8w8LTROaxPXOqhlGyVSrv0sB1jkyFGgXxJ8LVoPRLvPR6/CIZGFmfzqUa2NYeMr2A=="
+  "resolved" "https://registry.npmjs.org/react/-/react-18.0.0.tgz"
+  "version" "18.0.0"
   dependencies:
     "loose-envify" "^1.1.0"
-    "object-assign" "^4.1.1"
 
 "readdirp@~3.5.0":
   "integrity" "sha512-cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ=="
@@ -1513,13 +1518,12 @@
   dependencies:
     "chokidar" ">=3.0.0 <4.0.0"
 
-"scheduler@^0.20.2":
-  "integrity" "sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ=="
-  "resolved" "https://registry.npmjs.org/scheduler/-/scheduler-0.20.2.tgz"
-  "version" "0.20.2"
+"scheduler@^0.21.0":
+  "integrity" "sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ=="
+  "resolved" "https://registry.npmjs.org/scheduler/-/scheduler-0.21.0.tgz"
+  "version" "0.21.0"
   dependencies:
     "loose-envify" "^1.1.0"
-    "object-assign" "^4.1.1"
 
 "semver@^6.3.0":
   "integrity" "sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw=="
@@ -1555,10 +1559,10 @@
   dependencies:
     "inline-style-parser" "0.1.1"
 
-"styled-jsx@5.0.0":
-  "integrity" "sha512-qUqsWoBquEdERe10EW8vLp3jT25s/ssG1/qX5gZ4wu15OZpmSMFI2v+fWlRhLfykA5rFtlJ1ME8A8pm/peV4WA=="
-  "resolved" "https://registry.npmjs.org/styled-jsx/-/styled-jsx-5.0.0.tgz"
-  "version" "5.0.0"
+"styled-jsx@5.0.1":
+  "integrity" "sha512-+PIZ/6Uk40mphiQJJI1202b+/dYeTVd9ZnMPR80pgiWbjIwvN2zIp4r9et0BgqBuShh48I0gttPlAXA7WVvBxw=="
+  "resolved" "https://registry.npmjs.org/styled-jsx/-/styled-jsx-5.0.1.tgz"
+  "version" "5.0.1"
 
 "supports-color@^5.3.0":
   "integrity" "sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow=="
@@ -1629,13 +1633,6 @@
   dependencies:
     "@babel/runtime" "^7.6.2"
     "detect-node" "^2.0.4"
-
-"use-subscription@1.5.1":
-  "integrity" "sha512-Xv2a1P/yReAjAbhylMfFplFKj9GssgTwN7RlcTxBujFQcloStWNDQdc4g4NRWH9xS4i/FDk04vQBptAXoF3VcA=="
-  "resolved" "https://registry.npmjs.org/use-subscription/-/use-subscription-1.5.1.tgz"
-  "version" "1.5.1"
-  dependencies:
-    "object-assign" "^4.1.1"
 
 "usehooks-ts@^2.5.1":
   "integrity" "sha512-vGIl/r7SMey3Uwe/YykLTJ5AmrlBe02MwQxsUBxNWDmfegEdHXXQaJ2VoOEayKW85Zwr+NyIhfVG+xrQYjtXVg=="
