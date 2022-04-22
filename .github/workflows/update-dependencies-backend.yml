@@ -21,4 +21,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           LOG_LEVEL: debug
         with:
-          args: -u --packageFile package.json --loglevel verbose
+          args: -u --packageFile ./backend-nestjs/package.json --loglevel verbose
