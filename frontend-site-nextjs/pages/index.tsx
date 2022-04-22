@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from "next";
 import { QueryClient, dehydrate } from "react-query";
-import { ArticleServices } from "services";
-import { Home } from "views";
+import { ArticleServices } from "src/services";
+import { Home } from "src/views";
 
 export default function HomePage() {
   return <Home />;

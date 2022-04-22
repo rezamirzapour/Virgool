@@ -1,5 +1,5 @@
 import { NextRequest, NextFetchEvent } from "next/server";
-import { AuthOperations } from "utils";
+import { AuthOperations } from "src/utils";
 
 export function middleware(req: NextRequest, ev: NextFetchEvent) {
   //   const cookie = AuthOperations.getTokenFromReq(req);

@@ -1,8 +1,8 @@
-import AuthLayout from "layouts/auth";
-import { Input, Button } from "components";
+import AuthLayout from "src/layouts/auth";
+import { Input, Button } from "src/components";
 import { useForm, FormProvider } from "react-hook-form";
-import { LoginSchema } from "validations";
-import { useLoginMutation } from "hooks";
+import { LoginSchema } from "src/validations";
+import { useLoginMutation } from "src/hooks";
 import { classValidatorResolver } from "@hookform/resolvers/class-validator";
 
 const defaultValues = new LoginSchema();

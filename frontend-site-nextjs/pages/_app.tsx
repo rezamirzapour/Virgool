@@ -1,10 +1,17 @@
 import { AppProps } from "next/app";
 import { Router } from "next/router";
 import { useState } from "react";
-import { QueryClient, QueryClientProvider, Hydrate } from "react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  Hydrate,
+  // hydrate,
+  // dehydrate,
+} from "react-query";
 import NProgress from "nprogress";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { Main } from "layouts";
+import { Main } from "src/layouts";
+// import { CategoriesServices } from "services";
 // import store from "store";
 import "assets/css/style.scss";
 import "tailwindcss/tailwind.css";
@@ -22,7 +29,16 @@ Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  );
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
@@ -34,3 +50,15 @@ export default function App({ Component, pageProps }: AppProps) {
     </QueryClientProvider>
   );
 }
+
+// App.getInitialProps = async () => {
+//   const queryClient = new QueryClient();
+//   await queryClient.prefetchQuery("categories", () =>
+//     CategoriesServices.findAll().then(({ data }) => data)
+//   );
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(queryClient),
+//     },
+//   };
+// };

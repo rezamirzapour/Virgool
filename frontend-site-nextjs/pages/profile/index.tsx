@@ -1,8 +1,8 @@
 import type { GetServerSideProps, NextPage } from "next";
-import { Profile } from "views";
+import { Profile } from "src/views";
 import { QueryClient, dehydrate } from "react-query";
-import { MeServices } from "services";
-import { AuthOperations } from "utils";
+import { MeServices } from "src/services";
+import { AuthOperations } from "src/utils";
 
 const ProfilePage: NextPage = () => {
   return <Profile />;
