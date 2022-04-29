@@ -20,5 +20,6 @@ jobs:
           EXECUTE: "true"
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           LOG_LEVEL: debug
+          WORKING_DIR: frontend-panel-reactjs
         with:
-          args: -u --packageFile ./frontend-panel-reactjs/package.json --loglevel verbose
+          args: -u --packageFile package.json --loglevel verbose
