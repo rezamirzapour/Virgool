@@ -22,6 +22,8 @@ import {
   CreateResponse,
   DestroyResponse,
   UpdateResponse,
+  FindAllResponse,
+  PaginateResponse,
 } from 'src/common/httpResponse';
 @ApiController('articles')
 export class ArticlesController {
@@ -50,7 +52,14 @@ export class ArticlesController {
     @Query(new ValidationPipe({ transform: true }))
     listAllArticlesParams: ListAllArticlesParams,
   ) {
-    return this.articleService.findAll(listAllArticlesParams);
+    if (listAllArticlesParams.paginate) {
+      const response = await this.articleService.paginateAll(
+        listAllArticlesParams,
+      );
+      return new PaginateResponse(response.rows, response.count);
+    }
+    const response = await this.articleService.findAll(listAllArticlesParams);
+    return new FindAllResponse(response);
   }
 
   @DeleteMethod(':id')

@@ -5,14 +5,13 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Op } from 'sequelize';
+import { Op, FindOptions } from 'sequelize';
 import { Article, Category, User } from 'src/database/database.entities';
 import {
   ListAllArticlesParams,
   CreateArticleDto,
   UpdateArticleDto,
 } from './dto';
-import { PaginateResponse, FindAllResponse } from 'src/common/httpResponse';
 
 @Injectable()
 export class ArticlesService {
@@ -20,67 +19,72 @@ export class ArticlesService {
     @InjectModel(Article) private readonly articleModel: typeof Article,
   ) {}
 
-  async findAll(listAllArticlesParams: ListAllArticlesParams) {
-    const { size, offset, paginate, ...otherOptions } = listAllArticlesParams;
-    const paginateOptions = { offset, limit: size };
-    const options = { where: {} };
-    if (otherOptions.title)
-      options.where = {
-        ...options.where,
-        title: { [Op.like]: `%${otherOptions.title}%` },
+  generateAllOptions({
+    title,
+    startDate,
+    endDate,
+    status,
+    startLikeCount,
+    endLikeCount,
+    categories,
+  }: ListAllArticlesParams) {
+    const [whereBe, where]: Record<string, any>[] = [
+      {
+        title: { [Op.like]: `%${title}%` },
+        [Op.gte]: startDate,
+        [Op.lte]: endDate,
+        status,
+      },
+      {},
+    ];
+
+    [title, startDate, endDate, status].filter(Boolean).forEach((item) => {
+      where[item as string] = whereBe[item as string];
+    });
+
+    if (startLikeCount && endLikeCount)
+      where.likeCount = {
+        [Op.gte]: +startLikeCount,
+        [Op.lte]: +endLikeCount,
       };
 
-    if (otherOptions.startDate)
-      options.where = {
-        ...options.where,
-        createdAt: { [Op.gte]: otherOptions.startDate },
-      };
-
-    if (otherOptions.endDate)
-      options.where = {
-        ...options.where,
-        createdAt: { [Op.lte]: otherOptions.endDate },
-      };
-
-    if (otherOptions.status)
-      options.where = { ...options.where, status: otherOptions.status };
-
-    if (otherOptions.startLikeCount && otherOptions.endLikeCount)
-      options.where = {
-        ...options.where,
-        likeCount: {
-          [Op.gte]: +otherOptions.startLikeCount,
-          [Op.lte]: +otherOptions.endLikeCount,
+    const options: FindOptions = {
+      where,
+      attributes: { exclude: ['authorId', 'thumbnailId'] },
+      include: [
+        {
+          model: Category,
+          attributes: ['id', 'title'],
+          through: { attributes: [] },
+          ...(categories && {
+            id: { [Op.in]: categories?.map?.((c) => +c) ?? [] },
+          }),
         },
-      };
+        {
+          model: User,
+          attributes: ['id', 'email', 'firstName', 'lastName'],
+          include: ['avatar'],
+        },
+        'thumbnail',
+      ],
+    };
+    return options;
+  }
 
-    if (paginate) {
-      const result = await this.articleModel.findAndCountAll({
-        ...paginateOptions,
-        ...options,
-        attributes: { exclude: ['authorId', 'thumbnailId'] },
-        include: [
-          {
-            model: Category,
-            attributes: ['id', 'title'],
-            through: { attributes: [] },
-            ...(otherOptions.categories && {
-              id: { [Op.in]: otherOptions.categories?.map?.((c) => +c) ?? [] },
-            }),
-          },
-          {
-            model: User,
-            attributes: ['id', 'email', 'firstName', 'lastName'],
-            include: ['avatar'],
-          },
-          'thumbnail',
-        ],
-      });
-      return new PaginateResponse(result.rows, result.count);
-    }
+  async paginateAll(listAllArticlesParams: ListAllArticlesParams) {
+    let options = this.generateAllOptions(listAllArticlesParams);
+    const { size, offset } = listAllArticlesParams;
+    const paginateOptions = { offset, limit: size };
+    options = {
+      ...options,
+      ...paginateOptions,
+    };
+    return this.articleModel.findAndCountAll(options);
+  }
 
-    const result = await this.articleModel.findAll(options);
-    return new FindAllResponse(result);
+  async findAll(listAllArticlesParams: ListAllArticlesParams) {
+    const options = this.generateAllOptions(listAllArticlesParams);
+    return this.articleModel.findAll(options);
   }
 
   async findOne(id: number): Promise<Article> {
